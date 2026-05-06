@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tools by Bashid Effendi — BPK RI</title>
+    <title>masbash.id — Tools by Bashid Effendi</title>
+    <meta name="description" content="Koleksi tools otomasi audit, finance, dan personal projects oleh Bashid Effendi (Auditor BPK RI).">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -50,219 +51,473 @@
             transform: translateY(-1px);
             box-shadow: 0 4px 16px rgba(76,110,245,0.3);
         }
-        .float-anim {
-            animation: float 6s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        .fade-in { animation: fadeIn 0.6s ease-out; }
+        .fade-in { animation: fadeIn 0.6s ease-out both; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .stagger-1 { animation-delay: 0.1s; }
-        .stagger-2 { animation-delay: 0.2s; }
-        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-1 { animation-delay: 0.05s; }
+        .stagger-2 { animation-delay: 0.10s; }
+        .stagger-3 { animation-delay: 0.15s; }
+        .stagger-4 { animation-delay: 0.20s; }
+        .stagger-5 { animation-delay: 0.25s; }
+        .stagger-6 { animation-delay: 0.30s; }
+        .stagger-7 { animation-delay: 0.35s; }
+
+        .badge-new {
+            background: linear-gradient(135deg, #fab005, #ff6b6b);
+            color: white;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+        }
+        .section-anchor {
+            scroll-margin-top: 80px;
+        }
+        .nav-pill {
+            transition: all 0.2s ease;
+        }
+        .nav-pill:hover {
+            background: #f1f3f5;
+            color: #4c6ef5;
+        }
+        .nav-pill.active {
+            background: #dbe4ff;
+            color: #4263eb;
+        }
     </style>
 </head>
 <body class="min-h-screen hero-bg">
     <!-- Header -->
     <header class="bg-white/70 backdrop-blur-lg border-b border-gray-100 sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <img src="static/bpk-logo.png" alt="Logo BPK" class="w-11 h-11 object-contain">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            <a href="#top" class="flex items-center gap-3 shrink-0">
+                <img src="static/bpk-logo.png" alt="Logo" class="w-11 h-11 object-contain">
                 <div>
-                    <h1 class="text-lg font-bold text-gray-900">Bashid Tools</h1>
-                    <p class="text-xs text-gray-400">BPK RI</p>
+                    <h1 class="text-lg font-bold text-gray-900">masbash<span class="text-primary-500">.id</span></h1>
+                    <p class="text-xs text-gray-400">by Bashid Effendi</p>
                 </div>
-            </div>
-            <div class="flex items-center gap-2">
+            </a>
+            <nav class="hidden md:flex items-center gap-1 text-xs font-bold text-gray-500">
+                <a href="#audit" class="nav-pill px-3 py-1.5 rounded-full">Audit</a>
+                <a href="#desktop" class="nav-pill px-3 py-1.5 rounded-full">Desktop</a>
+                <a href="#personal" class="nav-pill px-3 py-1.5 rounded-full">Personal</a>
+                <a href="#finance" class="nav-pill px-3 py-1.5 rounded-full">Finance</a>
+            </nav>
+            <div class="flex items-center gap-2 shrink-0">
                 <span class="hidden sm:inline text-xs text-gray-400">Made with AI</span>
                 <span class="w-2 h-2 rounded-full bg-mint-500 animate-pulse"></span>
             </div>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4">
+    <main id="top" class="max-w-6xl mx-auto px-4">
         <!-- Hero -->
-        <section class="text-center py-16 md:py-24 fade-in">
+        <section class="text-center py-14 md:py-20 fade-in">
             <div class="inline-flex items-center gap-2 bg-accent-50 border border-accent-200 text-accent-600 text-xs font-bold px-4 py-1.5 rounded-full mb-6">
                 <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                Kumpulan Tools Otomasi
+                Tools Collection · 2026
             </div>
             <h2 class="text-4xl md:text-6xl font-black text-gray-900 mb-3 leading-tight">
                 Tools by<br>
                 <span class="gradient-text">Bashid Effendi</span>
             </h2>
-            <p class="text-lg md:text-xl text-gray-400 max-w-lg mx-auto leading-relaxed">
-                Koleksi tools otomasi untuk mempermudah pekerjaan sehari-hari di BPK RI
+            <p class="text-lg md:text-xl text-gray-400 max-w-xl mx-auto leading-relaxed mb-8">
+                Audit, finance, dan personal projects — semua dibikin sendiri buat dipakai sendiri & barengan.
             </p>
+            <div class="flex flex-wrap items-center justify-center gap-2 text-xs font-semibold">
+                <a href="#audit" class="bg-primary-50 text-primary-700 hover:bg-primary-100 transition px-4 py-2 rounded-full">🏛️ 6 Audit tools</a>
+                <a href="#desktop" class="bg-amber-50 text-amber-700 hover:bg-amber-100 transition px-4 py-2 rounded-full">🖥️ 2 Desktop apps</a>
+                <a href="#personal" class="bg-grape-50 text-grape-700 hover:bg-grape-100 transition px-4 py-2 rounded-full">🎨 Personal</a>
+                <a href="#finance" class="bg-mint-50 text-mint-700 hover:bg-mint-100 transition px-4 py-2 rounded-full">💰 Finance</a>
+            </div>
         </section>
 
-        <!-- Tools Grid -->
-        <section class="pb-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- PDDIKTI Checker -->
-            <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-1 flex flex-col">
-                <div class="card-icon w-14 h-14 bg-primary-100 rounded-2xl flex items-center justify-center mb-5">
-                    <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
+        <!-- ╔════════════════════════════════════════════╗ -->
+        <!-- ║ AUDIT TOOLS                                ║ -->
+        <!-- ╚════════════════════════════════════════════╝ -->
+        <section id="audit" class="section-anchor pb-12 pt-4">
+            <div class="flex items-end justify-between mb-6 border-b border-gray-200 pb-3">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-black text-gray-900 flex items-center gap-3">
+                        <span>🏛️</span>
+                        <span>Audit Tools</span>
+                    </h2>
+                    <p class="text-sm text-gray-400 mt-1">Bantu kerja audit BPK & APIP — kompliansi, data lookup, kalkulasi.</p>
                 </div>
-                <h3 class="text-xl font-extrabold text-gray-900 mb-2">PDDIKTI Checker</h3>
-                <p class="text-sm text-gray-400 mb-5 leading-relaxed flex-grow">Cek status kemahasiswaan otomatis dari PDDIKTI. Upload file Excel, dapatkan status Aktif/Lulus/DO secara massal.</p>
-                <div class="flex flex-wrap gap-2 mb-5">
-                    <span class="text-xs bg-primary-50 text-primary-600 px-2.5 py-1 rounded-lg font-semibold">Excel Upload</span>
-                    <span class="text-xs bg-mint-50 text-mint-600 px-2.5 py-1 rounded-lg font-semibold">Realtime</span>
-                    <span class="text-xs bg-accent-50 text-accent-600 px-2.5 py-1 rounded-lg font-semibold">Bulk Check</span>
-                </div>
-                <a href="https://pddikti-checker.up.railway.app" target="_blank" class="btn-open block w-full text-center bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 rounded-xl">
-                    Buka Tool
-                </a>
+                <span class="text-xs font-bold text-gray-400 hidden sm:inline">6 tools</span>
             </div>
 
-            <!-- SKA Checker -->
-            <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-2 flex flex-col">
-                <div class="card-icon w-14 h-14 bg-grape-100 rounded-2xl flex items-center justify-center mb-5">
-                    <svg class="w-7 h-7 text-grape-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/>
-                    </svg>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Just Count [NEW] -->
+                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-1 flex flex-col relative overflow-hidden">
+                    <div class="absolute top-3 right-3 badge-new text-[10px] px-2.5 py-1 rounded-full">NEW</div>
+                    <div class="card-icon w-14 h-14 bg-gradient-to-br from-primary-500 to-grape-500 rounded-2xl flex items-center justify-center mb-5 shadow-lg shadow-primary-200">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-gray-900 mb-2">Just Count</h3>
+                    <p class="text-sm text-gray-500 mb-5 leading-relaxed flex-grow">Audit kepatuhan jasa konsultansi konstruksi (APBD). 3-area checklist + engine numerik personel/non-personel + auto-generate BAPK Word.</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="text-xs bg-primary-50 text-primary-600 px-2.5 py-1 rounded-lg font-semibold">Multi-tenant</span>
+                        <span class="text-xs bg-grape-50 text-grape-600 px-2.5 py-1 rounded-lg font-semibold">BAPK Auto</span>
+                        <span class="text-xs bg-mint-50 text-mint-600 px-2.5 py-1 rounded-lg font-semibold">SKA Check</span>
+                    </div>
+                    <a href="https://justcount.masbash.id" target="_blank" class="btn-open block w-full text-center bg-gradient-to-r from-primary-600 to-grape-600 hover:from-primary-700 hover:to-grape-700 text-white font-bold py-3 rounded-xl">
+                        Buka Tool
+                    </a>
                 </div>
-                <h3 class="text-xl font-extrabold text-gray-900 mb-2">SKA Checker</h3>
-                <p class="text-sm text-gray-400 mb-5 leading-relaxed flex-grow">Verifikasi sertifikat keahlian konstruksi (SKA/SKT/SKK) dari LPJK. Cek keaslian dan status sertifikat dengan cepat.</p>
-                <div class="flex flex-wrap gap-2 mb-5">
-                    <span class="text-xs bg-grape-50 text-grape-600 px-2.5 py-1 rounded-lg font-semibold">SKA/SKT/SKK</span>
-                    <span class="text-xs bg-mint-50 text-mint-600 px-2.5 py-1 rounded-lg font-semibold">LPJK</span>
-                    <span class="text-xs bg-accent-50 text-accent-600 px-2.5 py-1 rounded-lg font-semibold">Verifikasi</span>
+
+                <!-- PDDIKTI Checker -->
+                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-2 flex flex-col">
+                    <div class="card-icon w-14 h-14 bg-primary-100 rounded-2xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-gray-900 mb-2">PDDIKTI Checker</h3>
+                    <p class="text-sm text-gray-500 mb-5 leading-relaxed flex-grow">Cek status kemahasiswaan otomatis dari PDDIKTI. Upload Excel, dapat status Aktif/Lulus/DO secara massal.</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="text-xs bg-primary-50 text-primary-600 px-2.5 py-1 rounded-lg font-semibold">Excel Upload</span>
+                        <span class="text-xs bg-mint-50 text-mint-600 px-2.5 py-1 rounded-lg font-semibold">Realtime</span>
+                        <span class="text-xs bg-accent-50 text-accent-600 px-2.5 py-1 rounded-lg font-semibold">Bulk</span>
+                    </div>
+                    <a href="https://pddikti-checker.up.railway.app" target="_blank" class="btn-open block w-full text-center bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 rounded-xl">
+                        Buka Tool
+                    </a>
                 </div>
-                <a href="https://cek-sertifikat-keahlian.up.railway.app" target="_blank" class="btn-open block w-full text-center bg-grape-600 hover:bg-grape-700 text-white font-bold py-3 rounded-xl">
-                    Buka Tool
-                </a>
+
+                <!-- SKA Checker -->
+                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-3 flex flex-col">
+                    <div class="card-icon w-14 h-14 bg-grape-100 rounded-2xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-grape-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-gray-900 mb-2">SKA Checker</h3>
+                    <p class="text-sm text-gray-500 mb-5 leading-relaxed flex-grow">Verifikasi sertifikat keahlian konstruksi (SKA/SKT/SKK) dari LPJK. Cek keaslian dan status sertifikat.</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="text-xs bg-grape-50 text-grape-600 px-2.5 py-1 rounded-lg font-semibold">SKA/SKT/SKK</span>
+                        <span class="text-xs bg-mint-50 text-mint-600 px-2.5 py-1 rounded-lg font-semibold">LPJK</span>
+                        <span class="text-xs bg-accent-50 text-accent-600 px-2.5 py-1 rounded-lg font-semibold">Verifikasi</span>
+                    </div>
+                    <a href="https://cek-sertifikat-keahlian.up.railway.app" target="_blank" class="btn-open block w-full text-center bg-grape-600 hover:bg-grape-700 text-white font-bold py-3 rounded-xl">
+                        Buka Tool
+                    </a>
+                </div>
+
+                <!-- SIKD Browser -->
+                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-4 flex flex-col">
+                    <div class="card-icon w-14 h-14 bg-indigo-100 rounded-2xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-gray-900 mb-2">SIKD Browser</h3>
+                    <p class="text-sm text-gray-500 mb-5 leading-relaxed flex-grow">Jelajahi data APBD seluruh Pemda di Indonesia. Lihat pendapatan, belanja, pembiayaan, dan bandingkan antar tahun.</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="text-xs bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-lg font-semibold">APBD</span>
+                        <span class="text-xs bg-mint-50 text-mint-600 px-2.5 py-1 rounded-lg font-semibold">DJPK</span>
+                        <span class="text-xs bg-accent-50 text-accent-600 px-2.5 py-1 rounded-lg font-semibold">Komparasi</span>
+                    </div>
+                    <a href="https://sikd-browser.up.railway.app" target="_blank" class="btn-open block w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl">
+                        Buka Tool
+                    </a>
+                </div>
+
+                <!-- CalcTape Audit -->
+                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-5 flex flex-col">
+                    <div class="card-icon w-14 h-14 bg-cyan-100 rounded-2xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-gray-900 mb-2">CalcTape Audit</h3>
+                    <p class="text-sm text-gray-500 mb-5 leading-relaxed flex-grow">Kalkulator paper tape untuk audit. Editable, komentar per baris, subtotal, undo, simpan, export CSV, dan print.</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="text-xs bg-cyan-50 text-cyan-600 px-2.5 py-1 rounded-lg font-semibold">Kalkulator</span>
+                        <span class="text-xs bg-primary-50 text-primary-600 px-2.5 py-1 rounded-lg font-semibold">Paper Tape</span>
+                        <span class="text-xs bg-mint-50 text-mint-600 px-2.5 py-1 rounded-lg font-semibold">Gratis</span>
+                    </div>
+                    <a href="https://calctape.up.railway.app" target="_blank" class="btn-open block w-full text-center bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 rounded-xl">
+                        Buka Tool
+                    </a>
+                </div>
+
+                <!-- BPS Data Explorer -->
+                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-6 flex flex-col">
+                    <div class="card-icon w-14 h-14 bg-coral-100 rounded-2xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-coral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-gray-900 mb-2">BPS Data Explorer</h3>
+                    <p class="text-sm text-gray-500 mb-5 leading-relaxed flex-grow">Jelajahi data statistik resmi BPS — publikasi, siaran pers, tabel statis, indikator strategis, SDGs, dan variabel ekonomi per wilayah.</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="text-xs bg-coral-50 text-coral-600 px-2.5 py-1 rounded-lg font-semibold">BPS</span>
+                        <span class="text-xs bg-primary-50 text-primary-600 px-2.5 py-1 rounded-lg font-semibold">Statistik</span>
+                        <span class="text-xs bg-mint-50 text-mint-600 px-2.5 py-1 rounded-lg font-semibold">10 Model</span>
+                    </div>
+                    <a href="https://data-bps.up.railway.app/" target="_blank" class="btn-open block w-full text-center bg-coral-500 hover:bg-coral-600 text-white font-bold py-3 rounded-xl">
+                        Buka Tool
+                    </a>
+                </div>
+
+                <!-- SIRUP Audit (Coming Soon) -->
+                <div class="card-tool bg-white/60 rounded-2xl p-6 fade-in stagger-7 border-dashed !border-2 !border-gray-200 flex flex-col">
+                    <div class="card-icon w-14 h-14 bg-gray-100 rounded-2xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5"/>
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <h3 class="text-xl font-extrabold text-gray-500">SIRUP Audit</h3>
+                        <span class="text-[10px] bg-gray-200 text-gray-500 font-bold px-2 py-0.5 rounded-full">SOON</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-5 leading-relaxed flex-grow">Dashboard deteksi paket pengadaan mencurigakan dari SIRUP LKPP. Red flag analysis 2021–2026.</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="text-xs bg-gray-100 text-gray-400 px-2.5 py-1 rounded-lg font-semibold">SIRUP</span>
+                        <span class="text-xs bg-gray-100 text-gray-400 px-2.5 py-1 rounded-lg font-semibold">Red Flag</span>
+                    </div>
+                    <div class="block w-full text-center bg-gray-100 text-gray-400 font-bold py-3 rounded-xl cursor-default">
+                        Coming Soon
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ╔════════════════════════════════════════════╗ -->
+        <!-- ║ DESKTOP TOOLS                              ║ -->
+        <!-- ╚════════════════════════════════════════════╝ -->
+        <section id="desktop" class="section-anchor pb-12 pt-4">
+            <div class="flex items-end justify-between mb-6 border-b border-gray-200 pb-3">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-black text-gray-900 flex items-center gap-3">
+                        <span>🖥️</span>
+                        <span>Desktop Tools</span>
+                    </h2>
+                    <p class="text-sm text-gray-400 mt-1">Aplikasi lokal untuk dijalankan di komputer (butuh download).</p>
+                </div>
+                <span class="text-xs font-bold text-gray-400 hidden sm:inline">2 apps</span>
             </div>
 
-            <!-- SIAP PKP Filler -->
-            <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-3 flex flex-col">
-                <div class="card-icon w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center mb-5">
-                    <svg class="w-7 h-7 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75"/>
-                    </svg>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- SIAP PKP Filler -->
+                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-1 flex flex-col">
+                    <div class="card-icon w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-gray-900 mb-2">SIAP PKP Filler</h3>
+                    <p class="text-sm text-gray-500 mb-5 leading-relaxed flex-grow">Auto-fill kolom Hasil Pengujian di SIAP BPK dari file Excel PKP. Dijalankan lokal di komputer (butuh VPN BPK).</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="text-xs bg-amber-50 text-amber-600 px-2.5 py-1 rounded-lg font-semibold">SIAP BPK</span>
+                        <span class="text-xs bg-mint-50 text-mint-600 px-2.5 py-1 rounded-lg font-semibold">Auto-fill</span>
+                        <span class="text-xs bg-gray-100 text-gray-500 px-2.5 py-1 rounded-lg font-semibold">Lokal</span>
+                    </div>
+                    <a href="siap-pkp-filler.html" class="btn-open block w-full text-center bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-xl">
+                        Panduan & Download
+                    </a>
                 </div>
-                <h3 class="text-xl font-extrabold text-gray-900 mb-2">SIAP PKP Filler</h3>
-                <p class="text-sm text-gray-400 mb-5 leading-relaxed flex-grow">Auto-fill kolom Hasil Pengujian di SIAP BPK dari file Excel PKP. Dijalankan lokal di komputer (butuh VPN BPK).</p>
-                <div class="flex flex-wrap gap-2 mb-5">
-                    <span class="text-xs bg-amber-50 text-amber-600 px-2.5 py-1 rounded-lg font-semibold">SIAP BPK</span>
-                    <span class="text-xs bg-mint-50 text-mint-600 px-2.5 py-1 rounded-lg font-semibold">Auto-fill</span>
-                    <span class="text-xs bg-gray-100 text-gray-500 px-2.5 py-1 rounded-lg font-semibold">Lokal</span>
+
+                <!-- SPSE Checker -->
+                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-2 flex flex-col">
+                    <div class="card-icon w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-gray-900 mb-2">SPSE Checker</h3>
+                    <p class="text-sm text-gray-500 mb-5 leading-relaxed flex-grow">Cek data pengadaan barang/jasa pemerintah dari SPSE/LPSE. Lihat tender, pemenang, peserta, dan nilai kontrak.</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="text-xs bg-green-50 text-green-600 px-2.5 py-1 rounded-lg font-semibold">LPSE</span>
+                        <span class="text-xs bg-primary-50 text-primary-600 px-2.5 py-1 rounded-lg font-semibold">Tender</span>
+                        <span class="text-xs bg-gray-100 text-gray-500 px-2.5 py-1 rounded-lg font-semibold">Lokal</span>
+                    </div>
+                    <a href="spse-checker.html" class="btn-open block w-full text-center bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl">
+                        Panduan & Download
+                    </a>
                 </div>
-                <a href="siap-pkp-filler.html" class="btn-open block w-full text-center bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-xl">
-                    Panduan & Download
-                </a>
+
+            </div>
+        </section>
+
+        <!-- ╔════════════════════════════════════════════╗ -->
+        <!-- ║ PERSONAL & HOBBY                           ║ -->
+        <!-- ╚════════════════════════════════════════════╝ -->
+        <section id="personal" class="section-anchor pb-12 pt-4">
+            <div class="flex items-end justify-between mb-6 border-b border-gray-200 pb-3">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-black text-gray-900 flex items-center gap-3">
+                        <span>🎨</span>
+                        <span>Personal Projects</span>
+                    </h2>
+                    <p class="text-sm text-gray-400 mt-1">Side projects buat hobi & koleksi pribadi.</p>
+                </div>
+                <span class="text-xs font-bold text-gray-400 hidden sm:inline">3 in dev</span>
             </div>
 
-            <!-- SPSE Checker -->
-            <div class="card-tool bg-white rounded-2xl p-6 fade-in flex flex-col">
-                <div class="card-icon w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mb-5">
-                    <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/>
-                    </svg>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Tiny Hour Tales (Watch Inventory) -->
+                <div class="card-tool bg-white/60 rounded-2xl p-6 fade-in stagger-1 border-dashed !border-2 !border-gray-200 flex flex-col">
+                    <div class="card-icon w-14 h-14 bg-gray-100 rounded-2xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <h3 class="text-xl font-extrabold text-gray-500">Tiny Hour Tales</h3>
+                        <span class="text-[10px] bg-gray-200 text-gray-500 font-bold px-2 py-0.5 rounded-full">SOON</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-5 leading-relaxed flex-grow">Inventory koleksi jam tangan dengan dashboard, story per jam, dan catatan service.</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="text-xs bg-gray-100 text-gray-400 px-2.5 py-1 rounded-lg font-semibold">Watches</span>
+                        <span class="text-xs bg-gray-100 text-gray-400 px-2.5 py-1 rounded-lg font-semibold">Next.js</span>
+                    </div>
+                    <div class="block w-full text-center bg-gray-100 text-gray-400 font-bold py-3 rounded-xl cursor-default">
+                        Coming Soon
+                    </div>
                 </div>
-                <h3 class="text-xl font-extrabold text-gray-900 mb-2">SPSE Checker</h3>
-                <p class="text-sm text-gray-400 mb-5 leading-relaxed flex-grow">Cek data pengadaan barang/jasa pemerintah dari SPSE/LPSE. Lihat tender, pemenang, peserta, dan nilai kontrak. Dijalankan lokal.</p>
-                <div class="flex flex-wrap gap-2 mb-5">
-                    <span class="text-xs bg-green-50 text-green-600 px-2.5 py-1 rounded-lg font-semibold">LPSE</span>
-                    <span class="text-xs bg-primary-50 text-primary-600 px-2.5 py-1 rounded-lg font-semibold">Tender</span>
-                    <span class="text-xs bg-gray-100 text-gray-500 px-2.5 py-1 rounded-lg font-semibold">Lokal</span>
+
+                <!-- Pasal -->
+                <div class="card-tool bg-white/60 rounded-2xl p-6 fade-in stagger-2 border-dashed !border-2 !border-gray-200 flex flex-col">
+                    <div class="card-icon w-14 h-14 bg-gray-100 rounded-2xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8.689c0-.864.933-1.405 1.683-.977l7.108 4.061a1.125 1.125 0 010 1.954l-7.108 4.061A1.125 1.125 0 013 16.811V8.69zM12.75 8.689c0-.864.933-1.405 1.683-.977l7.108 4.061a1.125 1.125 0 010 1.954l-7.108 4.061a1.125 1.125 0 01-1.683-.977V8.69z"/>
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <h3 class="text-xl font-extrabold text-gray-500">Pasal</h3>
+                        <span class="text-[10px] bg-gray-200 text-gray-500 font-bold px-2 py-0.5 rounded-full">SOON</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-5 leading-relaxed flex-grow">Browser pasal hukum & peraturan terkonsolidasi — searchable, cross-reference, anotasi.</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="text-xs bg-gray-100 text-gray-400 px-2.5 py-1 rounded-lg font-semibold">Hukum</span>
+                        <span class="text-xs bg-gray-100 text-gray-400 px-2.5 py-1 rounded-lg font-semibold">Search</span>
+                    </div>
+                    <div class="block w-full text-center bg-gray-100 text-gray-400 font-bold py-3 rounded-xl cursor-default">
+                        Coming Soon
+                    </div>
                 </div>
-                <a href="spse-checker.html" class="btn-open block w-full text-center bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl">
-                    Panduan & Download
-                </a>
+
+                <!-- Persotoan -->
+                <div class="card-tool bg-white/60 rounded-2xl p-6 fade-in stagger-3 border-dashed !border-2 !border-gray-200 flex flex-col">
+                    <div class="card-icon w-14 h-14 bg-gray-100 rounded-2xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <h3 class="text-xl font-extrabold text-gray-500">Persotoan</h3>
+                        <span class="text-[10px] bg-gray-200 text-gray-500 font-bold px-2 py-0.5 rounded-full">SOON</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-5 leading-relaxed flex-grow">Direktori soto Nusantara — review, peta, dan ranking soto se-Indonesia.</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="text-xs bg-gray-100 text-gray-400 px-2.5 py-1 rounded-lg font-semibold">Kuliner</span>
+                        <span class="text-xs bg-gray-100 text-gray-400 px-2.5 py-1 rounded-lg font-semibold">Direktori</span>
+                    </div>
+                    <div class="block w-full text-center bg-gray-100 text-gray-400 font-bold py-3 rounded-xl cursor-default">
+                        Coming Soon
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ╔════════════════════════════════════════════╗ -->
+        <!-- ║ FINANCE                                    ║ -->
+        <!-- ╚════════════════════════════════════════════╝ -->
+        <section id="finance" class="section-anchor pb-20 pt-4">
+            <div class="flex items-end justify-between mb-6 border-b border-gray-200 pb-3">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-black text-gray-900 flex items-center gap-3">
+                        <span>💰</span>
+                        <span>Finance & Investment</span>
+                    </h2>
+                    <p class="text-sm text-gray-400 mt-1">Personal finance dashboard, portfolio tracker, wealth management.</p>
+                </div>
+                <span class="text-xs font-bold text-gray-400 hidden sm:inline">2 in dev</span>
             </div>
 
-            <!-- SIKD Browser -->
-            <div class="card-tool bg-white rounded-2xl p-6 fade-in flex flex-col">
-                <div class="card-icon w-14 h-14 bg-indigo-100 rounded-2xl flex items-center justify-center mb-5">
-                    <svg class="w-7 h-7 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-extrabold text-gray-900 mb-2">SIKD Browser</h3>
-                <p class="text-sm text-gray-400 mb-5 leading-relaxed flex-grow">Jelajahi data APBD seluruh Pemda di Indonesia. Lihat pendapatan, belanja, pembiayaan, dan bandingkan antar tahun.</p>
-                <div class="flex flex-wrap gap-2 mb-5">
-                    <span class="text-xs bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-lg font-semibold">APBD</span>
-                    <span class="text-xs bg-mint-50 text-mint-600 px-2.5 py-1 rounded-lg font-semibold">DJPK</span>
-                    <span class="text-xs bg-accent-50 text-accent-600 px-2.5 py-1 rounded-lg font-semibold">Komparasi</span>
-                </div>
-                <a href="https://sikd-browser.up.railway.app" target="_blank" class="btn-open block w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl">
-                    Buka Tool
-                </a>
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-            <!-- CalcTape Audit -->
-            <div class="card-tool bg-white rounded-2xl p-6 fade-in flex flex-col">
-                <div class="card-icon w-14 h-14 bg-cyan-100 rounded-2xl flex items-center justify-center mb-5">
-                    <svg class="w-7 h-7 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z"/>
-                    </svg>
+                <!-- Investment Dashboard -->
+                <div class="card-tool bg-white/60 rounded-2xl p-6 fade-in stagger-1 border-dashed !border-2 !border-gray-200 flex flex-col">
+                    <div class="card-icon w-14 h-14 bg-gray-100 rounded-2xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/>
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <h3 class="text-xl font-extrabold text-gray-500">Investment Dashboard</h3>
+                        <span class="text-[10px] bg-gray-200 text-gray-500 font-bold px-2 py-0.5 rounded-full">SOON</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-5 leading-relaxed flex-grow">Track portfolio saham, reksa dana, obligasi — terminal-style dashboard untuk monitoring real-time.</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="text-xs bg-gray-100 text-gray-400 px-2.5 py-1 rounded-lg font-semibold">Portfolio</span>
+                        <span class="text-xs bg-gray-100 text-gray-400 px-2.5 py-1 rounded-lg font-semibold">Realtime</span>
+                    </div>
+                    <div class="block w-full text-center bg-gray-100 text-gray-400 font-bold py-3 rounded-xl cursor-default">
+                        Coming Soon
+                    </div>
                 </div>
-                <h3 class="text-xl font-extrabold text-gray-900 mb-2">CalcTape Audit</h3>
-                <p class="text-sm text-gray-400 mb-5 leading-relaxed flex-grow">Kalkulator paper tape untuk audit. Editable, komentar per baris, subtotal, undo, simpan, export CSV, dan print.</p>
-                <div class="flex flex-wrap gap-2 mb-5">
-                    <span class="text-xs bg-cyan-50 text-cyan-600 px-2.5 py-1 rounded-lg font-semibold">Kalkulator</span>
-                    <span class="text-xs bg-primary-50 text-primary-600 px-2.5 py-1 rounded-lg font-semibold">Paper Tape</span>
-                    <span class="text-xs bg-mint-50 text-mint-600 px-2.5 py-1 rounded-lg font-semibold">Gratis</span>
-                </div>
-                <a href="https://calctape.up.railway.app" target="_blank" class="btn-open block w-full text-center bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 rounded-xl">
-                    Buka Tool
-                </a>
-            </div>
 
-            <!-- BPS Data Explorer -->
-            <div class="card-tool bg-white rounded-2xl p-6 fade-in flex flex-col">
-                <div class="card-icon w-14 h-14 bg-coral-100 rounded-2xl flex items-center justify-center mb-5">
-                    <svg class="w-7 h-7 text-coral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/>
-                    </svg>
+                <!-- Wealth Management -->
+                <div class="card-tool bg-white/60 rounded-2xl p-6 fade-in stagger-2 border-dashed !border-2 !border-gray-200 flex flex-col">
+                    <div class="card-icon w-14 h-14 bg-gray-100 rounded-2xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/>
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <h3 class="text-xl font-extrabold text-gray-500">Wealth Management</h3>
+                        <span class="text-[10px] bg-gray-200 text-gray-500 font-bold px-2 py-0.5 rounded-full">SOON</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-5 leading-relaxed flex-grow">All-in-one personal wealth tracker — net worth, cash flow, asset allocation, goals.</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="text-xs bg-gray-100 text-gray-400 px-2.5 py-1 rounded-lg font-semibold">Net Worth</span>
+                        <span class="text-xs bg-gray-100 text-gray-400 px-2.5 py-1 rounded-lg font-semibold">Goals</span>
+                    </div>
+                    <div class="block w-full text-center bg-gray-100 text-gray-400 font-bold py-3 rounded-xl cursor-default">
+                        Coming Soon
+                    </div>
                 </div>
-                <h3 class="text-xl font-extrabold text-gray-900 mb-2">BPS Data Explorer</h3>
-                <p class="text-sm text-gray-400 mb-5 leading-relaxed flex-grow">Jelajahi data statistik resmi BPS — publikasi, siaran pers, tabel statis, indikator strategis, SDGs, dan variabel ekonomi per wilayah.</p>
-                <div class="flex flex-wrap gap-2 mb-5">
-                    <span class="text-xs bg-coral-50 text-coral-600 px-2.5 py-1 rounded-lg font-semibold">BPS</span>
-                    <span class="text-xs bg-primary-50 text-primary-600 px-2.5 py-1 rounded-lg font-semibold">Statistik</span>
-                    <span class="text-xs bg-mint-50 text-mint-600 px-2.5 py-1 rounded-lg font-semibold">10 Model Data</span>
-                </div>
-                <a href="https://data-bps.up.railway.app/" target="_blank" class="btn-open block w-full text-center bg-coral-500 hover:bg-coral-600 text-white font-bold py-3 rounded-xl">
-                    Buka Tool
-                </a>
-            </div>
 
-            <!-- Coming Soon -->
-            <div class="card-tool bg-white/60 rounded-2xl p-6 fade-in border-dashed !border-2 !border-gray-200 flex flex-col">
-                <div class="card-icon w-14 h-14 bg-gray-100 rounded-2xl flex items-center justify-center mb-5">
-                    <svg class="w-7 h-7 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.5v15m7.5-7.5h-15"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-extrabold text-gray-300 mb-2">Coming Soon</h3>
-                <p class="text-sm text-gray-300 mb-5 leading-relaxed flex-grow">Tool baru sedang dalam pengembangan. Stay tuned untuk update selanjutnya!</p>
-                <div class="flex flex-wrap gap-2 mb-5">
-                    <span class="text-xs bg-gray-50 text-gray-300 px-2.5 py-1 rounded-lg font-semibold">Segera Hadir</span>
-                </div>
-                <div class="block w-full text-center bg-gray-100 text-gray-300 font-bold py-3 rounded-xl cursor-default">
-                    Coming Soon
-                </div>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
     <footer class="border-t border-gray-100 bg-white/50">
-        <div class="max-w-5xl mx-auto px-4 py-8 text-center">
+        <div class="max-w-6xl mx-auto px-4 py-8 text-center">
             <div class="flex items-center justify-center gap-2 mb-2">
                 <img src="static/bpk-logo.png" alt="BPK" class="w-6 h-6 object-contain opacity-50">
                 <p class="text-sm font-bold text-gray-400">
-                    Tools by <span class="gradient-text">Bashid Effendi</span>
+                    <span class="gradient-text">masbash.id</span> · by Bashid Effendi
                 </p>
             </div>
-            <p class="text-xs text-gray-300">Badan Pemeriksa Keuangan Republik Indonesia</p>
+            <p class="text-xs text-gray-300">Auditor BPK RI · Made with AI · © 2026</p>
         </div>
     </footer>
+
+    <script>
+        // Highlight active section in nav
+        const sections = document.querySelectorAll('section[id]');
+        const navPills = document.querySelectorAll('.nav-pill');
+        function setActiveNav() {
+            const scrollPos = window.scrollY + 120;
+            sections.forEach(sec => {
+                if (scrollPos >= sec.offsetTop && scrollPos < sec.offsetTop + sec.offsetHeight) {
+                    navPills.forEach(p => p.classList.remove('active'));
+                    const active = document.querySelector(`.nav-pill[href="#${sec.id}"]`);
+                    if (active) active.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', setActiveNav);
+        setActiveNav();
+    </script>
 </body>
 </html>
