@@ -65,72 +65,89 @@
         .nav-pills a:hover { background: var(--bg-card); color: var(--ink); }
         .nav-pills a.active { background: var(--ink); color: var(--accent-fg); }
 
-        /* === Hero === */
+        /* === Hero === COMPACT — biar cards langsung nampak */
         .hero {
-            padding: 96px 0 80px;
-            text-align: left;
+            padding: 36px 0 28px;
+            display: flex; align-items: flex-end; justify-content: space-between;
+            gap: 32px; flex-wrap: wrap;
+            border-bottom: 1px solid var(--line);
         }
+        .hero-left { flex: 1; min-width: 280px; }
         .hero-eyebrow {
             display: inline-flex; align-items: center; gap: 8px;
-            font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+            font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
             color: var(--ink-soft);
-            margin-bottom: 28px;
+            margin-bottom: 12px;
         }
         .hero-eyebrow::before {
-            content: ''; width: 24px; height: 1px; background: var(--ink-mute);
+            content: ''; width: 18px; height: 1px; background: var(--ink-mute);
         }
         .hero h1 {
             font-family: 'Inter', sans-serif;
-            font-size: clamp(48px, 8vw, 96px);
-            line-height: 0.95;
-            letter-spacing: -0.045em;
+            font-size: clamp(28px, 4.5vw, 44px);
+            line-height: 1.05;
+            letter-spacing: -0.03em;
             font-weight: 800;
-            margin-bottom: 28px;
+            margin-bottom: 8px;
         }
         .hero h1 .serif {
-            font-size: 1.05em;
+            font-size: 1em;
             display: inline-block;
             color: var(--ink-soft);
         }
         .hero p {
-            font-size: 19px; line-height: 1.55;
+            font-size: 15px; line-height: 1.5;
             color: var(--ink-soft);
-            max-width: 580px;
-            margin-bottom: 36px;
+            max-width: 520px;
+            margin-bottom: 0;
         }
         .hero-meta {
-            display: flex; align-items: center; gap: 24px;
-            font-size: 13px; color: var(--ink-mute);
-            padding-top: 28px; border-top: 1px solid var(--line);
-            max-width: 580px;
+            display: flex; align-items: center; gap: 28px;
+            font-size: 11px; color: var(--ink-mute);
+            text-transform: uppercase; letter-spacing: 0.06em;
         }
-        .hero-meta-item { display: flex; align-items: center; gap: 8px; }
-        .hero-meta-num { font-weight: 700; color: var(--ink); font-size: 22px; letter-spacing: -0.02em; }
+        .hero-meta-item { display: flex; flex-direction: column; gap: 2px; align-items: flex-start; }
+        .hero-meta-num { font-weight: 700; color: var(--ink); font-size: 28px; letter-spacing: -0.02em; line-height: 1; }
 
-        /* === Section === */
-        .section { padding: 64px 0; }
+        /* === Section === STRONG identity */
+        .section { padding: 56px 0 16px; position: relative; }
+        .section + .section { border-top: 1px solid var(--line); }
+        /* Background alternation untuk kategori biar batas jelas */
+        #personal { background: linear-gradient(180deg, transparent 0%, rgba(231, 229, 228, 0.35) 60px, rgba(231, 229, 228, 0.35) 100%); margin-top: 0; padding-bottom: 56px; }
+        #finance { background: linear-gradient(180deg, transparent 0%, transparent 100%); padding-bottom: 56px; }
+
         .section-head {
-            display: flex; align-items: baseline; justify-content: space-between;
-            margin-bottom: 40px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid var(--line);
+            display: flex; align-items: flex-start; justify-content: space-between;
+            margin-bottom: 28px; gap: 24px;
+        }
+        .section-id {
+            display: flex; align-items: baseline; gap: 12px;
+            margin-bottom: 8px;
+        }
+        .section-num {
+            font-family: 'Instrument Serif', serif; font-style: italic;
+            font-size: 18px; color: var(--ink-mute);
+            font-weight: 400;
         }
         .section-title {
-            font-size: 28px; font-weight: 700; letter-spacing: -0.025em;
+            font-size: clamp(28px, 4vw, 38px); font-weight: 800; letter-spacing: -0.03em;
+            line-height: 1;
         }
         .section-meta {
-            font-size: 13px; color: var(--ink-mute);
+            font-size: 12px; color: var(--ink-mute);
             display: flex; align-items: center; gap: 12px;
+            text-transform: uppercase; letter-spacing: 0.06em;
+            padding-top: 6px;
         }
         .section-count {
             display: inline-flex; align-items: center; justify-content: center;
-            min-width: 28px; height: 28px; padding: 0 10px;
+            min-width: 26px; height: 26px; padding: 0 9px;
             background: var(--ink); color: var(--accent-fg);
             border-radius: 999px;
-            font-size: 12px; font-weight: 600;
+            font-size: 11px; font-weight: 700;
         }
         .section-sub {
-            color: var(--ink-soft); font-size: 15px; margin-top: 6px;
+            color: var(--ink-soft); font-size: 14px; margin-top: 4px;
             max-width: 540px;
         }
 
@@ -271,21 +288,25 @@
         .rise:nth-child(8) { animation-delay: .28s; }
         .rise:nth-child(9) { animation-delay: .32s; }
 
+        /* === Footer override mt jadi 32px karena ada section bg === */
+        .footer { margin-top: 0; padding-top: 40px; }
+
         /* === Mobile === */
         @media (max-width: 768px) {
             .container { padding: 0 20px; }
             .header-row { padding: 14px 0; gap: 12px; }
             .nav-pills { gap: 2px; }
             .nav-pills a { padding: 6px 10px; font-size: 12px; }
-            .hero { padding: 56px 0 56px; }
-            .hero h1 { font-size: clamp(40px, 11vw, 56px); }
-            .hero p { font-size: 17px; }
-            .hero-meta { gap: 16px; flex-wrap: wrap; }
-            .section { padding: 40px 0; }
-            .section-title { font-size: 22px; }
-            .section-head { margin-bottom: 24px; padding-bottom: 16px; }
+            .hero { padding: 24px 0 20px; flex-direction: column; align-items: flex-start; gap: 18px; }
+            .hero h1 { font-size: 28px; }
+            .hero p { font-size: 14px; }
+            .hero-meta { gap: 24px; }
+            .hero-meta-num { font-size: 24px; }
+            .section { padding: 40px 0 8px; }
+            .section-title { font-size: 26px; }
+            .section-head { margin-bottom: 20px; }
             .grid { grid-template-columns: 1fr; gap: 12px; }
-            .card { padding: 20px; border-radius: 14px; }
+            .card { padding: 18px; border-radius: 14px; }
             .footer-row { flex-direction: column; align-items: flex-start; gap: 8px; }
         }
         @media (max-width: 420px) {
@@ -310,25 +331,19 @@
     </header>
 
     <main class="container" id="top">
-        <!-- Hero -->
+        <!-- Hero (compact, 2-col) -->
         <section class="hero rise">
-            <div class="hero-eyebrow">Bashid Effendi · BPK RI</div>
-            <h1>
-                Tools, built<br>
-                <span class="serif">to be used.</span>
-            </h1>
-            <p>
-                Audit, finance, dan beberapa side projects. Semua jalan di browser — open, free, no signup.
-            </p>
+            <div class="hero-left">
+                <div class="hero-eyebrow">Bashid Effendi · BPK RI</div>
+                <h1>Tools, built <span class="serif">to be used.</span></h1>
+                <p>Audit, finance, dan beberapa side projects. Open, free, no signup.</p>
+            </div>
             <div class="hero-meta">
                 <div class="hero-meta-item">
-                    <span class="hero-meta-num">9</span><span>live</span>
+                    <span class="hero-meta-num">9</span><span>Live</span>
                 </div>
                 <div class="hero-meta-item">
-                    <span class="hero-meta-num">5</span><span>in dev</span>
-                </div>
-                <div class="hero-meta-item">
-                    <span class="hero-meta-num">2026</span><span>updated</span>
+                    <span class="hero-meta-num">5</span><span>In Dev</span>
                 </div>
             </div>
         </section>
@@ -337,11 +352,14 @@
         <section id="audit" class="section">
             <div class="section-head">
                 <div>
-                    <div class="section-title">Audit</div>
+                    <div class="section-id">
+                        <span class="section-num">01</span>
+                        <h2 class="section-title">Audit</h2>
+                    </div>
                     <div class="section-sub">Tools untuk kerja audit BPK & APIP — kompliansi, lookup data publik, kalkulasi.</div>
                 </div>
                 <div class="section-meta">
-                    <span class="section-count">9</span>
+                    <span class="section-count">9</span><span>tools</span>
                 </div>
             </div>
 
@@ -508,11 +526,14 @@
         <section id="personal" class="section">
             <div class="section-head">
                 <div>
-                    <div class="section-title">Personal</div>
+                    <div class="section-id">
+                        <span class="section-num">02</span>
+                        <h2 class="section-title">Personal</h2>
+                    </div>
                     <div class="section-sub">Side projects buat hobi dan koleksi pribadi.</div>
                 </div>
                 <div class="section-meta">
-                    <span class="section-count">3</span>
+                    <span class="section-count">3</span><span>tools</span>
                 </div>
             </div>
 
@@ -565,11 +586,14 @@
         <section id="finance" class="section">
             <div class="section-head">
                 <div>
-                    <div class="section-title">Finance</div>
+                    <div class="section-id">
+                        <span class="section-num">03</span>
+                        <h2 class="section-title">Finance</h2>
+                    </div>
                     <div class="section-sub">Personal finance dashboard, portfolio tracker, wealth management.</div>
                 </div>
                 <div class="section-meta">
-                    <span class="section-count">2</span>
+                    <span class="section-count">2</span><span>tools</span>
                 </div>
             </div>
 
