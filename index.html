@@ -5,616 +5,383 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bashid Effendi — Tools Collection</title>
     <meta name="description" content="Koleksi tools audit, finance, dan personal projects oleh Bashid Effendi (Auditor BPK RI).">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#f0f4ff', 100: '#dbe4ff', 200: '#bac8ff', 500: '#5c7cfa', 600: '#4c6ef5', 700: '#4263eb' },
+                        accent: { 50: '#fff9db', 100: '#fff3bf', 200: '#ffec99', 500: '#fcc419', 600: '#fab005' },
+                        mint: { 50: '#e6fcf5', 100: '#c3fae8', 500: '#20c997', 600: '#12b886' },
+                        coral: { 50: '#fff5f5', 100: '#ffe3e3', 500: '#ff6b6b', 600: '#fa5252' },
+                        grape: { 50: '#f8f0fc', 100: '#f3d9fa', 500: '#cc5de8', 600: '#be4bdb' },
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --bg: #fafaf9;
-            --bg-card: #ffffff;
-            --ink: #0a0a0a;
-            --ink-soft: #525252;
-            --ink-mute: #a3a3a3;
-            --line: #e7e5e4;
-            --line-strong: #d6d3d1;
-            --accent: #0a0a0a;
-            --accent-fg: #ffffff;
-            --shadow-sm: 0 1px 2px rgba(10,10,10,.04);
-            --shadow-md: 0 4px 24px rgba(10,10,10,.06);
-            --shadow-lg: 0 12px 48px rgba(10,10,10,.10);
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #4c6ef5, #be4bdb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-bg {
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(76,110,245,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 30%, rgba(190,75,219,0.06) 0%, transparent 50%),
+                linear-gradient(180deg, #f8f9ff 0%, #fff 100%);
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--ink);
-            font-size: 15px;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-            font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-        }
-        a { color: inherit; text-decoration: none; }
-        .serif { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-style: italic; }
-
-        .container { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
-
-        /* === Header === */
-        .header {
-            position: sticky; top: 0; z-index: 50;
-            background: rgba(250, 250, 249, 0.85);
-            backdrop-filter: saturate(180%) blur(12px);
-            -webkit-backdrop-filter: saturate(180%) blur(12px);
-            border-bottom: 1px solid var(--line);
-        }
-        .header-row {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 18px 0; gap: 24px;
-        }
-        .brand {
-            display: flex; align-items: center; gap: 10px;
-            font-weight: 700; font-size: 16px; letter-spacing: -0.01em;
-        }
-        .brand-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink); }
-        .nav-pills { display: flex; gap: 4px; }
-        .nav-pills a {
-            padding: 8px 14px; border-radius: 999px;
-            font-size: 13px; font-weight: 500; color: var(--ink-soft);
-            transition: all .15s ease;
-        }
-        .nav-pills a:hover { background: var(--bg-card); color: var(--ink); }
-        .nav-pills a.active { background: var(--ink); color: var(--accent-fg); }
-
-        /* === Hero === COMPACT — biar cards langsung nampak */
-        .hero {
-            padding: 36px 0 28px;
-            display: flex; align-items: flex-end; justify-content: space-between;
-            gap: 32px; flex-wrap: wrap;
-            border-bottom: 1px solid var(--line);
-        }
-        .hero-left { flex: 1; min-width: 280px; }
-        .hero-eyebrow {
-            display: inline-flex; align-items: center; gap: 8px;
-            font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-            color: var(--ink-soft);
-            margin-bottom: 12px;
-        }
-        .hero-eyebrow::before {
-            content: ''; width: 18px; height: 1px; background: var(--ink-mute);
-        }
-        .hero h1 {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(28px, 4.5vw, 44px);
-            line-height: 1.05;
-            letter-spacing: -0.03em;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-        .hero h1 .serif {
-            font-size: 1em;
-            display: inline-block;
-            color: var(--ink-soft);
-        }
-        .hero p {
-            font-size: 15px; line-height: 1.5;
-            color: var(--ink-soft);
-            max-width: 520px;
-            margin-bottom: 0;
-        }
-        .hero-meta {
-            display: flex; align-items: center; gap: 28px;
-            font-size: 11px; color: var(--ink-mute);
-            text-transform: uppercase; letter-spacing: 0.06em;
-        }
-        .hero-meta-item { display: flex; flex-direction: column; gap: 2px; align-items: flex-start; }
-        .hero-meta-num { font-weight: 700; color: var(--ink); font-size: 28px; letter-spacing: -0.02em; line-height: 1; }
-
-        /* === Section === STRONG identity */
-        .section { padding: 56px 0 16px; position: relative; }
-        .section + .section { border-top: 1px solid var(--line); }
-        /* Background alternation untuk kategori biar batas jelas */
-        #personal { background: linear-gradient(180deg, transparent 0%, rgba(231, 229, 228, 0.35) 60px, rgba(231, 229, 228, 0.35) 100%); margin-top: 0; padding-bottom: 56px; }
-        #finance { background: linear-gradient(180deg, transparent 0%, transparent 100%); padding-bottom: 56px; }
-
-        .section-head {
-            display: flex; align-items: flex-start; justify-content: space-between;
-            margin-bottom: 28px; gap: 24px;
-        }
-        .section-id {
-            display: flex; align-items: baseline; gap: 12px;
-            margin-bottom: 8px;
-        }
-        .section-num {
-            font-family: 'Instrument Serif', serif; font-style: italic;
-            font-size: 18px; color: var(--ink-mute);
-            font-weight: 400;
-        }
-        .section-title {
-            font-size: clamp(28px, 4vw, 38px); font-weight: 800; letter-spacing: -0.03em;
-            line-height: 1;
-        }
-        .section-meta {
-            font-size: 12px; color: var(--ink-mute);
-            display: flex; align-items: center; gap: 12px;
-            text-transform: uppercase; letter-spacing: 0.06em;
-            padding-top: 6px;
-        }
-        .section-count {
-            display: inline-flex; align-items: center; justify-content: center;
-            min-width: 26px; height: 26px; padding: 0 9px;
-            background: var(--ink); color: var(--accent-fg);
-            border-radius: 999px;
-            font-size: 11px; font-weight: 700;
-        }
-        .section-sub {
-            color: var(--ink-soft); font-size: 14px; margin-top: 4px;
-            max-width: 540px;
-        }
-
-        /* === Cards === */
-        .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--line);
-            border-radius: 14px;
-            padding: 22px;
-            display: flex; flex-direction: column;
-            transition: border-color .2s, transform .2s, box-shadow .2s;
-            position: relative;
-        }
-        .card:hover {
-            transform: translateY(-2px);
-            border-color: var(--ink);
-            box-shadow: var(--shadow-sm);
-        }
-        /* Just Count distinguish via accent bar di top, bukan dark gradient */
-        .card.featured::before {
-            content: ''; position: absolute; top: 0; left: 22px; right: 22px;
-            height: 2px; background: var(--ink); border-radius: 0 0 2px 2px;
-        }
-
-        .card.soon {
-            background: transparent;
-            border-style: dashed;
-        }
-        .card.soon:hover { transform: none; box-shadow: none; border-color: var(--line-strong); }
-        .card.soon .card-title, .card.soon .card-desc { color: var(--ink-mute); }
-        .card.soon .card-link { background: transparent; color: var(--ink-mute); cursor: default; pointer-events: none; border: 1px solid var(--line); }
-        .card.soon .card-link::after { content: ''; }
-
-        .card-badge {
-            position: absolute; top: 14px; right: 14px;
-            font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-            color: var(--ink-soft);
-        }
-
-        .card-eyebrow {
-            font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
-            text-transform: uppercase; color: var(--ink-mute);
-            margin-bottom: 14px;
-        }
-        .card-title {
-            font-size: 18px; font-weight: 700; letter-spacing: -0.015em;
-            margin-bottom: 6px;
-        }
-        .card-desc {
-            font-size: 13.5px; line-height: 1.55;
-            color: var(--ink-soft);
-            margin-bottom: 18px;
-            flex-grow: 1;
-        }
-        .card-tags {
-            display: flex; flex-wrap: wrap; gap: 6px;
-            margin-bottom: 18px;
-        }
-        .tag {
-            font-size: 10.5px; font-weight: 500;
-            padding: 3px 8px; border-radius: 4px;
-            color: var(--ink-soft);
-            background: var(--bg);
-        }
-        .card.soon .tag { background: transparent; color: var(--ink-mute); }
-        .card-link {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0;
-            color: var(--ink);
-            font-size: 13px; font-weight: 600;
-            transition: opacity .2s;
-            background: transparent;
-            border-top: 1px solid var(--line);
-            padding-top: 14px;
-        }
-        .card-link:hover { opacity: 0.6; }
-        .card-link::after {
-            content: '→';
-            font-weight: 400; transition: transform .2s;
-        }
-        .card-link:hover::after { transform: translateX(3px); }
-
-        /* === Footer === */
-        .footer {
-            margin-top: 96px;
-            padding: 48px 0 64px;
-            border-top: 1px solid var(--line);
-            text-align: left;
-        }
-        .footer-row {
-            display: flex; align-items: center; justify-content: space-between;
-            font-size: 13px; color: var(--ink-mute);
-            gap: 16px;
-        }
-        .footer-brand { font-weight: 600; color: var(--ink); }
-
-        /* === Animations === */
-        @keyframes rise {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .rise { animation: rise .5s cubic-bezier(0.4, 0, 0.2, 1) both; }
-        .rise:nth-child(2) { animation-delay: .04s; }
-        .rise:nth-child(3) { animation-delay: .08s; }
-        .rise:nth-child(4) { animation-delay: .12s; }
-        .rise:nth-child(5) { animation-delay: .16s; }
-        .rise:nth-child(6) { animation-delay: .20s; }
-        .rise:nth-child(7) { animation-delay: .24s; }
-        .rise:nth-child(8) { animation-delay: .28s; }
-        .rise:nth-child(9) { animation-delay: .32s; }
-
-        /* === Footer override mt jadi 32px karena ada section bg === */
-        .footer { margin-top: 0; padding-top: 40px; }
-
-        /* === Mobile === */
-        @media (max-width: 768px) {
-            .container { padding: 0 20px; }
-            .header-row { padding: 14px 0; gap: 12px; }
-            .nav-pills { gap: 2px; }
-            .nav-pills a { padding: 6px 10px; font-size: 12px; }
-            .hero { padding: 24px 0 20px; flex-direction: column; align-items: flex-start; gap: 18px; }
-            .hero h1 { font-size: 28px; }
-            .hero p { font-size: 14px; }
-            .hero-meta { gap: 24px; }
-            .hero-meta-num { font-size: 24px; }
-            .section { padding: 40px 0 8px; }
-            .section-title { font-size: 26px; }
-            .section-head { margin-bottom: 20px; }
-            .grid { grid-template-columns: 1fr; gap: 12px; }
-            .card { padding: 18px; border-radius: 14px; }
-            .footer-row { flex-direction: column; align-items: flex-start; gap: 8px; }
-        }
-        @media (max-width: 420px) {
-            .nav-pills a { padding: 5px 8px; font-size: 11px; }
-            .brand { font-size: 14px; }
-        }
+        .card-tool { transition: all .25s ease; border: 1px solid #f1f3f5; }
+        .card-tool:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(0,0,0,.08); border-color: transparent; }
+        .card-tool:hover .card-icon { transform: scale(1.08); }
+        .card-icon { transition: transform .25s ease; }
+        .btn-open { transition: all .15s ease; }
+        .btn-open:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(76,110,245,.25); }
+        .nav-pill { transition: all .15s ease; }
+        .nav-pill:hover { background: #f1f3f5; color: #4c6ef5; }
+        .nav-pill.active { background: #dbe4ff; color: #4263eb; }
+        .badge-new { background: linear-gradient(135deg, #fab005, #ff6b6b); color: white; font-weight: 800; letter-spacing: .05em; }
+        .section-anchor { scroll-margin-top: 80px; }
+        .fade-in { animation: fadeIn .5s ease-out both; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        .stagger-1 { animation-delay: .04s; } .stagger-2 { animation-delay: .08s; } .stagger-3 { animation-delay: .12s; }
+        .stagger-4 { animation-delay: .16s; } .stagger-5 { animation-delay: .20s; } .stagger-6 { animation-delay: .24s; }
+        .stagger-7 { animation-delay: .28s; } .stagger-8 { animation-delay: .32s; } .stagger-9 { animation-delay: .36s; }
     </style>
 </head>
-<body>
-    <header class="header">
-        <div class="container header-row">
-            <a href="#top" class="brand">
-                <span class="brand-dot"></span>
-                <span>Bashid Effendi</span>
+<body class="min-h-screen hero-bg">
+    <!-- Header -->
+    <header class="bg-white/70 backdrop-blur-lg border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            <a href="#top" class="flex items-center gap-2.5 shrink-0">
+                <span class="w-2 h-2 rounded-full bg-gray-900"></span>
+                <span class="font-bold text-gray-900">Bashid Effendi</span>
             </a>
-            <nav class="nav-pills">
-                <a href="#audit">Audit</a>
-                <a href="#personal">Personal</a>
-                <a href="#finance">Finance</a>
+            <nav class="hidden md:flex items-center gap-1 text-xs font-bold text-gray-500">
+                <a href="#audit" class="nav-pill px-3 py-1.5 rounded-full">Audit</a>
+                <a href="#personal" class="nav-pill px-3 py-1.5 rounded-full">Personal</a>
+                <a href="#finance" class="nav-pill px-3 py-1.5 rounded-full">Finance</a>
             </nav>
+            <span class="hidden sm:inline text-xs text-gray-400">Made with AI</span>
         </div>
     </header>
 
-    <main class="container" id="top">
-        <!-- Hero (compact, 2-col) -->
-        <section class="hero rise">
-            <div class="hero-left">
-                <div class="hero-eyebrow">Bashid Effendi · BPK RI</div>
-                <h1>Tools, built <span class="serif">to be used.</span></h1>
-                <p>Audit, finance, dan beberapa side projects. Open, free, no signup.</p>
-            </div>
-            <div class="hero-meta">
-                <div class="hero-meta-item">
-                    <span class="hero-meta-num">9</span><span>Live</span>
+    <main id="top" class="max-w-6xl mx-auto px-4">
+        <!-- Hero (compact) -->
+        <section class="py-10 md:py-14 fade-in border-b border-gray-100 flex items-end justify-between gap-6 flex-wrap">
+            <div>
+                <div class="inline-flex items-center gap-2 bg-accent-50 border border-accent-200 text-accent-600 text-[11px] font-bold px-3 py-1 rounded-full mb-4">
+                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    Tools Collection · 2026
                 </div>
-                <div class="hero-meta-item">
-                    <span class="hero-meta-num">5</span><span>In Dev</span>
+                <h1 class="text-3xl md:text-5xl font-black text-gray-900 leading-[1.05] tracking-tight">
+                    Tools by <span class="gradient-text">Bashid Effendi</span>
+                </h1>
+                <p class="text-sm md:text-base text-gray-500 mt-2 max-w-lg">
+                    Auditor BPK RI. Audit, finance, dan side projects — open, free, no signup.
+                </p>
+            </div>
+            <div class="flex items-end gap-7 text-[11px] font-bold uppercase tracking-wider text-gray-400">
+                <div class="flex flex-col items-start gap-0.5">
+                    <span class="font-black text-gray-900 text-2xl tracking-tight leading-none">9</span>
+                    <span>Live</span>
+                </div>
+                <div class="flex flex-col items-start gap-0.5">
+                    <span class="font-black text-gray-900 text-2xl tracking-tight leading-none">5</span>
+                    <span>In Dev</span>
                 </div>
             </div>
         </section>
 
-        <!-- ===== AUDIT ===== -->
-        <section id="audit" class="section">
-            <div class="section-head">
-                <div>
-                    <div class="section-id">
-                        <span class="section-num">01</span>
-                        <h2 class="section-title">Audit</h2>
-                    </div>
-                    <div class="section-sub">Tools untuk kerja audit BPK & APIP — kompliansi, lookup data publik, kalkulasi.</div>
+        <!-- ===== 01 AUDIT ===== -->
+        <section id="audit" class="section-anchor pt-12 pb-6">
+            <div class="flex items-end justify-between gap-4 mb-6 pb-4 border-b border-gray-200">
+                <div class="flex items-baseline gap-3">
+                    <span class="text-sm font-mono text-gray-400">01</span>
+                    <h2 class="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">Audit</h2>
+                    <span class="text-sm text-gray-400 ml-2 hidden md:inline">Tools untuk kerja audit BPK & APIP</span>
                 </div>
-                <div class="section-meta">
-                    <span class="section-count">9</span><span>tools</span>
+                <div class="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-wider">
+                    <span class="bg-gray-900 text-white rounded-full min-w-[26px] h-[26px] inline-flex items-center justify-center text-[11px]">9</span>
+                    <span class="hidden md:inline">Tools</span>
                 </div>
             </div>
 
-            <div class="grid">
-                <!-- Just Count [FEATURED] -->
-                <article class="card featured rise">
-                    <div class="card-badge">NEW</div>
-                    <h3 class="card-title">Just Count</h3>
-                    <p class="card-desc">
-                        Audit kepatuhan jasa konsultansi konstruksi APBD. 3-area checklist + engine numerik
-                        personel/non-personel + auto-generate BAPK Word.
-                    </p>
-                    <div class="card-tags">
-                        <span class="tag">Multi-tenant</span>
-                        <span class="tag">BAPK Auto</span>
-                        <span class="tag">SKA Check</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Just Count [NEW] -->
+                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-1 flex flex-col relative">
+                    <div class="absolute top-3 right-3 badge-new text-[10px] px-2.5 py-1 rounded-full">NEW</div>
+                    <div class="card-icon w-12 h-12 bg-gradient-to-br from-primary-500 to-grape-500 rounded-xl flex items-center justify-center mb-4 shadow-md shadow-primary-200">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25"/></svg>
                     </div>
-                    <a href="https://justcount.up.railway.app" target="_blank" class="card-link">
-                        Buka tool
-                    </a>
-                </article>
+                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">Just Count</h3>
+                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Audit kepatuhan jasa konsultansi konstruksi APBD. 3-area checklist + engine numerik + auto-generate BAPK Word.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="text-[11px] bg-primary-50 text-primary-600 px-2 py-0.5 rounded font-semibold">Multi-tenant</span>
+                        <span class="text-[11px] bg-grape-50 text-grape-600 px-2 py-0.5 rounded font-semibold">BAPK Auto</span>
+                        <span class="text-[11px] bg-mint-50 text-mint-600 px-2 py-0.5 rounded font-semibold">SKA Check</span>
+                    </div>
+                    <a href="https://justcount.up.railway.app" target="_blank" class="btn-open block w-full text-center bg-gradient-to-r from-primary-600 to-grape-600 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
+                </div>
 
                 <!-- PDDIKTI Checker -->
-                <article class="card rise">
-                    <h3 class="card-title">PDDIKTI Checker</h3>
-                    <p class="card-desc">
-                        Cek status kemahasiswaan dari PDDIKTI. Upload Excel, dapat status Aktif/Lulus/DO secara massal.
-                    </p>
-                    <div class="card-tags">
-                        <span class="tag">Excel</span>
-                        <span class="tag">Bulk</span>
-                        <span class="tag">Realtime</span>
+                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-2 flex flex-col">
+                    <div class="card-icon w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     </div>
-                    <a href="https://pddikti-checker.up.railway.app" target="_blank" class="card-link">
-                        Buka tool
-                    </a>
-                </article>
+                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">PDDIKTI Checker</h3>
+                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Cek status kemahasiswaan dari PDDIKTI. Upload Excel, dapat status Aktif/Lulus/DO secara massal.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="text-[11px] bg-primary-50 text-primary-600 px-2 py-0.5 rounded font-semibold">Excel</span>
+                        <span class="text-[11px] bg-mint-50 text-mint-600 px-2 py-0.5 rounded font-semibold">Bulk</span>
+                    </div>
+                    <a href="https://pddikti-checker.up.railway.app" target="_blank" class="btn-open block w-full text-center bg-primary-600 hover:bg-primary-700 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
+                </div>
 
                 <!-- SKA Checker -->
-                <article class="card rise">
-                    <h3 class="card-title">SKA Checker</h3>
-                    <p class="card-desc">
-                        Verifikasi sertifikat keahlian konstruksi (SKA/SKT/SKK) dari LPJK.
-                        Cek keaslian dan status sertifikat.
-                    </p>
-                    <div class="card-tags">
-                        <span class="tag">SKA/SKT/SKK</span>
-                        <span class="tag">LPJK</span>
+                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-3 flex flex-col">
+                    <div class="card-icon w-12 h-12 bg-grape-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-grape-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
                     </div>
-                    <a href="https://cek-sertifikat-keahlian.up.railway.app" target="_blank" class="card-link">
-                        Buka tool
-                    </a>
-                </article>
+                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">SKA Checker</h3>
+                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Verifikasi sertifikat keahlian konstruksi (SKA/SKT/SKK) dari LPJK. Cek keaslian dan status sertifikat.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="text-[11px] bg-grape-50 text-grape-600 px-2 py-0.5 rounded font-semibold">SKA/SKT/SKK</span>
+                        <span class="text-[11px] bg-mint-50 text-mint-600 px-2 py-0.5 rounded font-semibold">LPJK</span>
+                    </div>
+                    <a href="https://cek-sertifikat-keahlian.up.railway.app" target="_blank" class="btn-open block w-full text-center bg-grape-600 hover:bg-grape-700 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
+                </div>
 
                 <!-- SIKD Browser -->
-                <article class="card rise">
-                    <h3 class="card-title">SIKD Browser</h3>
-                    <p class="card-desc">
-                        Jelajahi data APBD seluruh Pemda Indonesia. Pendapatan, belanja, pembiayaan, komparasi antar tahun.
-                    </p>
-                    <div class="card-tags">
-                        <span class="tag">APBD</span>
-                        <span class="tag">DJPK</span>
-                        <span class="tag">Komparasi</span>
+                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-4 flex flex-col">
+                    <div class="card-icon w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
                     </div>
-                    <a href="https://sikd-browser.up.railway.app" target="_blank" class="card-link">
-                        Buka tool
-                    </a>
-                </article>
+                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">SIKD Browser</h3>
+                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Jelajahi data APBD seluruh Pemda Indonesia. Pendapatan, belanja, pembiayaan, komparasi antar tahun.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="text-[11px] bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded font-semibold">APBD</span>
+                        <span class="text-[11px] bg-mint-50 text-mint-600 px-2 py-0.5 rounded font-semibold">DJPK</span>
+                    </div>
+                    <a href="https://sikd-browser.up.railway.app" target="_blank" class="btn-open block w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
+                </div>
 
                 <!-- CalcTape Audit -->
-                <article class="card rise">
-                    <h3 class="card-title">CalcTape Audit</h3>
-                    <p class="card-desc">
-                        Kalkulator paper tape untuk audit. Editable, komentar per baris, subtotal, undo,
-                        export CSV, print.
-                    </p>
-                    <div class="card-tags">
-                        <span class="tag">Kalkulator</span>
-                        <span class="tag">Paper Tape</span>
+                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-5 flex flex-col">
+                    <div class="card-icon w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z"/></svg>
                     </div>
-                    <a href="https://calctape.up.railway.app" target="_blank" class="card-link">
-                        Buka tool
-                    </a>
-                </article>
+                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">CalcTape Audit</h3>
+                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Kalkulator paper tape untuk audit. Editable, komentar per baris, subtotal, undo, export CSV, print.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="text-[11px] bg-cyan-50 text-cyan-600 px-2 py-0.5 rounded font-semibold">Kalkulator</span>
+                        <span class="text-[11px] bg-primary-50 text-primary-600 px-2 py-0.5 rounded font-semibold">Paper Tape</span>
+                    </div>
+                    <a href="https://calctape.up.railway.app" target="_blank" class="btn-open block w-full text-center bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
+                </div>
 
                 <!-- BPS Data Explorer -->
-                <article class="card rise">
-                    <h3 class="card-title">BPS Data Explorer</h3>
-                    <p class="card-desc">
-                        Jelajahi data statistik resmi BPS — publikasi, siaran pers, indikator strategis,
-                        SDGs, ekonomi per wilayah.
-                    </p>
-                    <div class="card-tags">
-                        <span class="tag">BPS</span>
-                        <span class="tag">Statistik</span>
+                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-6 flex flex-col">
+                    <div class="card-icon w-12 h-12 bg-coral-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-coral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
                     </div>
-                    <a href="https://data-bps.up.railway.app/" target="_blank" class="card-link">
-                        Buka tool
-                    </a>
-                </article>
+                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">BPS Data Explorer</h3>
+                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Jelajahi data statistik resmi BPS — publikasi, siaran pers, indikator strategis, SDGs, ekonomi per wilayah.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="text-[11px] bg-coral-50 text-coral-600 px-2 py-0.5 rounded font-semibold">BPS</span>
+                        <span class="text-[11px] bg-primary-50 text-primary-600 px-2 py-0.5 rounded font-semibold">Statistik</span>
+                    </div>
+                    <a href="https://data-bps.up.railway.app/" target="_blank" class="btn-open block w-full text-center bg-coral-500 hover:bg-coral-600 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
+                </div>
 
-                <!-- SIAP PKP Filler (Desktop) -->
-                <article class="card rise">
-                    <h3 class="card-title">SIAP PKP Filler</h3>
-                    <p class="card-desc">
-                        Auto-fill kolom Hasil Pengujian di SIAP BPK dari Excel PKP. Aplikasi desktop
-                        (butuh download + VPN BPK).
-                    </p>
-                    <div class="card-tags">
-                        <span class="tag">SIAP BPK</span>
-                        <span class="tag">Desktop App</span>
-                        <span class="tag">VPN</span>
+                <!-- SIAP PKP Filler -->
+                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-7 flex flex-col">
+                    <div class="card-icon w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486"/></svg>
                     </div>
-                    <a href="siap-pkp-filler.html" class="card-link">
-                        Panduan & Download
-                    </a>
-                </article>
+                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">SIAP PKP Filler</h3>
+                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Auto-fill kolom Hasil Pengujian di SIAP BPK dari Excel PKP. Aplikasi desktop (butuh download + VPN BPK).</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="text-[11px] bg-amber-50 text-amber-600 px-2 py-0.5 rounded font-semibold">SIAP BPK</span>
+                        <span class="text-[11px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded font-semibold">Desktop</span>
+                    </div>
+                    <a href="siap-pkp-filler.html" class="btn-open block w-full text-center bg-amber-500 hover:bg-amber-600 text-white font-bold py-2.5 rounded-lg text-sm">Panduan & Download</a>
+                </div>
 
-                <!-- SPSE Checker (Desktop) -->
-                <article class="card rise">
-                    <h3 class="card-title">SPSE Checker</h3>
-                    <p class="card-desc">
-                        Cek data pengadaan B/J pemerintah dari SPSE/LPSE. Tender, pemenang, peserta,
-                        nilai kontrak. Aplikasi desktop.
-                    </p>
-                    <div class="card-tags">
-                        <span class="tag">LPSE</span>
-                        <span class="tag">Desktop App</span>
-                        <span class="tag">Tender</span>
+                <!-- SPSE Checker -->
+                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-8 flex flex-col">
+                    <div class="card-icon w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                     </div>
-                    <a href="spse-checker.html" class="card-link">
-                        Panduan & Download
-                    </a>
-                </article>
+                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">SPSE Checker</h3>
+                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Cek data pengadaan B/J pemerintah dari SPSE/LPSE. Tender, pemenang, peserta, nilai kontrak. Aplikasi desktop.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="text-[11px] bg-green-50 text-green-600 px-2 py-0.5 rounded font-semibold">LPSE</span>
+                        <span class="text-[11px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded font-semibold">Desktop</span>
+                    </div>
+                    <a href="spse-checker.html" class="btn-open block w-full text-center bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded-lg text-sm">Panduan & Download</a>
+                </div>
 
                 <!-- SIRUP Audit (Coming Soon) -->
-                <article class="card soon rise">
-                    <div class="card-badge">SOON</div>
-                    <h3 class="card-title">SIRUP Audit</h3>
-                    <p class="card-desc">
-                        Dashboard deteksi paket pengadaan mencurigakan dari SIRUP LKPP.
-                        Red flag analysis 2021–2026.
-                    </p>
-                    <div class="card-tags">
-                        <span class="tag">SIRUP</span>
-                        <span class="tag">Red Flag</span>
+                <div class="card-tool bg-white/60 rounded-2xl p-6 fade-in stagger-9 border-dashed !border-2 !border-gray-200 flex flex-col">
+                    <div class="card-icon w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3v1.5M3 21v-6m0 0l2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5"/></svg>
                     </div>
-                    <div class="card-link">Coming Soon</div>
-                </article>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <h3 class="text-lg font-extrabold text-gray-500">SIRUP Audit</h3>
+                        <span class="text-[10px] bg-gray-200 text-gray-500 font-bold px-2 py-0.5 rounded-full">SOON</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4 leading-snug flex-grow">Dashboard deteksi paket pengadaan mencurigakan dari SIRUP LKPP. Red flag analysis 2021–2026.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="text-[11px] bg-gray-100 text-gray-400 px-2 py-0.5 rounded font-semibold">SIRUP</span>
+                        <span class="text-[11px] bg-gray-100 text-gray-400 px-2 py-0.5 rounded font-semibold">Red Flag</span>
+                    </div>
+                    <div class="block w-full text-center bg-gray-100 text-gray-400 font-bold py-2.5 rounded-lg text-sm cursor-default">Coming Soon</div>
+                </div>
             </div>
         </section>
 
-        <!-- ===== PERSONAL ===== -->
-        <section id="personal" class="section">
-            <div class="section-head">
-                <div>
-                    <div class="section-id">
-                        <span class="section-num">02</span>
-                        <h2 class="section-title">Personal</h2>
-                    </div>
-                    <div class="section-sub">Side projects buat hobi dan koleksi pribadi.</div>
+        <!-- ===== 02 PERSONAL ===== -->
+        <section id="personal" class="section-anchor pt-12 pb-6">
+            <div class="flex items-end justify-between gap-4 mb-6 pb-4 border-b border-gray-200">
+                <div class="flex items-baseline gap-3">
+                    <span class="text-sm font-mono text-gray-400">02</span>
+                    <h2 class="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">Personal</h2>
+                    <span class="text-sm text-gray-400 ml-2 hidden md:inline">Side projects buat hobi dan koleksi pribadi</span>
                 </div>
-                <div class="section-meta">
-                    <span class="section-count">3</span><span>tools</span>
+                <div class="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-wider">
+                    <span class="bg-gray-900 text-white rounded-full min-w-[26px] h-[26px] inline-flex items-center justify-center text-[11px]">3</span>
+                    <span class="hidden md:inline">Tools</span>
                 </div>
             </div>
 
-            <div class="grid">
-                <article class="card soon rise">
-                    <div class="card-badge">SOON</div>
-                    <h3 class="card-title">Tiny Hour Tales</h3>
-                    <p class="card-desc">
-                        Inventory koleksi jam tangan dengan dashboard, story per jam, dan catatan service.
-                    </p>
-                    <div class="card-tags">
-                        <span class="tag">Watches</span>
-                        <span class="tag">Next.js</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Tiny Hour Tales -->
+                <div class="card-tool bg-white/60 rounded-2xl p-6 fade-in stagger-1 border-dashed !border-2 !border-gray-200 flex flex-col">
+                    <div class="card-icon w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     </div>
-                    <div class="card-link">Coming Soon</div>
-                </article>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <h3 class="text-lg font-extrabold text-gray-500">Tiny Hour Tales</h3>
+                        <span class="text-[10px] bg-gray-200 text-gray-500 font-bold px-2 py-0.5 rounded-full">SOON</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4 leading-snug flex-grow">Inventory koleksi jam tangan dengan dashboard, story per jam, dan catatan service.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="text-[11px] bg-gray-100 text-gray-400 px-2 py-0.5 rounded font-semibold">Watches</span>
+                    </div>
+                    <div class="block w-full text-center bg-gray-100 text-gray-400 font-bold py-2.5 rounded-lg text-sm cursor-default">Coming Soon</div>
+                </div>
 
-                <article class="card soon rise">
-                    <div class="card-badge">SOON</div>
-                    <h3 class="card-title">Pasal</h3>
-                    <p class="card-desc">
-                        Browser pasal hukum & peraturan terkonsolidasi — searchable, cross-reference, anotasi.
-                    </p>
-                    <div class="card-tags">
-                        <span class="tag">Hukum</span>
-                        <span class="tag">Search</span>
+                <!-- Pasal -->
+                <div class="card-tool bg-white/60 rounded-2xl p-6 fade-in stagger-2 border-dashed !border-2 !border-gray-200 flex flex-col">
+                    <div class="card-icon w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
                     </div>
-                    <div class="card-link">Coming Soon</div>
-                </article>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <h3 class="text-lg font-extrabold text-gray-500">Pasal</h3>
+                        <span class="text-[10px] bg-gray-200 text-gray-500 font-bold px-2 py-0.5 rounded-full">SOON</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4 leading-snug flex-grow">Browser pasal hukum & peraturan terkonsolidasi — searchable, cross-reference, anotasi.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="text-[11px] bg-gray-100 text-gray-400 px-2 py-0.5 rounded font-semibold">Hukum</span>
+                    </div>
+                    <div class="block w-full text-center bg-gray-100 text-gray-400 font-bold py-2.5 rounded-lg text-sm cursor-default">Coming Soon</div>
+                </div>
 
-                <article class="card soon rise">
-                    <div class="card-badge">SOON</div>
-                    <h3 class="card-title">Persotoan</h3>
-                    <p class="card-desc">
-                        Direktori soto Nusantara — review, peta, dan ranking soto se-Indonesia.
-                    </p>
-                    <div class="card-tags">
-                        <span class="tag">Kuliner</span>
-                        <span class="tag">Direktori</span>
+                <!-- Persotoan -->
+                <div class="card-tool bg-white/60 rounded-2xl p-6 fade-in stagger-3 border-dashed !border-2 !border-gray-200 flex flex-col">
+                    <div class="card-icon w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
                     </div>
-                    <div class="card-link">Coming Soon</div>
-                </article>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <h3 class="text-lg font-extrabold text-gray-500">Persotoan</h3>
+                        <span class="text-[10px] bg-gray-200 text-gray-500 font-bold px-2 py-0.5 rounded-full">SOON</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4 leading-snug flex-grow">Direktori soto Nusantara — review, peta, dan ranking soto se-Indonesia.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="text-[11px] bg-gray-100 text-gray-400 px-2 py-0.5 rounded font-semibold">Kuliner</span>
+                    </div>
+                    <div class="block w-full text-center bg-gray-100 text-gray-400 font-bold py-2.5 rounded-lg text-sm cursor-default">Coming Soon</div>
+                </div>
             </div>
         </section>
 
-        <!-- ===== FINANCE ===== -->
-        <section id="finance" class="section">
-            <div class="section-head">
-                <div>
-                    <div class="section-id">
-                        <span class="section-num">03</span>
-                        <h2 class="section-title">Finance</h2>
-                    </div>
-                    <div class="section-sub">Personal finance dashboard, portfolio tracker, wealth management.</div>
+        <!-- ===== 03 FINANCE ===== -->
+        <section id="finance" class="section-anchor pt-12 pb-12">
+            <div class="flex items-end justify-between gap-4 mb-6 pb-4 border-b border-gray-200">
+                <div class="flex items-baseline gap-3">
+                    <span class="text-sm font-mono text-gray-400">03</span>
+                    <h2 class="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">Finance</h2>
+                    <span class="text-sm text-gray-400 ml-2 hidden md:inline">Personal finance, portfolio, wealth</span>
                 </div>
-                <div class="section-meta">
-                    <span class="section-count">2</span><span>tools</span>
+                <div class="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-wider">
+                    <span class="bg-gray-900 text-white rounded-full min-w-[26px] h-[26px] inline-flex items-center justify-center text-[11px]">2</span>
+                    <span class="hidden md:inline">Tools</span>
                 </div>
             </div>
 
-            <div class="grid">
-                <article class="card soon rise">
-                    <div class="card-badge">SOON</div>
-                    <h3 class="card-title">Investment Dashboard</h3>
-                    <p class="card-desc">
-                        Track portfolio saham, reksa dana, obligasi — terminal-style dashboard untuk monitoring real-time.
-                    </p>
-                    <div class="card-tags">
-                        <span class="tag">Portfolio</span>
-                        <span class="tag">Realtime</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Investment -->
+                <div class="card-tool bg-white/60 rounded-2xl p-6 fade-in stagger-1 border-dashed !border-2 !border-gray-200 flex flex-col">
+                    <div class="card-icon w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
                     </div>
-                    <div class="card-link">Coming Soon</div>
-                </article>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <h3 class="text-lg font-extrabold text-gray-500">Investment Dashboard</h3>
+                        <span class="text-[10px] bg-gray-200 text-gray-500 font-bold px-2 py-0.5 rounded-full">SOON</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4 leading-snug flex-grow">Track portfolio saham, reksa dana, obligasi — terminal-style dashboard untuk monitoring real-time.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="text-[11px] bg-gray-100 text-gray-400 px-2 py-0.5 rounded font-semibold">Portfolio</span>
+                    </div>
+                    <div class="block w-full text-center bg-gray-100 text-gray-400 font-bold py-2.5 rounded-lg text-sm cursor-default">Coming Soon</div>
+                </div>
 
-                <article class="card soon rise">
-                    <div class="card-badge">SOON</div>
-                    <h3 class="card-title">Wealth Management</h3>
-                    <p class="card-desc">
-                        All-in-one personal wealth tracker — net worth, cash flow, asset allocation, goals.
-                    </p>
-                    <div class="card-tags">
-                        <span class="tag">Net Worth</span>
-                        <span class="tag">Goals</span>
+                <!-- Wealth -->
+                <div class="card-tool bg-white/60 rounded-2xl p-6 fade-in stagger-2 border-dashed !border-2 !border-gray-200 flex flex-col">
+                    <div class="card-icon w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                     </div>
-                    <div class="card-link">Coming Soon</div>
-                </article>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <h3 class="text-lg font-extrabold text-gray-500">Wealth Management</h3>
+                        <span class="text-[10px] bg-gray-200 text-gray-500 font-bold px-2 py-0.5 rounded-full">SOON</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4 leading-snug flex-grow">All-in-one personal wealth tracker — net worth, cash flow, asset allocation, goals.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="text-[11px] bg-gray-100 text-gray-400 px-2 py-0.5 rounded font-semibold">Net Worth</span>
+                    </div>
+                    <div class="block w-full text-center bg-gray-100 text-gray-400 font-bold py-2.5 rounded-lg text-sm cursor-default">Coming Soon</div>
+                </div>
             </div>
         </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-row">
-                <div>
-                    <div class="footer-brand">Bashid Effendi</div>
-                    <div>Auditor BPK RI · Made with AI</div>
-                </div>
-                <div>© 2026</div>
-            </div>
-        </footer>
     </main>
 
+    <!-- Footer -->
+    <footer class="border-t border-gray-100 bg-white/50">
+        <div class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between text-xs text-gray-400">
+            <div>
+                <span class="font-bold text-gray-700">Bashid Effendi</span> · Auditor BPK RI · Made with AI
+            </div>
+            <div>© 2026</div>
+        </div>
+    </footer>
+
     <script>
-        // Scroll-spy active nav state
+        // Highlight active section in nav
         const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-pills a');
-        function updateNav() {
-            const y = window.scrollY + 120;
-            let activeId = null;
-            sections.forEach(s => {
-                if (y >= s.offsetTop && y < s.offsetTop + s.offsetHeight) activeId = s.id;
-            });
-            navLinks.forEach(a => {
-                a.classList.toggle('active', a.getAttribute('href') === '#' + activeId);
+        const navPills = document.querySelectorAll('.nav-pill');
+        function setActiveNav() {
+            const scrollPos = window.scrollY + 120;
+            sections.forEach(sec => {
+                if (scrollPos >= sec.offsetTop && scrollPos < sec.offsetTop + sec.offsetHeight) {
+                    navPills.forEach(p => p.classList.remove('active'));
+                    const active = document.querySelector(`.nav-pill[href="#${sec.id}"]`);
+                    if (active) active.classList.add('active');
+                }
             });
         }
-        window.addEventListener('scroll', updateNav, { passive: true });
-        updateNav();
+        window.addEventListener('scroll', setActiveNav);
+        setActiveNav();
     </script>
 </body>
 </html>
