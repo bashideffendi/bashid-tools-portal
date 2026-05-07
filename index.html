@@ -157,102 +157,75 @@
         .card {
             background: var(--bg-card);
             border: 1px solid var(--line);
-            border-radius: 16px;
-            padding: 24px;
+            border-radius: 14px;
+            padding: 22px;
             display: flex; flex-direction: column;
-            transition: all .25s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: border-color .2s, transform .2s, box-shadow .2s;
             position: relative;
-            overflow: hidden;
         }
         .card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             border-color: var(--ink);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-sm);
         }
-        .card.featured {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1c1917 100%);
-            color: white;
-            border-color: #0a0a0a;
+        /* Just Count distinguish via accent bar di top, bukan dark gradient */
+        .card.featured::before {
+            content: ''; position: absolute; top: 0; left: 22px; right: 22px;
+            height: 2px; background: var(--ink); border-radius: 0 0 2px 2px;
         }
-        .card.featured:hover { box-shadow: var(--shadow-lg); }
-        .card.featured .card-desc, .card.featured .tag { color: rgba(255,255,255,0.7); }
-        .card.featured .tag { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); }
-        .card.featured .card-link { background: white; color: var(--ink); }
-        .card.featured .card-link:hover { background: rgba(255,255,255,0.9); }
 
         .card.soon {
             background: transparent;
             border-style: dashed;
-            border-color: var(--line-strong);
         }
-        .card.soon:hover { transform: none; box-shadow: none; border-color: var(--ink-mute); }
+        .card.soon:hover { transform: none; box-shadow: none; border-color: var(--line-strong); }
         .card.soon .card-title, .card.soon .card-desc { color: var(--ink-mute); }
-        .card.soon .card-link { background: var(--line); color: var(--ink-mute); cursor: default; pointer-events: none; }
+        .card.soon .card-link { background: transparent; color: var(--ink-mute); cursor: default; pointer-events: none; border: 1px solid var(--line); }
+        .card.soon .card-link::after { content: ''; }
 
         .card-badge {
-            position: absolute; top: 16px; right: 16px;
-            font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
-            padding: 4px 9px; border-radius: 6px;
-            background: #fff; color: var(--ink);
-            border: 1px solid var(--line);
-        }
-        .card.featured .card-badge {
-            background: white; color: var(--ink);
-        }
-        .card.soon .card-badge {
-            background: transparent; color: var(--ink-mute); border-color: var(--line-strong);
+            position: absolute; top: 14px; right: 14px;
+            font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--ink-soft);
         }
 
-        .card-icon {
-            width: 44px; height: 44px;
-            border-radius: 10px;
-            background: var(--bg);
-            border: 1px solid var(--line);
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 20px;
-            font-size: 20px;
+        .card-eyebrow {
+            font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+            text-transform: uppercase; color: var(--ink-mute);
+            margin-bottom: 14px;
         }
-        .card.featured .card-icon {
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(255,255,255,0.12);
-            color: white;
-        }
-        .card.soon .card-icon {
-            background: transparent;
-            border-style: dashed;
-        }
-
         .card-title {
-            font-size: 19px; font-weight: 700; letter-spacing: -0.015em;
-            margin-bottom: 8px;
+            font-size: 18px; font-weight: 700; letter-spacing: -0.015em;
+            margin-bottom: 6px;
         }
         .card-desc {
-            font-size: 14px; line-height: 1.55;
+            font-size: 13.5px; line-height: 1.55;
             color: var(--ink-soft);
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             flex-grow: 1;
         }
         .card-tags {
             display: flex; flex-wrap: wrap; gap: 6px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
         .tag {
-            font-size: 11px; font-weight: 500;
-            padding: 4px 9px; border-radius: 6px;
+            font-size: 10.5px; font-weight: 500;
+            padding: 3px 8px; border-radius: 4px;
             color: var(--ink-soft);
             background: var(--bg);
-            border: 1px solid var(--line);
         }
+        .card.soon .tag { background: transparent; color: var(--ink-mute); }
         .card-link {
             display: flex; align-items: center; justify-content: space-between;
-            padding: 12px 16px;
-            background: var(--ink);
-            color: var(--accent-fg);
+            padding: 0;
+            color: var(--ink);
             font-size: 13px; font-weight: 600;
-            border-radius: 10px;
-            transition: all .2s;
+            transition: opacity .2s;
+            background: transparent;
+            border-top: 1px solid var(--line);
+            padding-top: 14px;
         }
-        .card-link:hover { background: #262626; }
+        .card-link:hover { opacity: 0.6; }
         .card-link::after {
             content: '→';
             font-weight: 400; transition: transform .2s;
@@ -367,7 +340,6 @@
                 <!-- Just Count [FEATURED] -->
                 <article class="card featured rise">
                     <div class="card-badge">NEW</div>
-                    <div class="card-icon">JC</div>
                     <h3 class="card-title">Just Count</h3>
                     <p class="card-desc">
                         Audit kepatuhan jasa konsultansi konstruksi APBD. 3-area checklist + engine numerik
@@ -385,7 +357,6 @@
 
                 <!-- PDDIKTI Checker -->
                 <article class="card rise">
-                    <div class="card-icon">🎓</div>
                     <h3 class="card-title">PDDIKTI Checker</h3>
                     <p class="card-desc">
                         Cek status kemahasiswaan dari PDDIKTI. Upload Excel, dapat status Aktif/Lulus/DO secara massal.
@@ -402,7 +373,6 @@
 
                 <!-- SKA Checker -->
                 <article class="card rise">
-                    <div class="card-icon">📜</div>
                     <h3 class="card-title">SKA Checker</h3>
                     <p class="card-desc">
                         Verifikasi sertifikat keahlian konstruksi (SKA/SKT/SKK) dari LPJK.
@@ -419,7 +389,6 @@
 
                 <!-- SIKD Browser -->
                 <article class="card rise">
-                    <div class="card-icon">📊</div>
                     <h3 class="card-title">SIKD Browser</h3>
                     <p class="card-desc">
                         Jelajahi data APBD seluruh Pemda Indonesia. Pendapatan, belanja, pembiayaan, komparasi antar tahun.
@@ -436,7 +405,6 @@
 
                 <!-- CalcTape Audit -->
                 <article class="card rise">
-                    <div class="card-icon">🧮</div>
                     <h3 class="card-title">CalcTape Audit</h3>
                     <p class="card-desc">
                         Kalkulator paper tape untuk audit. Editable, komentar per baris, subtotal, undo,
@@ -453,7 +421,6 @@
 
                 <!-- BPS Data Explorer -->
                 <article class="card rise">
-                    <div class="card-icon">📈</div>
                     <h3 class="card-title">BPS Data Explorer</h3>
                     <p class="card-desc">
                         Jelajahi data statistik resmi BPS — publikasi, siaran pers, indikator strategis,
@@ -470,7 +437,6 @@
 
                 <!-- SIAP PKP Filler (Desktop) -->
                 <article class="card rise">
-                    <div class="card-icon">⚙️</div>
                     <h3 class="card-title">SIAP PKP Filler</h3>
                     <p class="card-desc">
                         Auto-fill kolom Hasil Pengujian di SIAP BPK dari Excel PKP. Aplikasi desktop
@@ -488,7 +454,6 @@
 
                 <!-- SPSE Checker (Desktop) -->
                 <article class="card rise">
-                    <div class="card-icon">🛒</div>
                     <h3 class="card-title">SPSE Checker</h3>
                     <p class="card-desc">
                         Cek data pengadaan B/J pemerintah dari SPSE/LPSE. Tender, pemenang, peserta,
@@ -507,7 +472,6 @@
                 <!-- SIRUP Audit (Coming Soon) -->
                 <article class="card soon rise">
                     <div class="card-badge">SOON</div>
-                    <div class="card-icon">🚩</div>
                     <h3 class="card-title">SIRUP Audit</h3>
                     <p class="card-desc">
                         Dashboard deteksi paket pengadaan mencurigakan dari SIRUP LKPP.
@@ -540,7 +504,6 @@
             <div class="grid">
                 <article class="card soon rise">
                     <div class="card-badge">SOON</div>
-                    <div class="card-icon">⌚</div>
                     <h3 class="card-title">Tiny Hour Tales</h3>
                     <p class="card-desc">
                         Inventory koleksi jam tangan dengan dashboard, story per jam, dan catatan service.
@@ -554,7 +517,6 @@
 
                 <article class="card soon rise">
                     <div class="card-badge">SOON</div>
-                    <div class="card-icon">⚖️</div>
                     <h3 class="card-title">Pasal</h3>
                     <p class="card-desc">
                         Browser pasal hukum & peraturan terkonsolidasi — searchable, cross-reference, anotasi.
@@ -568,7 +530,6 @@
 
                 <article class="card soon rise">
                     <div class="card-badge">SOON</div>
-                    <div class="card-icon">🍜</div>
                     <h3 class="card-title">Persotoan</h3>
                     <p class="card-desc">
                         Direktori soto Nusantara — review, peta, dan ranking soto se-Indonesia.
@@ -600,7 +561,6 @@
             <div class="grid">
                 <article class="card soon rise">
                     <div class="card-badge">SOON</div>
-                    <div class="card-icon">📉</div>
                     <h3 class="card-title">Investment Dashboard</h3>
                     <p class="card-desc">
                         Track portfolio saham, reksa dana, obligasi — terminal-style dashboard untuk monitoring real-time.
@@ -614,7 +574,6 @@
 
                 <article class="card soon rise">
                     <div class="card-badge">SOON</div>
-                    <div class="card-icon">💼</div>
                     <h3 class="card-title">Wealth Management</h3>
                     <p class="card-desc">
                         All-in-one personal wealth tracker — net worth, cash flow, asset allocation, goals.
