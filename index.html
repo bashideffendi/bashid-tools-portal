@@ -83,11 +83,11 @@
             </div>
             <div class="flex items-end gap-7 text-[11px] font-bold uppercase tracking-wider text-gray-400">
                 <div class="flex flex-col items-start gap-0.5">
-                    <span class="font-black text-gray-900 text-2xl tracking-tight leading-none">9</span>
+                    <span class="font-black text-gray-900 text-2xl tracking-tight leading-none">10</span>
                     <span>Live</span>
                 </div>
                 <div class="flex flex-col items-start gap-0.5">
-                    <span class="font-black text-gray-900 text-2xl tracking-tight leading-none">5</span>
+                    <span class="font-black text-gray-900 text-2xl tracking-tight leading-none">4</span>
                     <span>In Dev</span>
                 </div>
             </div>
@@ -222,21 +222,20 @@
                     <a href="spse-checker.html" class="btn-open block w-full text-center bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded-lg text-sm">Panduan & Download</a>
                 </div>
 
-                <!-- Pasal (Audit — referensi pasal hukum buat audit) -->
-                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-9 flex flex-col">
+                <!-- Kriteria (ex-Pasal) — AI cari kriteria temuan via pasal.id MCP [NEW] -->
+                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-9 flex flex-col relative">
+                    <div class="absolute top-3 right-3 badge-new text-[10px] px-2.5 py-1 rounded-full">NEW</div>
                     <div class="card-icon w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center mb-4">
                         <svg class="w-6 h-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
                     </div>
-                    <div class="flex items-center gap-2 mb-1.5">
-                        <h3 class="text-lg font-extrabold text-gray-900">Pasal</h3>
-                        <span class="text-[10px] bg-gray-200 text-gray-500 font-bold px-2 py-0.5 rounded-full">SOON</span>
-                    </div>
-                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Browser pasal hukum & peraturan terkonsolidasi — searchable, cross-reference, anotasi.</p>
+                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">Kriteria</h3>
+                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">AI cari kriteria temuan pemeriksaan — paste kondisi, dapat peraturan + pasal + ayat relevan dengan format BPK siap copy ke BAPK.</p>
                     <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-rose-50 text-rose-600 px-2 py-0.5 rounded font-semibold">Hukum</span>
-                        <span class="text-[11px] bg-primary-50 text-primary-600 px-2 py-0.5 rounded font-semibold">Search</span>
+                        <span class="text-[11px] bg-rose-50 text-rose-600 px-2 py-0.5 rounded font-semibold">AI</span>
+                        <span class="text-[11px] bg-primary-50 text-primary-600 px-2 py-0.5 rounded font-semibold">pasal.id</span>
+                        <span class="text-[11px] bg-mint-50 text-mint-600 px-2 py-0.5 rounded font-semibold">BAPK</span>
                     </div>
-                    <div class="block w-full text-center bg-gray-100 text-gray-400 font-bold py-2.5 rounded-lg text-sm cursor-default">Coming Soon</div>
+                    <a href="https://kriteria.masbash.id" target="_blank" class="btn-open block w-full text-center bg-rose-600 hover:bg-rose-700 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
                 </div>
 
                 <!-- SIRUP Audit (Coming Soon) -->
