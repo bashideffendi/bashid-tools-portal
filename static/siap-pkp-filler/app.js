@@ -346,8 +346,16 @@
     }
 
     // ============ FETCH PIC IDs ============
-    async function fetchUserPicIds(subId, userId, targetNip) {
-        const d = await apiGet(`/api/subpemeriksaan/prosedur/bundle/dataPicHasil/${subId}/${userId}`);
+    async function fetchProjectId(subId) {
+        // ProjectId (= Pemeriksaan.Id) di slot kedua URL dataPicHasil.
+        // Fetch dari endpoint subpemeriksaan/data yang selalu work.
+        const d = await apiGet(`/api/subpemeriksaan/data/${subId}`);
+        if (!d || !d.data || !d.data.ProjectId) throw new Error('ProjectId not found');
+        return d.data.ProjectId;
+    }
+
+    async function fetchUserPicIds(subId, projectId, targetNip) {
+        const d = await apiGet(`/api/subpemeriksaan/prosedur/bundle/dataPicHasil/${subId}/${projectId}`);
         if (!d.success || !Array.isArray(d.data)) throw new Error('dataPicHasil response invalid');
         const target = String(targetNip).trim();
         const ids = new Set();
@@ -639,18 +647,17 @@
         // 4. Detect auditor if not set or to verify
         // (auditor sudah dari form — skip auto-detect)
 
-        // 5. Pre-filter PIC
+        // 5. Pre-filter PIC — fetch ProjectId, lalu fetch PIC list, filter
         let filteredList = state.prosedurList;
-        if (state.userId) {
-            setStatusBanner('Fetch PIC list — filter prosedur ke yang kamu PIC saja...', 'info');
-            appendLog('▶ Fetch PIC list buat pre-filter', 'info');
-            try {
-                state.picIds = await fetchUserPicIds(state.subId, state.userId, state.auditor.nip);
-                filteredList = state.prosedurList.filter(p => state.picIds.has(p.id.toUpperCase()));
-                appendLog(`  ${state.picIds.size} prosedur kamu PIC (dari ${state.prosedurList.length} total)`, 'ok');
-            } catch(e) {
-                appendLog('  ⚠ Pre-filter gagal: ' + e.message + ' — submit semua', 'skip');
-            }
+        setStatusBanner('Fetch PIC list — filter prosedur ke yang kamu PIC saja...', 'info');
+        appendLog('▶ Fetch ProjectId + PIC list buat pre-filter', 'info');
+        try {
+            const projectId = await fetchProjectId(state.subId);
+            state.picIds = await fetchUserPicIds(state.subId, projectId, state.auditor.nip);
+            filteredList = state.prosedurList.filter(p => state.picIds.has(p.id.toUpperCase()));
+            appendLog(`  ${state.picIds.size} prosedur kamu PIC (dari ${state.prosedurList.length} total)`, 'ok');
+        } catch(e) {
+            appendLog('  ⚠ Pre-filter gagal: ' + e.message + ' — submit semua', 'skip');
         }
 
         // 6. Match Excel ↔ prosedur
