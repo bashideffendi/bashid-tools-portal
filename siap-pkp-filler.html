@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIAP PKP Filler - Panduan & Download</title>
+    <title>SIAP PKP Filler — Bookmarklet</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = { theme: { extend: { colors: {
@@ -16,184 +16,132 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .gradient-text { background: linear-gradient(135deg, #fab005, #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-bg { background: radial-gradient(ellipse at 20% 50%, rgba(250,176,5,0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(76,110,245,0.06) 0%, transparent 50%), linear-gradient(180deg, #fffdf5 0%, #fff 100%); }
-        .card { background: white; border-radius: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid #f1f3f5; }
+        .gradient-text { background: linear-gradient(135deg, #4c6ef5, #be4bdb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-bg { background: radial-gradient(ellipse at 20% 50%, rgba(76,110,245,.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(190,75,219,.06) 0%, transparent 50%), linear-gradient(180deg, #f8f9ff 0%, #fff 100%); }
+        .card { background: white; border-radius: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,.06); border: 1px solid #f1f3f5; }
+        .bookmarklet-btn { background: linear-gradient(135deg, #4c6ef5, #7c3aed); color: white; padding: 14px 28px; border-radius: 12px; font-weight: 700; font-size: 15px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 6px 20px rgba(76,110,245,.35); cursor: grab; user-select: none; text-decoration: none; transition: all .15s; }
+        .bookmarklet-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(76,110,245,.45); }
+        .bookmarklet-btn:active { cursor: grabbing; }
     </style>
 </head>
 <body class="min-h-screen hero-bg">
     <header class="bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50">
-        <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <a href="index.html" class="text-gray-400 hover:text-gray-600 mr-1">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                </a>
-                <img src="static/bpk-logo.png" alt="BPK" class="w-10 h-10 object-contain">
-                <div>
-                    <h1 class="text-lg font-bold text-gray-900">SIAP PKP Filler</h1>
-                    <p class="text-xs text-gray-400">Auto-fill Hasil Pengujian di SIAP BPK</p>
-                </div>
+        <div class="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
+            <a href="index.html" class="text-gray-400 hover:text-gray-600 mr-1">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            </a>
+            <img src="static/bpk-logo.png" alt="BPK" class="w-10 h-10 object-contain">
+            <div>
+                <h1 class="text-lg font-bold gradient-text">SIAP PKP Filler</h1>
+                <p class="text-xs text-gray-400">Auto-fill Hasil Pengujian di SIAP BPK · Bookmarklet edition</p>
             </div>
         </div>
     </header>
 
     <main class="max-w-3xl mx-auto px-4 py-8 space-y-6">
         <!-- Hero -->
-        <section class="text-center py-4">
+        <section class="text-center py-2">
             <h2 class="text-3xl font-extrabold text-gray-900 mb-1">SIAP PKP Filler</h2>
             <p class="text-base text-gray-500">by <span class="font-bold gradient-text">Bashid Effendi</span></p>
-            <p class="text-sm text-gray-400 mt-2 max-w-lg mx-auto">Tools untuk mengisi kolom Hasil Pengujian pada halaman Prosedur PKP di SIAP BPK secara otomatis dari file Excel. Hemat waktu, kurangi pekerjaan repetitif.</p>
+            <p class="text-sm text-gray-400 mt-2 max-w-lg mx-auto">Isi kolom Hasil Pengujian di SIAP BPK secara otomatis dari Excel. <strong>Browser-only</strong> — tidak install Python, tidak upload file ke server, semua jalan di browser kamu.</p>
         </section>
 
-        <!-- Download -->
+        <!-- Bookmarklet -->
         <section class="card p-6 text-center">
-            <div class="w-16 h-16 mx-auto mb-4 bg-amber-100 rounded-2xl flex items-center justify-center">
-                <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            <div class="w-14 h-14 mx-auto mb-4 bg-primary-100 rounded-2xl flex items-center justify-center">
+                <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
             </div>
-            <a href="static/downloads/SIAP-PKP-Filler.zip" download class="inline-block bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 rounded-xl text-base transition-all hover:shadow-lg">
-                Download SIAP PKP Filler (.zip)
+            <p class="text-sm text-gray-600 mb-3"><strong>Drag tombol di bawah ke bookmark bar Chrome</strong> kamu:</p>
+            <a id="bookmarklet" class="bookmarklet-btn" href="javascript:(function(){var s=document.createElement('script');s.src='https://masbash.id/static/siap-pkp-filler/app.js?'+Date.now();document.head.appendChild(s);})();" onclick="event.preventDefault();alert('Jangan di-klik di sini — DRAG ke bookmark bar Chrome, lalu klik dari bookmark bar saat sudah di tab SIAP.');return false;">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+                SIAP PKP Filler
             </a>
-            <p class="text-xs text-gray-400 mt-2">Versi terbaru &mdash; Membutuhkan Python 3.8+ dan koneksi VPN BPK</p>
-        </section>
-
-        <!-- Prasyarat -->
-        <section class="card p-6">
-            <h3 class="font-bold text-gray-800 mb-3">Prasyarat</h3>
-            <ul class="space-y-2 text-sm text-gray-600">
-                <li class="flex gap-2 items-start">
-                    <span class="text-amber-500 mt-0.5">&#10003;</span>
-                    <p><strong>Python 3.8+</strong> terinstall di komputer. Download di <a href="https://www.python.org/downloads/" target="_blank" class="text-primary-600 underline">python.org</a>. <span class="text-red-500 font-semibold">Saat install, centang "Add Python to PATH".</span></p>
-                </li>
-                <li class="flex gap-2 items-start">
-                    <span class="text-amber-500 mt-0.5">&#10003;</span>
-                    <p><strong>Browser Chrome</strong> untuk mengakses SIAP BPK dan export data.</p>
-                </li>
-                <li class="flex gap-2 items-start">
-                    <span class="text-amber-500 mt-0.5">&#10003;</span>
-                    <p><strong>VPN BPK terhubung</strong>. Tools ini hanya bisa berjalan saat komputer terhubung ke jaringan BPK.</p>
-                </li>
-            </ul>
-        </section>
-
-        <!-- Instalasi -->
-        <section class="card p-6">
-            <h3 class="font-bold text-gray-800 mb-3">Instalasi (Sekali Saja)</h3>
-            <div class="space-y-3 text-sm text-gray-600">
-                <div class="flex gap-3 items-start">
-                    <span class="w-6 h-6 bg-gray-100 text-gray-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">1</span>
-                    <p><strong>Extract</strong> file ZIP yang sudah didownload ke folder manapun (misal Desktop).</p>
-                </div>
-                <div class="flex gap-3 items-start">
-                    <span class="w-6 h-6 bg-gray-100 text-gray-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">2</span>
-                    <p>Buka folder hasil extract, lalu <strong>double-click <code class="bg-gray-100 px-1.5 rounded">Install.bat</code></strong>. Tunggu sampai selesai. Ini hanya perlu dilakukan sekali.</p>
-                </div>
-            </div>
+            <p class="text-xs text-gray-400 mt-3">Setelah tombol di bookmark bar, klik dia saat kamu di tab SIAP halaman Prosedur.</p>
         </section>
 
         <!-- Cara Pakai -->
         <section class="card p-6">
-            <h3 class="font-bold text-gray-800 mb-4">Cara Penggunaan</h3>
+            <h3 class="font-bold text-gray-800 mb-4">Cara Pakai</h3>
 
-            <!-- Step A -->
-            <h4 class="font-bold text-amber-600 mb-3 text-sm uppercase tracking-wider">A. Siapkan File Excel PKP</h4>
-            <div class="space-y-3 text-sm text-gray-600 mb-6">
-                <div class="flex gap-3 items-start">
-                    <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">1</span>
-                    <p><strong>Download file Excel PKP</strong> dari SIAP BPK: buka menu <strong>Perencanaan</strong> &rarr; <strong>Dokumen Pemeriksaan</strong> &rarr; <strong>Program Kerja Perseorangan</strong> &rarr; klik <strong>Detail</strong> &rarr; pilih dokumen atas nama Anda &rarr; <strong>Lihat File</strong> &rarr; <strong>Download</strong>.</p>
-                </div>
-                <div class="flex gap-3 items-start">
-                    <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">2</span>
-                    <p><strong>Tambahkan kolom "Hasil Pemeriksaan"</strong> di <strong>kolom G</strong> pada file Excel tersebut. Anda dapat memanfaatkan <strong>Claude for Excel</strong> untuk membantu mengisi Hasil Pemeriksaan berdasarkan data CALK, SAP, atau dokumen pendukung lainnya. Cukup upload dokumen ke Claude for Excel dan minta untuk menghasilkan narasi Hasil Pemeriksaan per prosedur.</p>
-                </div>
-                <div class="flex gap-3 items-start">
-                    <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">3</span>
-                    <p>Jika tidak berlangganan Claude, Anda tetap dapat <strong>mengisi kolom Hasil Pemeriksaan secara manual</strong> sesuai hasil pengujian yang telah dilakukan.</p>
-                </div>
-                <div class="flex gap-3 items-start">
-                    <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">4</span>
-                    <p><strong>Simpan file Excel.</strong></p>
-                </div>
-            </div>
-
-            <!-- Step B -->
-            <h4 class="font-bold text-primary-600 mb-3 text-sm uppercase tracking-wider">B. Export Data dari Browser</h4>
+            <!-- Step A: Setup Bookmarklet -->
+            <h4 class="font-bold text-primary-600 mb-3 text-sm uppercase tracking-wider">A. Setup Bookmarklet (Sekali Saja)</h4>
             <div class="space-y-3 text-sm text-gray-600 mb-6">
                 <div class="flex gap-3 items-start">
                     <span class="w-6 h-6 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">1</span>
-                    <p><strong>Login</strong> ke SIAP BPK menggunakan browser Chrome.</p>
+                    <p>Pastikan <strong>bookmark bar Chrome</strong> kamu terlihat. Kalau belum, tekan <code class="bg-gray-100 px-1.5 rounded">Ctrl+Shift+B</code>.</p>
                 </div>
                 <div class="flex gap-3 items-start">
                     <span class="w-6 h-6 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">2</span>
-                    <p>Buka halaman <strong>Pelaksanaan</strong> &rarr; <strong>Prosedur</strong> pada sub pemeriksaan yang ingin diisi. Pastikan semua prosedur tampil (filter dalam keadaan kosong/default).</p>
+                    <p><strong>Drag tombol "SIAP PKP Filler"</strong> di atas ke bookmark bar. Tahan klik mouse, geser ke atas, lepas di area bookmark bar.</p>
                 </div>
                 <div class="flex gap-3 items-start">
                     <span class="w-6 h-6 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">3</span>
-                    <div>
-                        <p>Di folder SIAP PKP Filler, cari file <code class="bg-gray-100 px-1.5 rounded font-semibold">export_dari_browser.js</code>. <strong>Klik kanan</strong> file tersebut &rarr; <strong>Open with</strong> &rarr; <strong>Notepad</strong>. Lalu tekan <strong>Ctrl+A</strong> (Select All) dan <strong>Ctrl+C</strong> (Copy).</p>
-                        <p class="mt-1 text-xs text-red-500 font-semibold">Jangan double-click file JS-nya! Harus dibuka pakai Notepad lalu copy isinya.</p>
-                    </div>
-                </div>
-                <div class="flex gap-3 items-start">
-                    <span class="w-6 h-6 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">4</span>
-                    <p>Kembali ke halaman SIAP BPK di Chrome. Tekan <strong>F12</strong> (atau <strong>Fn+F12</strong> di laptop HP) untuk membuka panel Developer Tools. Klik tab <strong>Console</strong>.</p>
-                </div>
-                <div class="flex gap-3 items-start">
-                    <span class="w-6 h-6 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">5</span>
-                    <div>
-                        <p>Klik pada area Console, lalu tekan <strong>Ctrl+V</strong> untuk paste.</p>
-                        <div class="mt-2 p-2.5 bg-amber-50 border border-amber-100 rounded-lg">
-                            <p class="text-xs text-amber-700">Jika muncul pesan <em>"Warning: Don't paste code..."</em>, ketik <code class="bg-amber-100 px-1.5 py-0.5 rounded font-bold text-amber-800">allow pasting</code> lalu tekan <strong>Enter</strong>. Setelah itu baru paste ulang (Ctrl+V) dan tekan Enter.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex gap-3 items-start">
-                    <span class="w-6 h-6 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">6</span>
-                    <p>Tunggu hingga muncul pesan <strong>"SELESAI"</strong>. Dua file akan otomatis terdownload: <code class="bg-gray-100 px-1 rounded">auth.json</code> dan <code class="bg-gray-100 px-1 rounded">prosedur_list.json</code>.</p>
+                    <p>Done! Bookmarklet siap dipake. Cukup setup sekali, bisa dipake berkali-kali untuk pemeriksaan berbeda.</p>
                 </div>
             </div>
 
-            <!-- Step C -->
-            <h4 class="font-bold text-green-600 mb-3 text-sm uppercase tracking-wider">C. Jalankan Tools & Upload</h4>
+            <!-- Step B: Siapkan Excel -->
+            <h4 class="font-bold text-amber-600 mb-3 text-sm uppercase tracking-wider">B. Siapkan File Excel PKP</h4>
+            <div class="space-y-3 text-sm text-gray-600 mb-6">
+                <div class="flex gap-3 items-start">
+                    <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">1</span>
+                    <p><strong>Download file Excel PKP</strong> dari SIAP: <strong>Perencanaan</strong> &rarr; <strong>Dokumen Pemeriksaan</strong> &rarr; <strong>Program Kerja Perseorangan</strong> &rarr; klik <strong>Detail</strong> &rarr; pilih dokumen atas namamu &rarr; <strong>Lihat File</strong> &rarr; <strong>Download</strong>.</p>
+                </div>
+                <div class="flex gap-3 items-start">
+                    <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">2</span>
+                    <p><strong>Tambahkan kolom "Hasil Pemeriksaan"</strong> di kolom G. Bisa pakai <strong>Claude for Excel</strong> untuk bantu generate narasi berdasarkan dokumen CALK / SAP, atau isi manual.</p>
+                </div>
+                <div class="flex gap-3 items-start">
+                    <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">3</span>
+                    <p><strong>Save</strong> file Excel-nya.</p>
+                </div>
+            </div>
+
+            <!-- Step C: Jalankan -->
+            <h4 class="font-bold text-green-600 mb-3 text-sm uppercase tracking-wider">C. Jalankan Tool</h4>
             <div class="space-y-3 text-sm text-gray-600">
                 <div class="flex gap-3 items-start">
                     <span class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">1</span>
-                    <p>Pastikan <strong>VPN BPK terhubung</strong>.</p>
+                    <p>Login ke <strong>SIAP BPK</strong> di Chrome (siap.bpk.go.id) — pastikan VPN BPK aktif.</p>
                 </div>
                 <div class="flex gap-3 items-start">
                     <span class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">2</span>
-                    <p>Double-click <code class="bg-gray-100 px-1.5 rounded font-semibold">Jalankan.bat</code>. Akan muncul jendela hitam (CMD) &mdash; <strong>jangan ditutup</strong> selama menggunakan tools.</p>
+                    <p>Buka pemeriksaan &rarr; sub-pemeriksaan yang dituju &rarr; <strong>Pelaksanaan</strong> &rarr; <strong>Prosedur</strong>. Pastikan filter prosedur kosong.</p>
                 </div>
                 <div class="flex gap-3 items-start">
                     <span class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">3</span>
-                    <p>Buka Chrome, ketik di address bar: <code class="bg-gray-100 px-1.5 rounded font-bold text-primary-700">localhost:5001</code> lalu Enter.</p>
+                    <p><strong>Klik bookmarklet "SIAP PKP Filler"</strong> di bookmark bar kamu. Overlay akan muncul di atas halaman SIAP.</p>
                 </div>
                 <div class="flex gap-3 items-start">
                     <span class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">4</span>
-                    <p>Upload ketiga file: <strong>auth.json</strong>, <strong>prosedur_list.json</strong>, dan <strong>file Excel PKP</strong>. Isi <strong>Nama Sheet</strong>, <strong>NIP</strong>, dan <strong>Nama Auditor</strong>.</p>
+                    <p>Upload <strong>file Excel</strong>, pilih <strong>sheet</strong>, isi <strong>NIP</strong> + <strong>Nama</strong>. Optional: centang <em>Dry-run</em> untuk simulasi tanpa submit.</p>
                 </div>
                 <div class="flex gap-3 items-start">
                     <span class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">5</span>
-                    <p>Disarankan pilih <strong>Dry Run (Simulasi)</strong> terlebih dahulu untuk memastikan data yang akan diisi sudah benar. Jika sudah yakin, jalankan ulang dengan mode <strong>Submit Langsung</strong>.</p>
+                    <p>Klik <strong>Mulai Proses</strong>. Tab akan sebentar switch ke "Akun" lalu balik ke "Prosedur" (itu normal — buat capture token). Lalu progress submit jalan.</p>
                 </div>
                 <div class="flex gap-3 items-start">
                     <span class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold shrink-0">6</span>
-                    <p>Tunggu proses selesai. Setelah selesai, Anda dapat menutup jendela CMD.</p>
+                    <p>Tunggu sampai selesai. Summary tampil di akhir: Berhasil / Gagal / Bukan PIC / No-Match.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Catatan Penting -->
+        <!-- Catatan Keamanan -->
         <section class="card p-6">
-            <h3 class="font-bold text-gray-800 mb-3">Catatan Penting</h3>
+            <h3 class="font-bold text-gray-800 mb-3">Keamanan &amp; Privasi</h3>
             <div class="space-y-2 text-sm text-gray-600">
-                <div class="p-3 bg-blue-50 border border-blue-100 rounded-xl">
-                    <p class="text-xs text-blue-700"><strong>Hasil belum divalidasi.</strong> Tools ini hanya mengisi kolom Hasil Pengujian tanpa melakukan validasi. Anda masih dapat mengubah isi, melengkapi narasi, atau mengunggah file pendukung langsung di SIAP. Validasi sengaja tidak dilakukan otomatis agar Anda memiliki kesempatan mengecek kembali sebelum finalisasi.</p>
-                </div>
-                <div class="p-3 bg-amber-50 border border-amber-100 rounded-xl">
-                    <p class="text-xs text-amber-700"><strong>Auth token bersifat sementara.</strong> File auth.json hanya berlaku selama sesi login browser Anda aktif. Jika Anda logout atau menutup browser, export ulang auth.json dengan menjalankan script di Console lagi.</p>
+                <div class="p-3 bg-green-50 border border-green-100 rounded-xl">
+                    <p class="text-xs text-green-700"><strong>✓ Semua data tetap di browser kamu.</strong> Token autentikasi, file Excel, dan hasil pengujian tidak pernah dikirim ke server masbash.id. Browser kamu hanya download file <code>app.js</code>, lalu semua processing terjadi di tab SIAP-mu sendiri.</p>
                 </div>
                 <div class="p-3 bg-green-50 border border-green-100 rounded-xl">
-                    <p class="text-xs text-green-700"><strong>Bisa untuk pemeriksaan berbeda.</strong> Cukup buka halaman Prosedur di sub pemeriksaan yang berbeda, jalankan export ulang, lalu jalankan tools dengan file Excel yang sesuai.</p>
+                    <p class="text-xs text-green-700"><strong>✓ Submit langsung ke SIAP.</strong> Tool call API SIAP dari tab SIAP-mu (same-origin) pakai token yang lagi aktif. Sama persis seperti kamu submit manual via UI SIAP — tinggal otomatis.</p>
+                </div>
+                <div class="p-3 bg-amber-50 border border-amber-100 rounded-xl">
+                    <p class="text-xs text-amber-700"><strong>Hasil belum divalidasi otomatis.</strong> Tool ini hanya mengisi kolom Hasil Pengujian. Kamu masih bisa edit, lengkapi narasi, atau upload file pendukung di SIAP sebelum finalisasi.</p>
+                </div>
+                <div class="p-3 bg-blue-50 border border-blue-100 rounded-xl">
+                    <p class="text-xs text-blue-700"><strong>Pre-filter PIC.</strong> Tool otomatis filter prosedur ke yang kamu jadi PIC saja, biar nggak ada error "User bukan PIC".</p>
                 </div>
             </div>
         </section>
@@ -203,24 +151,32 @@
             <h3 class="font-bold text-gray-800 mb-3">Pertanyaan Umum</h3>
             <div class="space-y-3 text-sm">
                 <details class="group">
-                    <summary class="cursor-pointer font-semibold text-gray-700 hover:text-primary-600">Error "Python is not recognized"?</summary>
-                    <p class="mt-2 text-gray-500 pl-4">Python belum terinstall atau belum masuk PATH. Install ulang Python dan pastikan mencentang "Add Python to PATH" saat instalasi.</p>
+                    <summary class="cursor-pointer font-semibold text-gray-700 hover:text-primary-600">Drag bookmarklet tidak bisa, browser blokir?</summary>
+                    <p class="mt-2 text-gray-500 pl-4">Chrome kadang blokir drag JavaScript URL pertama kali. Klik kanan tombol &rarr; <strong>Bookmark this link</strong>. Atau tampilkan bookmark bar (Ctrl+Shift+B) dulu, baru drag.</p>
                 </details>
                 <details class="group">
-                    <summary class="cursor-pointer font-semibold text-gray-700 hover:text-primary-600">Error "No module named flask/openpyxl"?</summary>
-                    <p class="mt-2 text-gray-500 pl-4">Jalankan Install.bat lagi untuk menginstall library yang dibutuhkan.</p>
+                    <summary class="cursor-pointer font-semibold text-gray-700 hover:text-primary-600">Error "Bookmarklet ini cuma jalan di tab SIAP"?</summary>
+                    <p class="mt-2 text-gray-500 pl-4">Bookmarklet harus di-klik dari dalam tab siap.bpk.go.id. Jangan klik dari tab masbash.id atau tab lain.</p>
                 </details>
                 <details class="group">
-                    <summary class="cursor-pointer font-semibold text-gray-700 hover:text-primary-600">Auth expired / Error 401?</summary>
-                    <p class="mt-2 text-gray-500 pl-4">Login ulang ke SIAP BPK di Chrome, lalu jalankan script export_dari_browser.js di Console lagi untuk mendapatkan auth.json yang baru.</p>
+                    <summary class="cursor-pointer font-semibold text-gray-700 hover:text-primary-600">"Token tidak ter-capture dalam 10 detik"?</summary>
+                    <p class="mt-2 text-gray-500 pl-4">Halaman SIAP belum sempat kirim API request. Refresh halaman SIAP dulu (F5), tunggu sampai data prosedur load penuh, lalu klik bookmarklet lagi.</p>
+                </details>
+                <details class="group">
+                    <summary class="cursor-pointer font-semibold text-gray-700 hover:text-primary-600">Error 500 "Server error"?</summary>
+                    <p class="mt-2 text-gray-500 pl-4">Token kemungkinan expired. Logout/login ulang ke SIAP, refresh halaman Prosedur, lalu klik bookmarklet lagi. Token JWT SIAP valid ~1 jam.</p>
+                </details>
+                <details class="group">
+                    <summary class="cursor-pointer font-semibold text-gray-700 hover:text-primary-600">Kenapa tab switch ke "Akun" lalu balik ke "Prosedur"?</summary>
+                    <p class="mt-2 text-gray-500 pl-4">Itu trick untuk capture token segar dari live page request. SIAP simpan token in-memory (silent renew), bukan di localStorage. Switching tab memaksa page kirim API call yang kita intercept untuk capture token-nya. Setelah token dapat, tab balik normal.</p>
                 </details>
                 <details class="group">
                     <summary class="cursor-pointer font-semibold text-gray-700 hover:text-primary-600">Apakah bisa dipakai auditor lain?</summary>
-                    <p class="mt-2 text-gray-500 pl-4">Ya! Setiap auditor cukup mengisi NIP dan Nama masing-masing di form. File auth.json dan prosedur_list.json harus di-export dari browser masing-masing auditor.</p>
+                    <p class="mt-2 text-gray-500 pl-4">Bisa banget. Setiap auditor punya bookmarklet sendiri di bookmark bar masing-masing, isi NIP + Nama-nya sendiri saat run.</p>
                 </details>
                 <details class="group">
-                    <summary class="cursor-pointer font-semibold text-gray-700 hover:text-primary-600">Kenapa harus dijalankan lokal? Tidak bisa online?</summary>
-                    <p class="mt-2 text-gray-500 pl-4">Karena website SIAP BPK hanya bisa diakses dari jaringan internal BPK (via VPN). Server online tidak bisa menjangkau SIAP, sehingga tools ini harus berjalan di komputer yang terhubung VPN BPK.</p>
+                    <summary class="cursor-pointer font-semibold text-gray-700 hover:text-primary-600">Versi lama (installer Python) masih ada?</summary>
+                    <p class="mt-2 text-gray-500 pl-4">Sourcenya di <a href="https://github.com/bashideffendi/bashid-tools-portal" class="text-primary-600 underline" target="_blank">repo GitHub</a>. Tapi versi browser-only ini lebih direkomendasikan: nggak perlu install Python, nggak perlu VPN setup di laptop, lebih aman.</p>
                 </details>
             </div>
         </section>
