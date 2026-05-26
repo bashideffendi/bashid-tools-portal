@@ -77,10 +77,13 @@
         sheetName: null,
         excelConfig: { headerRow: 16, dataStartRow: 19, noCol: 1, hasilCol: 7, langkahCol: 2 },
         prosedurList: null,   // list of { no, id, nama }
-        picIds: null,         // set of prosedur IDs user PIC
+        picStates: null,      // Map<prosedurId, {has_hasil, is_approved}>
+        prefilterStats: null, // {pic_count, filtered_to, skipped_filled, skipped_validated}
         submissions: null,    // list of { id, no, hasil }
         skipped: [],
         running: false,
+        skipFilled: false,
+        skipValidated: true,  // default ON (safer)
     };
 
     // ============ UI INJECTION ============
@@ -354,17 +357,23 @@
         return d.data.ProjectId;
     }
 
-    async function fetchUserPicIds(subId, projectId, targetNip) {
+    async function fetchUserPicStates(subId, projectId, targetNip) {
+        // Return Map<prosedurId, {has_hasil, is_approved}>
         const d = await apiGet(`/api/subpemeriksaan/prosedur/bundle/dataPicHasil/${subId}/${projectId}`);
         if (!d.success || !Array.isArray(d.data)) throw new Error('dataPicHasil response invalid');
         const target = String(targetNip).trim();
-        const ids = new Set();
+        const states = new Map();
         for (const it of d.data) {
             if (String(it.NIP || '').trim() === target && it.IsPic) {
-                if (it.PemeriksaanProsedurId) ids.add(it.PemeriksaanProsedurId.toUpperCase());
+                if (it.PemeriksaanProsedurId) {
+                    states.set(it.PemeriksaanProsedurId.toUpperCase(), {
+                        has_hasil: !!it.HasilSusun,
+                        is_approved: !!(it.IsApprovedByKT || it.IsApprovedByKST)
+                    });
+                }
             }
         }
-        return ids;
+        return states;
     }
 
     // ============ MATCH PROSEDUR ============
@@ -536,7 +545,18 @@
                     <div><label class="${STYLE_PREFIX}-label">Col Hasil</label><input id="${STYLE_PREFIX}-hasil-col" type="number" class="${STYLE_PREFIX}-input" value="7"></div>
                 </div>
             </details>
-            <div class="${STYLE_PREFIX}-section" style="display:flex;gap:10px;justify-content:flex-end;margin-top:20px;margin-bottom:0;">
+            <div class="${STYLE_PREFIX}-section" style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:12px;">
+                <p style="font-size:11px;font-weight:600;color:#475569;margin:0 0 8px 0;text-transform:uppercase;letter-spacing:.5px;">Opsi Replace</p>
+                <label style="display:flex;gap:8px;font-size:12px;color:#334155;cursor:pointer;margin-bottom:6px;align-items:flex-start;">
+                    <input type="checkbox" id="${STYLE_PREFIX}-skip-validated" checked style="margin-top:2px;">
+                    <span><strong>Skip prosedur yang sudah divalidasi</strong> (KT/KST approve) — disarankan ON</span>
+                </label>
+                <label style="display:flex;gap:8px;font-size:12px;color:#334155;cursor:pointer;align-items:flex-start;">
+                    <input type="checkbox" id="${STYLE_PREFIX}-skip-filled" style="margin-top:2px;">
+                    <span><strong>Skip prosedur yang sudah terisi</strong> — pertahankan isi sebelumnya, jangan overwrite</span>
+                </label>
+            </div>
+            <div class="${STYLE_PREFIX}-section" style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px;margin-bottom:0;">
                 <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:#475569;">
                     <input type="checkbox" id="${STYLE_PREFIX}-dryrun"> Dry-run (simulasi)
                 </label>
@@ -564,6 +584,8 @@
             const nama = bodyEl.querySelector('#' + STYLE_PREFIX + '-nama').value.trim();
             if (!nip || !nama) return alert('NIP dan Nama wajib diisi!');
             const dryRun = bodyEl.querySelector('#' + STYLE_PREFIX + '-dryrun').checked;
+            state.skipFilled = bodyEl.querySelector('#' + STYLE_PREFIX + '-skip-filled').checked;
+            state.skipValidated = bodyEl.querySelector('#' + STYLE_PREFIX + '-skip-validated').checked;
             state.excelConfig.headerRow = parseInt(bodyEl.querySelector('#' + STYLE_PREFIX + '-header-row').value) || 16;
             state.excelConfig.dataStartRow = parseInt(bodyEl.querySelector('#' + STYLE_PREFIX + '-data-row').value) || 19;
             state.excelConfig.noCol = parseInt(bodyEl.querySelector('#' + STYLE_PREFIX + '-no-col').value) || 1;
@@ -647,15 +669,31 @@
         // 4. Detect auditor if not set or to verify
         // (auditor sudah dari form — skip auto-detect)
 
-        // 5. Pre-filter PIC — fetch ProjectId, lalu fetch PIC list, filter
+        // 5. Pre-filter PIC + apply skip flags
         let filteredList = state.prosedurList;
-        setStatusBanner('Fetch PIC list — filter prosedur ke yang kamu PIC saja...', 'info');
-        appendLog('▶ Fetch ProjectId + PIC list buat pre-filter', 'info');
+        setStatusBanner('Fetch PIC list + filter prosedur...', 'info');
+        appendLog('▶ Fetch ProjectId + PIC states buat pre-filter', 'info');
         try {
             const projectId = await fetchProjectId(state.subId);
-            state.picIds = await fetchUserPicIds(state.subId, projectId, state.auditor.nip);
-            filteredList = state.prosedurList.filter(p => state.picIds.has(p.id.toUpperCase()));
-            appendLog(`  ${state.picIds.size} prosedur kamu PIC (dari ${state.prosedurList.length} total)`, 'ok');
+            state.picStates = await fetchUserPicStates(state.subId, projectId, state.auditor.nip);
+            let skippedValidated = 0, skippedFilled = 0;
+            const allowedIds = new Set();
+            for (const [pid, st] of state.picStates) {
+                if (state.skipValidated && st.is_approved) { skippedValidated++; continue; }
+                if (state.skipFilled && st.has_hasil) { skippedFilled++; continue; }
+                allowedIds.add(pid);
+            }
+            filteredList = state.prosedurList.filter(p => allowedIds.has(p.id.toUpperCase()));
+            state.prefilterStats = {
+                pic_count: state.picStates.size,
+                filtered_to: filteredList.length,
+                skipped_validated: skippedValidated,
+                skipped_filled: skippedFilled
+            };
+            const extras = [];
+            if (skippedValidated > 0) extras.push(`${skippedValidated} sudah divalidasi`);
+            if (skippedFilled > 0) extras.push(`${skippedFilled} sudah terisi`);
+            appendLog(`  ${state.picStates.size} PIC, ${filteredList.length} akan diproses${extras.length ? ` (skip: ${extras.join(', ')})` : ''}`, 'ok');
         } catch(e) {
             appendLog('  ⚠ Pre-filter gagal: ' + e.message + ' — submit semua', 'skip');
         }
@@ -716,7 +754,7 @@
             </div>
             <div style="text-align:center;font-size:11px;color:#94a3b8;margin-bottom:12px;">
                 Auditor: <strong>${state.auditor.nama}</strong> (${state.auditor.nip})
-                ${state.picIds ? `· Pre-filter PIC: <span style="color:#059669;font-weight:600;">${state.picIds.size} prosedur</span>` : ''}
+                ${state.prefilterStats ? `<br>Pre-filter: <span style="color:#059669;font-weight:600;">${state.prefilterStats.pic_count} PIC → ${state.prefilterStats.filtered_to} diproses</span>${state.prefilterStats.skipped_validated > 0 ? ` (skip ${state.prefilterStats.skipped_validated} validated)` : ''}${state.prefilterStats.skipped_filled > 0 ? ` (skip ${state.prefilterStats.skipped_filled} filled)` : ''}` : ''}
             </div>
             <div style="display:flex;gap:8px;">
                 <button class="${STYLE_PREFIX}-btn ${STYLE_PREFIX}-btn-secondary" style="flex:1;" onclick="window.__siapFiller.reset()">Mulai Lagi</button>
