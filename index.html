@@ -54,11 +54,11 @@ header.nav .wrap{display:flex;align-items:center;justify-content:space-between;h
 .ventures .vh h2{font-size:clamp(22px,2.4vw,30px);font-weight:800;letter-spacing:-.02em}
 .ventures .vh .side{color:var(--soft);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
 .vgrid{display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid var(--line)}
-.vcell{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 24px 26px;display:flex;flex-direction:column;gap:14px;min-height:150px;transition:background .35s}
+.vcell{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 24px 26px;display:flex;flex-direction:column;gap:18px;min-height:172px;transition:background .35s}
 .vcell:hover{background:#fafafa}
-.vcell .logo{height:76px;object-fit:contain;display:block}
-.vcell .bname{font-weight:800;font-size:22px;letter-spacing:-.025em;line-height:1.05;margin-top:auto}
-.vcell .bmeta{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.vcell .logo{max-height:56px;width:auto;height:auto;max-width:100%;align-self:flex-start;object-fit:contain;object-position:left center;display:block}
+.vcell .bname{font-weight:800;font-size:22px;letter-spacing:-.025em;line-height:1.05}
+.vcell .bmeta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto}
 .vcell .burl{font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--soft)}
 .vcell a.burl:hover{color:var(--accent)}
 .vcell .ar{transition:transform .3s;font-weight:700;color:var(--soft)}
@@ -206,10 +206,10 @@ const SITE = {
   year: "2026",
   stats: { live: 17, dev: 1 },
   ventures: [
-    { name: "Tiny Hour Tales", url: "https://tinyhourtales.com", label: "tinyhourtales.com" },
-    { name: "Tempus Collective", label: "tempuscollective" },
+    { name: "Tiny Hour Tales", url: "https://tinyhourtales.com", label: "tinyhourtales.com", logo: "static/logos/tiny-hour-tales.png" },
+    { name: "Tempus Collective", label: "tempuscollective", logo: "static/logos/tempus.png" },
     { name: "Klunting", url: "https://www.klunting.com", label: "klunting.com" },
-    { name: "Macnoos", label: "macnoos" }
+    { name: "Macnoos", label: "macnoos", logo: "static/logos/macnoos.png" }
   ],
   sections: [
     {
@@ -260,11 +260,13 @@ document.getElementById('amsg').textContent = `${S.stats.live} Tools Live · ${S
 
 /* ventures */
 document.getElementById('vgrid').innerHTML = S.ventures.map(v => {
-  const logo = v.logo ? `<img class="logo" src="${esc(v.logo)}" alt="${esc(v.name)}" />` : '';
+  const head = v.logo
+    ? `<img class="logo" src="${esc(v.logo)}" alt="${esc(v.name)}" />`
+    : `<div class="bname">${esc(v.name)}</div>`;
   const meta = v.url
     ? `<div class="bmeta"><a class="burl" href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.label)}</a><span class="ar">↗</span></div>`
     : `<div class="bmeta"><span class="burl">${esc(v.label)}</span></div>`;
-  return `<div class="vcell">${logo}<div class="bname">${esc(v.name)}</div>${meta}</div>`;
+  return `<div class="vcell">${head}${meta}</div>`;
 }).join('');
 
 /* footer flagship tool links */
