@@ -1,444 +1,315 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bashid Effendi — Tools Collection</title>
-    <meta name="description" content="Koleksi tools audit, finance, dan personal projects oleh Bashid Effendi (Auditor BPK RI).">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: { 50: '#f0f4ff', 100: '#dbe4ff', 200: '#bac8ff', 500: '#5c7cfa', 600: '#4c6ef5', 700: '#4263eb' },
-                        accent: { 50: '#fff9db', 100: '#fff3bf', 200: '#ffec99', 500: '#fcc419', 600: '#fab005' },
-                        mint: { 50: '#e6fcf5', 100: '#c3fae8', 500: '#20c997', 600: '#12b886' },
-                        coral: { 50: '#fff5f5', 100: '#ffe3e3', 500: '#ff6b6b', 600: '#fa5252' },
-                        grape: { 50: '#f8f0fc', 100: '#f3d9fa', 500: '#cc5de8', 600: '#be4bdb' },
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .gradient-text { background: linear-gradient(135deg, #4c6ef5, #be4bdb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-bg {
-            background:
-                radial-gradient(ellipse at 20% 50%, rgba(76,110,245,0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 30%, rgba(190,75,219,0.06) 0%, transparent 50%),
-                linear-gradient(180deg, #f8f9ff 0%, #fff 100%);
-        }
-        .card-tool { transition: all .25s ease; border: 1px solid #f1f3f5; }
-        .card-tool:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(0,0,0,.08); border-color: transparent; }
-        .card-tool:hover .card-icon { transform: scale(1.08); }
-        .card-icon { transition: transform .25s ease; }
-        .btn-open { transition: all .15s ease; }
-        .btn-open:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(76,110,245,.25); }
-        .nav-pill { transition: all .15s ease; }
-        .nav-pill:hover { background: #f1f3f5; color: #4c6ef5; }
-        .nav-pill.active { background: #dbe4ff; color: #4263eb; }
-        .badge-new { background: linear-gradient(135deg, #fab005, #ff6b6b); color: white; font-weight: 800; letter-spacing: .05em; }
-        .section-anchor { scroll-margin-top: 80px; }
-        .fade-in { animation: fadeIn .5s ease-out both; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-        .stagger-1 { animation-delay: .04s; } .stagger-2 { animation-delay: .08s; } .stagger-3 { animation-delay: .12s; }
-        .stagger-4 { animation-delay: .16s; } .stagger-5 { animation-delay: .20s; } .stagger-6 { animation-delay: .24s; }
-        .stagger-7 { animation-delay: .28s; } .stagger-8 { animation-delay: .32s; } .stagger-9 { animation-delay: .36s; }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bashid Effendi — Tools Collection</title>
+<meta name="description" content="Koleksi tools audit, finance, dan personal projects oleh Bashid Effendi (Auditor BPK RI). Open, free, no signup." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink:#0e0e0e; --bg:#ffffff; --soft:#6b6b6b; --line:#e4e4e2; --hair:#111;
+  --accent:#e2231a;
+  --sans:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:var(--ink);color:#fff}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+
+/* announcement */
+.announce{background:var(--ink);color:#fff}
+.announce .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;height:42px}
+.announce .msg{font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:12px;white-space:nowrap}
+.announce .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none;animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.3}}
+.announce a{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.announce a:hover{color:var(--accent)}
+
+/* header */
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
+.brand{font-size:23px;font-weight:800;letter-spacing:-.03em;display:flex;align-items:center;gap:9px;white-space:nowrap;flex:none}
+.brand .mk{width:11px;height:11px;border-radius:50%;background:var(--ink)}
+.menu{display:flex;align-items:center;gap:34px}
+.menu a{font-size:15px;font-weight:500;position:relative;padding:4px 0}
+.menu a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--ink);transition:width .3s}
+.menu a:hover::after{width:100%}
+.menu .ext{font-weight:600}
+.menu .ext:hover{color:var(--accent)}
+
+/* hero — nama di tengah */
+.hero{padding:96px 0 64px;border-bottom:2px solid var(--hair);text-align:center}
+.hero .kick{color:var(--soft);margin-bottom:30px;display:flex;align-items:center;justify-content:center;gap:14px}
+.hero .name{font-size:clamp(36px,5.4vw,76px);font-weight:900;line-height:.9;letter-spacing:-.04em}
+
+/* ventures */
+.ventures{margin-top:60px;text-align:left}
+.ventures .vh{display:flex;align-items:baseline;justify-content:space-between;gap:20px;border-bottom:2px solid var(--hair);padding-bottom:16px;margin-bottom:0}
+.ventures .vh h2{font-size:clamp(22px,2.4vw,30px);font-weight:800;letter-spacing:-.02em}
+.ventures .vh .side{color:var(--soft);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.vgrid{display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid var(--line)}
+.vcell{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 24px 26px;display:flex;flex-direction:column;gap:14px;min-height:150px;transition:background .35s}
+.vcell:hover{background:#fafafa}
+.vcell .logo{height:76px;object-fit:contain;display:block}
+.vcell .bname{font-weight:800;font-size:22px;letter-spacing:-.025em;line-height:1.05;margin-top:auto}
+.vcell .bmeta{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.vcell .burl{font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--soft)}
+.vcell a.burl:hover{color:var(--accent)}
+.vcell .ar{transition:transform .3s;font-weight:700;color:var(--soft)}
+.vcell:hover .ar{transform:translateX(5px);color:var(--accent)}
+
+/* program sections */
+.program{padding:96px 0 0}
+.prog-head{display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:end;border-bottom:2px solid var(--hair);padding-bottom:22px;margin-bottom:0}
+.prog-head .no{font-size:15px;font-weight:700;color:var(--soft)}
+.prog-head h2{font-size:clamp(30px,3.6vw,52px);font-weight:800;letter-spacing:-.03em;line-height:.92}
+.prog-head .meta{text-align:right;color:var(--soft);font-size:15px;max-width:30ch}
+.prog-head .meta .ct{font-weight:700;color:var(--ink);margin-top:6px}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--line)}
+.card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 28px 26px;display:flex;flex-direction:column;min-height:300px;position:relative;background:var(--bg);transition:background .35s}
+.card::before{content:"";position:absolute;left:0;top:-1px;height:3px;width:0;background:var(--accent);transition:width .4s cubic-bezier(.2,.7,.2,1)}
+.card:not(.disabled):hover{background:#fafafa}
+.card:not(.disabled):hover::before{width:100%}
+.card .toollogo{aspect-ratio:16/10;width:100%;margin-bottom:22px;border:1px solid var(--line);object-fit:contain;display:block}
+.card.disabled .toollogo{opacity:.7}
+.card .cat{color:var(--soft);display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.card .cat .badge{color:var(--accent);font-weight:700}
+.card .cat .badge.soon{color:var(--soft)}
+.card h3{font-size:27px;font-weight:800;letter-spacing:-.025em;line-height:1.04;margin-bottom:12px}
+.card .desc{color:var(--soft);font-size:16px;line-height:1.48;flex:1}
+.card .tags{display:flex;flex-wrap:wrap;gap:5px 14px;margin:20px 0 18px}
+.tag{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);white-space:nowrap}
+.card .more{display:inline-flex;align-items:center;justify-content:space-between;font-weight:700;font-size:14.5px;border-top:1px solid var(--line);padding-top:16px;white-space:nowrap;transition:color .3s}
+.card .more .ar{transition:transform .3s}
+.card:not(.disabled):hover .more{color:var(--accent)}
+.card:not(.disabled):hover .more .ar{transform:translateX(7px)}
+.card.disabled{opacity:.55}
+
+/* footer */
+footer{margin-top:110px;background:var(--ink);color:#fff}
+footer .wrap{padding:80px 40px 46px}
+footer .top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,.16)}
+footer .bigmark{font-size:clamp(40px,5vw,72px);font-weight:900;letter-spacing:-.04em;line-height:.9}
+footer .lede{color:rgba(255,255,255,.62);font-size:16px;margin-top:22px;max-width:34ch;line-height:1.5}
+footer .col h4{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:18px}
+footer .col a,footer .col p{display:block;color:#fff;font-size:15.5px;margin-bottom:11px;opacity:.9}
+footer .col a:hover{color:var(--accent);opacity:1}
+footer .bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding-top:30px}
+footer .bottom .c{font-size:13px;color:rgba(255,255,255,.5)}
+footer .bottom .made{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:9px}
+footer .bottom .made .dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:980px){
+  .wrap{padding:0 24px}
+  .grid,.vgrid{grid-template-columns:1fr 1fr}
+  .menu a:not(.ext){display:none}
+  footer .top{grid-template-columns:1fr 1fr}
+  .prog-head{grid-template-columns:1fr;gap:14px}
+  .prog-head .meta{text-align:left}
+}
+@media(max-width:600px){
+  .grid,.vgrid,footer .top{grid-template-columns:1fr}
+  footer .wrap{padding:56px 24px 40px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .announce .dot{animation:none}
+  .reveal{opacity:1;transform:none;transition:none}
+  *{transition:none!important}
+}
+</style>
 </head>
-<body class="min-h-screen hero-bg">
-    <!-- Header -->
-    <header class="bg-white/70 backdrop-blur-lg border-b border-gray-100 sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-            <a href="#top" class="flex items-center gap-2.5 shrink-0">
-                <span class="w-2 h-2 rounded-full bg-gray-900"></span>
-                <span class="font-bold text-gray-900">Bashid Effendi</span>
-            </a>
-            <nav class="hidden md:flex items-center gap-1 text-xs font-bold text-gray-500">
-                <a href="#audit" class="nav-pill px-3 py-1.5 rounded-full">Audit</a>
-                <a href="#hobbies" class="nav-pill px-3 py-1.5 rounded-full">Hobbies</a>
-                <a href="#finance" class="nav-pill px-3 py-1.5 rounded-full">Finance</a>
-            </nav>
-            <span class="hidden sm:inline text-xs text-gray-400">Made with AI</span>
-        </div>
-    </header>
+<body>
+<a id="top"></a>
 
-    <main id="top" class="max-w-6xl mx-auto px-4">
-        <!-- Hero (compact) -->
-        <section class="py-10 md:py-14 fade-in border-b border-gray-100 flex items-end justify-between gap-6 flex-wrap">
-            <div>
-                <div class="inline-flex items-center gap-2 bg-accent-50 border border-accent-200 text-accent-600 text-[11px] font-bold px-3 py-1 rounded-full mb-4">
-                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                    Tools Collection · 2026
-                </div>
-                <h1 class="text-3xl md:text-5xl font-black text-gray-900 leading-[1.05] tracking-tight">
-                    Tools by <span class="gradient-text">Bashid Effendi</span>
-                </h1>
-                <p class="text-sm md:text-base text-gray-500 mt-2 max-w-lg">
-                    Auditor BPK RI. Audit, finance, dan side projects — open, free, no signup.
-                </p>
-            </div>
-            <div class="flex items-end gap-7 text-[11px] font-bold uppercase tracking-wider text-gray-400">
-                <div class="flex flex-col items-start gap-0.5">
-                    <span class="font-black text-gray-900 text-2xl tracking-tight leading-none">17</span>
-                    <span>Live</span>
-                </div>
-                <div class="flex flex-col items-start gap-0.5">
-                    <span class="font-black text-gray-900 text-2xl tracking-tight leading-none">1</span>
-                    <span>In Dev</span>
-                </div>
-            </div>
-        </section>
+<div class="announce">
+  <div class="wrap">
+    <div class="msg"><span class="dot"></span><span id="amsg">15 Tools Live · 1 In Dev</span></div>
+    <a href="https://masbash.id" target="_blank" rel="noopener">Open · Free · No Signup →</a>
+  </div>
+</div>
 
-        <!-- ===== 01 AUDIT ===== -->
-        <section id="audit" class="section-anchor pt-12 pb-6">
-            <div class="flex items-end justify-between gap-4 mb-6 pb-4 border-b border-gray-200">
-                <div class="flex items-baseline gap-3">
-                    <span class="text-sm font-mono text-gray-400">01</span>
-                    <h2 class="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">Audit</h2>
-                    <span class="text-sm text-gray-400 ml-2 hidden md:inline">Tools untuk kerja audit BPK & APIP</span>
-                </div>
-                <div class="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-wider">
-                    <span class="bg-gray-900 text-white rounded-full min-w-[26px] h-[26px] inline-flex items-center justify-center text-[11px]">10</span>
-                    <span class="hidden md:inline">Tools</span>
-                </div>
-            </div>
+<header class="nav">
+  <div class="wrap">
+    <a href="#top" class="brand"><span class="mk"></span>Bashid Effendi</a>
+    <nav class="menu">
+      <a href="#audit">Audit</a>
+      <a href="#hobbies">Hobbies</a>
+      <a href="#finance">Finance</a>
+      <a href="https://masbash.id" target="_blank" rel="noopener" class="ext">masbash.id ↗</a>
+    </nav>
+  </div>
+</header>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                <!-- Just Count [NEW] -->
-                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-1 flex flex-col relative">
-                    <div class="absolute top-3 right-3 badge-new text-[10px] px-2.5 py-1 rounded-full">NEW</div>
-                    <div class="card-icon w-12 h-12 bg-gradient-to-br from-primary-500 to-grape-500 rounded-xl flex items-center justify-center mb-4 shadow-md shadow-primary-200">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25"/></svg>
-                    </div>
-                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">Just Count</h3>
-                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Audit kepatuhan jasa konsultansi konstruksi APBD. 3-area checklist + engine numerik + auto-generate BAPK Word.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-primary-50 text-primary-600 px-2 py-0.5 rounded font-semibold">Multi-tenant</span>
-                        <span class="text-[11px] bg-grape-50 text-grape-600 px-2 py-0.5 rounded font-semibold">BAPK Auto</span>
-                        <span class="text-[11px] bg-mint-50 text-mint-600 px-2 py-0.5 rounded font-semibold">SKA Check</span>
-                    </div>
-                    <a href="https://justcount.up.railway.app" target="_blank" class="btn-open block w-full text-center bg-gradient-to-r from-primary-600 to-grape-600 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
-                </div>
+<div class="wrap">
+  <section class="hero reveal">
+    <div class="kick eyebrow">Tools Collection — 2026</div>
+    <h1 class="name">Bashid Effendi</h1>
 
-                <!-- PDDIKTI Checker -->
-                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-2 flex flex-col">
-                    <div class="card-icon w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    </div>
-                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">PDDIKTI Checker</h3>
-                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Cek status kemahasiswaan dari PDDIKTI. Upload Excel, dapat status Aktif/Lulus/DO secara massal.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-primary-50 text-primary-600 px-2 py-0.5 rounded font-semibold">Excel</span>
-                        <span class="text-[11px] bg-mint-50 text-mint-600 px-2 py-0.5 rounded font-semibold">Bulk</span>
-                    </div>
-                    <a href="https://pddikti-checker.up.railway.app" target="_blank" class="btn-open block w-full text-center bg-primary-600 hover:bg-primary-700 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
-                </div>
+    <div class="ventures">
+      <div class="vh">
+        <h2>Ventures &amp; Brands</h2>
+        <span class="side">Empat Brand</span>
+      </div>
+      <div class="vgrid" id="vgrid"></div>
+    </div>
+  </section>
 
-                <!-- SKA Checker -->
-                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-3 flex flex-col">
-                    <div class="card-icon w-12 h-12 bg-grape-100 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-grape-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
-                    </div>
-                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">SKA Checker</h3>
-                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Verifikasi sertifikat keahlian konstruksi (SKA/SKT/SKK) dari LPJK. Cek keaslian dan status sertifikat.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-grape-50 text-grape-600 px-2 py-0.5 rounded font-semibold">SKA/SKT/SKK</span>
-                        <span class="text-[11px] bg-mint-50 text-mint-600 px-2 py-0.5 rounded font-semibold">LPJK</span>
-                    </div>
-                    <a href="https://cek-sertifikat-keahlian.up.railway.app" target="_blank" class="btn-open block w-full text-center bg-grape-600 hover:bg-grape-700 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
-                </div>
+  <main id="app"></main>
+</div>
 
-                <!-- SIKD Browser -->
-                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-4 flex flex-col">
-                    <div class="card-icon w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
-                    </div>
-                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">SIKD Browser</h3>
-                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Jelajahi data APBD seluruh Pemda Indonesia. Pendapatan, belanja, pembiayaan, komparasi antar tahun.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded font-semibold">APBD</span>
-                        <span class="text-[11px] bg-mint-50 text-mint-600 px-2 py-0.5 rounded font-semibold">DJPK</span>
-                    </div>
-                    <a href="https://sikd-browser.up.railway.app" target="_blank" class="btn-open block w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
-                </div>
+<footer>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <div class="bigmark">Bashid<br/>Effendi</div>
+        <p class="lede">Koleksi perkakas untuk audit, finance, dan side projects — dirakit dengan AI, terbuka untuk semua.</p>
+      </div>
+      <div class="col">
+        <h4>Kategori</h4>
+        <a href="#audit">Audit</a>
+        <a href="#hobbies">Hobbies</a>
+        <a href="#finance">Finance</a>
+      </div>
+      <div class="col" id="fcol-tools">
+        <h4>Tools</h4>
+      </div>
+      <div class="col">
+        <h4>Tentang</h4>
+        <a href="https://masbash.id" target="_blank" rel="noopener">masbash.id ↗</a>
+        <p>Auditor BPK RI</p>
+        <p>Open · Free · No signup</p>
+      </div>
+    </div>
+    <div class="bottom">
+      <span class="c">The Tools Collection of Bashid Effendi © 2026. All Rights Reserved.</span>
+      <span class="made"><span class="dot"></span>Made with AI</span>
+    </div>
+  </div>
+</footer>
 
-                <!-- BPS Data Explorer -->
-                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-6 flex flex-col">
-                    <div class="card-icon w-12 h-12 bg-coral-100 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-coral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
-                    </div>
-                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">BPS Data Explorer</h3>
-                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Jelajahi data statistik resmi BPS — publikasi, siaran pers, indikator strategis, SDGs, ekonomi per wilayah.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-coral-50 text-coral-600 px-2 py-0.5 rounded font-semibold">BPS</span>
-                        <span class="text-[11px] bg-primary-50 text-primary-600 px-2 py-0.5 rounded font-semibold">Statistik</span>
-                    </div>
-                    <a href="https://data-bps.up.railway.app/" target="_blank" class="btn-open block w-full text-center bg-coral-500 hover:bg-coral-600 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
-                </div>
+<script>
+/* ---- Content (single source of truth) ---- */
+const SITE = {
+  name: "Bashid Effendi",
+  role: "Auditor BPK RI",
+  year: "2026",
+  stats: { live: 17, dev: 1 },
+  ventures: [
+    { name: "Tiny Hour Tales", url: "https://tinyhourtales.com", label: "tinyhourtales.com" },
+    { name: "Tempus Collective", label: "tempuscollective" },
+    { name: "Klunting", url: "https://www.klunting.com", label: "klunting.com" },
+    { name: "Macnoos", label: "macnoos" }
+  ],
+  sections: [
+    {
+      no: "01", key: "audit", title: "Audit",
+      blurb: "Alat untuk pemeriksaan — kepatuhan, verifikasi, dan data pemerintahan.",
+      tools: [
+        { name: "Just Count", status: "new", tags: ["Multi-tenant", "BAPK Auto", "SKA Check"], desc: "Audit kepatuhan jasa konsultansi konstruksi APBD. 3-area checklist, engine numerik, dan auto-generate BAPK Word.", link: "https://justcount.up.railway.app", label: "Buka Tool" },
+        { name: "PDDIKTI Checker", tags: ["Excel", "Bulk"], desc: "Cek status kemahasiswaan dari PDDIKTI. Upload Excel, dapat status Aktif/Lulus/DO secara massal.", link: "https://pddikti-checker.up.railway.app", label: "Buka Tool" },
+        { name: "SKA Checker", tags: ["SKA/SKT/SKK", "LPJK"], desc: "Verifikasi sertifikat keahlian konstruksi dari LPJK. Cek keaslian dan status sertifikat.", link: "https://cek-sertifikat-keahlian.up.railway.app", label: "Buka Tool" },
+        { name: "SIKD Browser", tags: ["APBD", "DJPK"], desc: "Jelajahi data APBD seluruh Pemda Indonesia. Pendapatan, belanja, pembiayaan, komparasi antar tahun.", link: "https://sikd-browser.up.railway.app", label: "Buka Tool" },
+        { name: "BPS Data Explorer", tags: ["BPS", "Statistik"], desc: "Jelajahi data statistik resmi BPS — publikasi, siaran pers, indikator strategis, SDGs, ekonomi per wilayah.", link: "https://data-bps.up.railway.app/", label: "Buka Tool" },
+        { name: "SIAP PKP Filler", tags: ["SIAP BPK", "Desktop"], desc: "Auto-fill kolom Hasil Pengujian di SIAP BPK dari Excel PKP. Aplikasi desktop (butuh download + VPN BPK).", link: "https://masbash.id/siap-pkp-filler.html", label: "Panduan & Download" },
+        { name: "SPSE Checker", tags: ["LPSE", "Desktop"], desc: "Cek data pengadaan B/J pemerintah dari SPSE/LPSE. Tender, pemenang, peserta, nilai kontrak.", link: "https://masbash.id/spse-checker.html", label: "Panduan & Download" },
+        { name: "Kriteria", status: "new", tags: ["AI", "pasal.id", "BAPK"], desc: "AI cari kriteria temuan pemeriksaan — paste kondisi, dapat peraturan + pasal + ayat relevan dengan format BPK siap copy ke BAPK.", link: "https://kriteria.masbash.id", label: "Buka Tool" },
+        { name: "CalcTape Audit", status: "new", tags: ["Telstruk", "AI", ".calc"], desc: "Telstruk LHP otomatis — drop file Word, dapat verifikasi aritmatika (narasi + tabel) jadi file .calc. Hybrid regex + AI.", link: "https://calctape.vercel.app", label: "Buka Tool" },
+        { name: "SIRUP Audit", status: "soon", tags: ["SIRUP", "Red Flag"], desc: "Dashboard deteksi paket pengadaan mencurigakan dari SIRUP LKPP. Red flag analysis 2021–2026.", link: "", label: "Coming Soon" }
+      ]
+    },
+    {
+      no: "02", key: "hobbies", title: "Hobbies",
+      blurb: "Hal-hal yang saya cintai di luar kantor — jam, kuliner, cuaca, dan rumah.",
+      tools: [
+        { name: "Tiny Hour Tales", tags: ["Watches", "Inventory"], desc: "Inventory koleksi jam tangan dengan dashboard, story per jam, dan catatan service.", link: "https://inventory.tinyhourtales.com", label: "Buka Tool" },
+        { name: "Seiko Almanac", status: "new", tags: ["Seiko", "Watches", "Decoder"], desc: "Meja referensi Seiko buat kolektor — decode tahun produksi dari nomor serial, decoder case-code vintage pra-1966, 230+ caliber & 1.179 model dari katalog asli 1932–2020. Sibling Tiny Hour Tales.", link: "https://seiko.tinyhourtales.com", label: "Buka Tool" },
+        { name: "Persotoan", status: "new", tags: ["Peta", "Kuliner"], desc: "Peta interaktif kuliner soto Nusantara — 18+ jenis soto & 165 warung legendaris, filter basis kuah & wilayah.", link: "https://soto.masbash.id", label: "Buka Tool" },
+        { name: "RABin", tags: ["RAB", "Konstruksi"], desc: "Tools RAB online untuk konstruksi — kalkulator AHSP, harga regional, dan ekspor Excel/PDF.", link: "https://rabindonesia.vercel.app", label: "Buka Tool" },
+        { name: "Hujan di Batam", status: "new", tags: ["Radar", "Cuaca"], desc: "Radar hujan real-time Batam & sekitarnya — overlay citra radar MSS Singapura (240 km), 3 view + time slider + animasi.", link: "https://hujandibatam.masbash.id", label: "Buka Tool" },
+        { name: "Batam Bites", status: "new", tags: ["Kuliner", "Peta", "Halal"], desc: "Direktori kuliner Batam buat turis — 118 warung legendaris, seafood & hidden gem dengan peta interaktif, filter halal, dan dwibahasa ID/EN.", link: "https://batam-bites.vercel.app", label: "Buka Tool" }
+      ]
+    },
+    {
+      no: "03", key: "finance", title: "Finance",
+      blurb: "Menata uang dengan tenang — portofolio, kekayaan, dan tujuan.",
+      tools: [
+        { name: "Investment Dashboard", tags: ["Portfolio", "Real-time"], desc: "Track portfolio saham, reksa dana, obligasi — terminal-style dashboard untuk monitoring real-time.", link: "https://kelolainvestasi.vercel.app", label: "Buka Tool" },
+        { name: "Klunting", tags: ["Net Worth", "Goals"], desc: "Wealth Management App — net worth, cash flow, alokasi aset, dan goals dalam satu tempat.", link: "https://www.klunting.com", label: "Buka Tool" }
+      ]
+    }
+  ]
+};
 
-                <!-- SIAP PKP Filler -->
-                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-7 flex flex-col">
-                    <div class="card-icon w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486"/></svg>
-                    </div>
-                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">SIAP PKP Filler</h3>
-                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Auto-fill kolom Hasil Pengujian di SIAP BPK dari Excel PKP. Aplikasi desktop (butuh download + VPN BPK).</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-amber-50 text-amber-600 px-2 py-0.5 rounded font-semibold">SIAP BPK</span>
-                        <span class="text-[11px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded font-semibold">Desktop</span>
-                    </div>
-                    <a href="siap-pkp-filler.html" class="btn-open block w-full text-center bg-amber-500 hover:bg-amber-600 text-white font-bold py-2.5 rounded-lg text-sm">Panduan & Download</a>
-                </div>
+/* ---- Render ---- */
+const S = SITE;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const allTools = S.sections.flatMap(s => s.tools.map(t => ({...t, cat: s.title, key: s.key})));
 
-                <!-- SPSE Checker -->
-                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-8 flex flex-col">
-                    <div class="card-icon w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    </div>
-                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">SPSE Checker</h3>
-                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Cek data pengadaan B/J pemerintah dari SPSE/LPSE. Tender, pemenang, peserta, nilai kontrak. Aplikasi desktop.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-green-50 text-green-600 px-2 py-0.5 rounded font-semibold">LPSE</span>
-                        <span class="text-[11px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded font-semibold">Desktop</span>
-                    </div>
-                    <a href="spse-checker.html" class="btn-open block w-full text-center bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded-lg text-sm">Panduan & Download</a>
-                </div>
+document.getElementById('amsg').textContent = `${S.stats.live} Tools Live · ${S.stats.dev} In Dev`;
 
-                <!-- Kriteria (ex-Pasal) — AI cari kriteria temuan via pasal.id MCP [NEW] -->
-                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-9 flex flex-col relative">
-                    <div class="absolute top-3 right-3 badge-new text-[10px] px-2.5 py-1 rounded-full">NEW</div>
-                    <div class="card-icon w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
-                    </div>
-                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">Kriteria</h3>
-                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">AI cari kriteria temuan pemeriksaan — paste kondisi, dapat peraturan + pasal + ayat relevan dengan format BPK siap copy ke BAPK.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-rose-50 text-rose-600 px-2 py-0.5 rounded font-semibold">AI</span>
-                        <span class="text-[11px] bg-primary-50 text-primary-600 px-2 py-0.5 rounded font-semibold">pasal.id</span>
-                        <span class="text-[11px] bg-mint-50 text-mint-600 px-2 py-0.5 rounded font-semibold">BAPK</span>
-                    </div>
-                    <a href="https://kriteria.masbash.id" target="_blank" class="btn-open block w-full text-center bg-rose-600 hover:bg-rose-700 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
-                </div>
+/* ventures */
+document.getElementById('vgrid').innerHTML = S.ventures.map(v => {
+  const logo = v.logo ? `<img class="logo" src="${esc(v.logo)}" alt="${esc(v.name)}" />` : '';
+  const meta = v.url
+    ? `<div class="bmeta"><a class="burl" href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.label)}</a><span class="ar">↗</span></div>`
+    : `<div class="bmeta"><span class="burl">${esc(v.label)}</span></div>`;
+  return `<div class="vcell">${logo}<div class="bname">${esc(v.name)}</div>${meta}</div>`;
+}).join('');
 
-                <!-- CalcTape Audit — telstruk LHP otomatis [NEW] -->
-                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-9 flex flex-col relative">
-                    <div class="absolute top-3 right-3 badge-new text-[10px] px-2.5 py-1 rounded-full">NEW</div>
-                    <div class="card-icon w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z"/></svg>
-                    </div>
-                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">CalcTape Audit</h3>
-                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Telstruk LHP otomatis — drop file Word, dapat verifikasi aritmatika (narasi + tabel) langsung jadi file .calc CalcTape. Hybrid regex + AI.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-violet-50 text-violet-600 px-2 py-0.5 rounded font-semibold">Telstruk</span>
-                        <span class="text-[11px] bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded font-semibold">AI</span>
-                        <span class="text-[11px] bg-primary-50 text-primary-600 px-2 py-0.5 rounded font-semibold">.calc</span>
-                    </div>
-                    <a href="https://calctape.vercel.app" target="_blank" class="btn-open block w-full text-center bg-violet-600 hover:bg-violet-700 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
-                </div>
+/* footer flagship tool links */
+const fcols = ['Just Count','Kriteria','Tiny Hour Tales','Persotoan','Investment Dashboard'];
+document.getElementById('fcol-tools').insertAdjacentHTML('beforeend',
+  fcols.map(n => { const t = allTools.find(x => x.name === n); return t ? `<a href="${esc(t.link)}" target="_blank" rel="noopener">${esc(t.name)}</a>` : ''; }).join(''));
 
-                <!-- SIRUP Audit (Coming Soon) -->
-                <div class="card-tool bg-white/60 rounded-2xl p-6 fade-in stagger-9 border-dashed !border-2 !border-gray-200 flex flex-col">
-                    <div class="card-icon w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3v1.5M3 21v-6m0 0l2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5"/></svg>
-                    </div>
-                    <div class="flex items-center gap-2 mb-1.5">
-                        <h3 class="text-lg font-extrabold text-gray-500">SIRUP Audit</h3>
-                        <span class="text-[10px] bg-gray-200 text-gray-500 font-bold px-2 py-0.5 rounded-full">SOON</span>
-                    </div>
-                    <p class="text-sm text-gray-400 mb-4 leading-snug flex-grow">Dashboard deteksi paket pengadaan mencurigakan dari SIRUP LKPP. Red flag analysis 2021–2026.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-gray-100 text-gray-400 px-2 py-0.5 rounded font-semibold">SIRUP</span>
-                        <span class="text-[11px] bg-gray-100 text-gray-400 px-2 py-0.5 rounded font-semibold">Red Flag</span>
-                    </div>
-                    <div class="block w-full text-center bg-gray-100 text-gray-400 font-bold py-2.5 rounded-lg text-sm cursor-default">Coming Soon</div>
-                </div>
-            </div>
-        </section>
+/* program sections — text cards */
+function card(t, i, sec){
+  const dis = t.status === 'soon';
+  const badge = t.status === 'new' ? '<span class="badge">New</span>'
+    : (t.status === 'soon' ? '<span class="badge soon">Coming Soon</span>' : '<span></span>');
+  const idx = sec.title + ' · #' + String(i + 1).padStart(2, '0');
+  const tags = t.tags.map(x => `<span class="tag">${esc(x)}</span>`).join('');
+  const logo = t.logo ? `<img class="toollogo" src="${esc(t.logo)}" alt="${esc(t.name)}" />` : '';
+  const more = dis ? `<span class="more"><span>Segera Hadir</span></span>`
+    : `<span class="more"><span>${esc(t.label)}</span><span class="ar">→</span></span>`;
+  const inner = `
+    ${logo}
+    <div class="cat eyebrow"><span>${esc(idx)}</span>${badge}</div>
+    <h3>${esc(t.name)}</h3>
+    <p class="desc">${esc(t.desc)}</p>
+    <div class="tags">${tags}</div>
+    ${more}`;
+  if(dis) return `<div class="card disabled">${inner}</div>`;
+  return `<a class="card" href="${esc(t.link)}" target="_blank" rel="noopener">${inner}</a>`;
+}
+function section(sec){
+  return `<section class="program reveal" id="${sec.key}">
+    <div class="prog-head">
+      <div class="no">${sec.no}</div>
+      <h2>${esc(sec.title)}</h2>
+      <div class="meta">${esc(sec.blurb)}<div class="ct">${sec.tools.length} Tools</div></div>
+    </div>
+    <div class="grid">${sec.tools.map((t, i) => card(t, i, sec)).join('')}</div>
+  </section>`;
+}
+document.getElementById('app').innerHTML = S.sections.map(section).join('');
 
-        <!-- ===== 02 HOBBIES ===== -->
-        <section id="hobbies" class="section-anchor pt-12 pb-6">
-            <div class="flex items-end justify-between gap-4 mb-6 pb-4 border-b border-gray-200">
-                <div class="flex items-baseline gap-3">
-                    <span class="text-sm font-mono text-gray-400">02</span>
-                    <h2 class="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">Hobbies</h2>
-                    <span class="text-sm text-gray-400 ml-2 hidden md:inline">Side projects buat hobi & koleksi pribadi</span>
-                </div>
-                <div class="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-wider">
-                    <span class="bg-gray-900 text-white rounded-full min-w-[26px] h-[26px] inline-flex items-center justify-center text-[11px]">6</span>
-                    <span class="hidden md:inline">Tools</span>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                <!-- Tiny Hour Tales [LIVE] -->
-                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-1 flex flex-col">
-                    <div class="card-icon w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    </div>
-                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">Tiny Hour Tales</h3>
-                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Inventory koleksi jam tangan dengan dashboard, story per jam, dan catatan service.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded font-semibold">Watches</span>
-                        <span class="text-[11px] bg-primary-50 text-primary-600 px-2 py-0.5 rounded font-semibold">Inventory</span>
-                    </div>
-                    <a href="https://inventory.tinyhourtales.com" target="_blank" class="btn-open block w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
-                </div>
-
-                <!-- Seiko Almanac [LIVE/NEW] -->
-                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-5 flex flex-col relative">
-                    <div class="absolute top-3 right-3 badge-new text-[10px] px-2.5 py-1 rounded-full">NEW</div>
-                    <div class="card-icon w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-                    </div>
-                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">Seiko Almanac</h3>
-                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Meja referensi Seiko buat kolektor — decode tahun produksi dari nomor serial, decoder case-code vintage pra-1966, 230+ caliber &amp; 1.179 model dari katalog asli 1932–2020. Sibling Tiny Hour Tales.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-rose-50 text-rose-600 px-2 py-0.5 rounded font-semibold">Seiko</span>
-                        <span class="text-[11px] bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded font-semibold">Watches</span>
-                        <span class="text-[11px] bg-primary-50 text-primary-600 px-2 py-0.5 rounded font-semibold">Decoder</span>
-                    </div>
-                    <a href="https://seiko.tinyhourtales.com" target="_blank" class="btn-open block w-full text-center bg-rose-600 hover:bg-rose-700 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
-                </div>
-
-                <!-- Persotoan [NEW] -->
-                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-2 flex flex-col relative">
-                    <div class="absolute top-3 right-3 badge-new text-[10px] px-2.5 py-1 rounded-full">NEW</div>
-                    <div class="card-icon w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"/></svg>
-                    </div>
-                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">Persotoan</h3>
-                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Peta interaktif kuliner soto Nusantara — 18+ jenis soto + 165 warung legendaris, filter basis kuah & wilayah.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-orange-50 text-orange-600 px-2 py-0.5 rounded font-semibold">Peta</span>
-                        <span class="text-[11px] bg-coral-50 text-coral-600 px-2 py-0.5 rounded font-semibold">Kuliner</span>
-                    </div>
-                    <a href="https://soto.masbash.id" target="_blank" class="btn-open block w-full text-center bg-orange-500 hover:bg-orange-600 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
-                </div>
-
-                <!-- RABin [LIVE] -->
-                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-3 flex flex-col">
-                    <div class="card-icon w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"/></svg>
-                    </div>
-                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">RABin</h3>
-                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Tools RAB (Rencana Anggaran Biaya) online untuk konstruksi — kalkulator AHSP, harga regional, dan ekspor Excel/PDF.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-cyan-50 text-cyan-600 px-2 py-0.5 rounded font-semibold">RAB</span>
-                        <span class="text-[11px] bg-primary-50 text-primary-600 px-2 py-0.5 rounded font-semibold">Konstruksi</span>
-                    </div>
-                    <a href="https://rabindonesia.vercel.app" target="_blank" class="btn-open block w-full text-center bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
-                </div>
-
-                <!-- Hujan di Batam [NEW] -->
-                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-4 flex flex-col relative">
-                    <div class="absolute top-3 right-3 badge-new text-[10px] px-2.5 py-1 rounded-full">NEW</div>
-                    <div class="card-icon w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z"/></svg>
-                    </div>
-                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">Hujan di Batam</h3>
-                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Radar hujan real-time Batam &amp; sekitarnya — overlay citra radar MSS Singapura (jangkauan 240 km) di atas peta, dengan 3 view + time slider + animasi.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-sky-50 text-sky-600 px-2 py-0.5 rounded font-semibold">Radar</span>
-                        <span class="text-[11px] bg-cyan-50 text-cyan-600 px-2 py-0.5 rounded font-semibold">Batam</span>
-                        <span class="text-[11px] bg-primary-50 text-primary-600 px-2 py-0.5 rounded font-semibold">Cuaca</span>
-                    </div>
-                    <a href="https://hujandibatam.masbash.id" target="_blank" class="btn-open block w-full text-center bg-sky-600 hover:bg-sky-700 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
-                </div>
-
-                <!-- Batam Bites [NEW] -->
-                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-6 flex flex-col relative">
-                    <div class="absolute top-3 right-3 badge-new text-[10px] px-2.5 py-1 rounded-full">NEW</div>
-                    <div class="card-icon w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
-                    </div>
-                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">Batam Bites</h3>
-                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Direktori kuliner Batam buat turis — 118 warung legendaris, seafood &amp; hidden gem dengan peta interaktif, filter halal, dan dwibahasa ID/EN.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-red-50 text-red-600 px-2 py-0.5 rounded font-semibold">Kuliner</span>
-                        <span class="text-[11px] bg-orange-50 text-orange-600 px-2 py-0.5 rounded font-semibold">Peta</span>
-                        <span class="text-[11px] bg-mint-50 text-mint-600 px-2 py-0.5 rounded font-semibold">Halal</span>
-                    </div>
-                    <a href="https://batam-bites.vercel.app" target="_blank" class="btn-open block w-full text-center bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== 03 FINANCE ===== -->
-        <section id="finance" class="section-anchor pt-12 pb-12">
-            <div class="flex items-end justify-between gap-4 mb-6 pb-4 border-b border-gray-200">
-                <div class="flex items-baseline gap-3">
-                    <span class="text-sm font-mono text-gray-400">03</span>
-                    <h2 class="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">Finance</h2>
-                    <span class="text-sm text-gray-400 ml-2 hidden md:inline">Personal finance, portfolio, wealth</span>
-                </div>
-                <div class="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-wider">
-                    <span class="bg-gray-900 text-white rounded-full min-w-[26px] h-[26px] inline-flex items-center justify-center text-[11px]">2</span>
-                    <span class="hidden md:inline">Tools</span>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                <!-- Investment Dashboard [LIVE] -->
-                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-1 flex flex-col">
-                    <div class="card-icon w-12 h-12 bg-mint-100 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-mint-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
-                    </div>
-                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">Investment Dashboard</h3>
-                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Track portfolio saham, reksa dana, obligasi — terminal-style dashboard untuk monitoring real-time.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-mint-50 text-mint-600 px-2 py-0.5 rounded font-semibold">Portfolio</span>
-                        <span class="text-[11px] bg-primary-50 text-primary-600 px-2 py-0.5 rounded font-semibold">Real-time</span>
-                    </div>
-                    <a href="https://kelolainvestasi.vercel.app" target="_blank" class="btn-open block w-full text-center bg-mint-600 hover:bg-mint-700 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
-                </div>
-
-                <!-- Wealth Management [LIVE] -->
-                <div class="card-tool bg-white rounded-2xl p-6 fade-in stagger-2 flex flex-col">
-                    <div class="card-icon w-12 h-12 bg-grape-100 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-grape-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    </div>
-                    <h3 class="text-lg font-extrabold text-gray-900 mb-1.5">Klunting</h3>
-                    <p class="text-sm text-gray-500 mb-4 leading-snug flex-grow">Wealth Management App — net worth, cash flow, alokasi aset, dan goals dalam satu tempat.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] bg-grape-50 text-grape-600 px-2 py-0.5 rounded font-semibold">Net Worth</span>
-                        <span class="text-[11px] bg-primary-50 text-primary-600 px-2 py-0.5 rounded font-semibold">Goals</span>
-                    </div>
-                    <a href="https://www.klunting.com" target="_blank" class="btn-open block w-full text-center bg-grape-600 hover:bg-grape-700 text-white font-bold py-2.5 rounded-lg text-sm">Buka Tool</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="border-t border-gray-100 bg-white/50">
-        <div class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between text-xs text-gray-400">
-            <div>
-                <span class="font-bold text-gray-700">Bashid Effendi</span> · Auditor BPK RI · Made with AI
-            </div>
-            <div>© 2026</div>
-        </div>
-    </footer>
-
-    <script>
-        // Highlight active section in nav
-        const sections = document.querySelectorAll('section[id]');
-        const navPills = document.querySelectorAll('.nav-pill');
-        function setActiveNav() {
-            const scrollPos = window.scrollY + 120;
-            sections.forEach(sec => {
-                if (scrollPos >= sec.offsetTop && scrollPos < sec.offsetTop + sec.offsetHeight) {
-                    navPills.forEach(p => p.classList.remove('active'));
-                    const active = document.querySelector(`.nav-pill[href="#${sec.id}"]`);
-                    if (active) active.classList.add('active');
-                }
-            });
-        }
-        window.addEventListener('scroll', setActiveNav);
-        setActiveNav();
-    </script>
+/* scroll reveal */
+const io = new IntersectionObserver((es) => {
+  es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, {threshold:.04});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+setTimeout(() => document.querySelectorAll('.reveal:not(.in)').forEach(el => el.classList.add('in')), 1500);
+</script>
 </body>
 </html>
