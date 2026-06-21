@@ -69,8 +69,7 @@ header.nav .wrap{display:flex;align-items:center;justify-content:space-between;h
 .prog-head .meta{text-align:right;color:var(--soft);font-size:15px;max-width:30ch;flex:none}
 .prog-head .meta .ct{font-weight:700;color:var(--ink);margin-top:6px}
 
-.grid{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--line)}
-@media(min-width:981px){#audit .grid{grid-template-columns:repeat(2,1fr)}}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);border-left:1px solid var(--line)}
 .card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:32px 30px 28px;display:flex;flex-direction:column;min-height:300px;position:relative;background:var(--bg);transition:background .35s}
 .card:not(.disabled):hover{background:#fafafa}
 .card .embed{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);margin-bottom:22px;background:#f3f1ea}
@@ -276,7 +275,11 @@ const LOGOS = {
   "BPS Data Explorer": "bps-data-explorer",
   "SIAP PKP Filler": "siap-pkp-filler",
   "Kriteria": "kriteria",
-  "CalcTape Audit": "calctape"
+  "CalcTape Audit": "calctape",
+  "Persotoan": "persotoan",
+  "Hujan di Batam": "hujan-di-batam",
+  "Batam Bites": "batam-bites",
+  "Investment Dashboard": "investment-dashboard"
 };
 
 /* program sections — text cards */
@@ -317,7 +320,8 @@ function fitEmbeds(){
 }
 fitEmbeds();
 window.addEventListener('resize', fitEmbeds);
-setTimeout(fitEmbeds, 400);
+[120, 400, 1000, 2000].forEach(d => setTimeout(fitEmbeds, d));
+document.querySelectorAll('.card .embed iframe').forEach(f => f.addEventListener('load', fitEmbeds));
 if(window.ResizeObserver){ const _ro = new ResizeObserver(() => fitEmbeds()); document.querySelectorAll('.card .embed').forEach(b => _ro.observe(b)); }
 
 /* scroll reveal */
