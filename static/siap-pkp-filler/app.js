@@ -29,7 +29,7 @@
         return;
     }
 
-    const VERSION = '1.2.1';
+    const VERSION = '1.2.2';
     const SHEETJS_CDN = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
     const BASE_API = location.origin;
 
@@ -581,12 +581,9 @@
                     <input type="text" id="${STYLE_PREFIX}-nama" class="${STYLE_PREFIX}-input" placeholder="BASHID EFFENDI">
                 </div>
             </div>
-            <div class="${STYLE_PREFIX}-section" style="background:#f0f4ff;border:1px solid #dbe4ff;border-radius:10px;padding:12px;">
-                <p style="font-size:12px;color:#334155;margin:0 0 8px 0;line-height:1.5;">
-                    <strong>Belum punya file Excel PKP?</strong> Buka halaman file <strong>PKP kamu</strong> di SIAP langsung dari sini — nggak usah klik Perencanaan → Dokumen → cari baris. Di sana, pada <strong>baris namamu</strong>, klik <strong>"Lihat File"</strong> → lalu download dari viewer-nya.
-                </p>
+            <div class="${STYLE_PREFIX}-section">
                 <button id="${STYLE_PREFIX}-pkp" class="${STYLE_PREFIX}-btn ${STYLE_PREFIX}-btn-secondary" style="width:100%;">📂 Buka PKP Saya di SIAP</button>
-                <p class="${STYLE_PREFIX}-hint" id="${STYLE_PREFIX}-pkp-status" style="margin-top:6px;">Kebuka di tab baru. Setelah download + isi kolom Hasil (G), upload file-nya di kolom Excel di atas.</p>
+                <p class="${STYLE_PREFIX}-hint" id="${STYLE_PREFIX}-pkp-status" style="margin-top:6px;"></p>
             </div>
             <details>
                 <summary style="cursor:pointer;font-size:12px;color:#6366f1;font-weight:600;margin-bottom:10px;">Pengaturan Lanjutan (Format Excel)</summary>
