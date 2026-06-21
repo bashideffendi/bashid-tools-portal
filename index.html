@@ -72,7 +72,8 @@ header.nav .wrap{display:flex;align-items:center;justify-content:space-between;h
 .grid{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--line)}
 .card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:32px 30px 28px;display:flex;flex-direction:column;min-height:300px;position:relative;background:var(--bg);transition:background .35s}
 .card:not(.disabled):hover{background:#fafafa}
-.card .embed{width:100%;aspect-ratio:16/9;border:1px solid var(--line);display:block;margin-bottom:22px;background:#f3f1ea}
+.card .embed{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);margin-bottom:22px;background:#f3f1ea}
+.card .embed iframe{position:absolute;top:0;left:0;width:640px;height:360px;border:0;transform-origin:0 0}
 .card .toollogo{aspect-ratio:16/10;width:100%;margin-bottom:22px;border:1px solid var(--line);object-fit:contain;display:block}
 .card.disabled .toollogo{opacity:.7}
 .card .cat{color:var(--soft);display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
@@ -285,7 +286,7 @@ function card(t, i, sec){
   const idx = sec.title + ' · #' + String(i + 1).padStart(2, '0');
   const tags = t.tags.map(x => `<span class="tag">${esc(x)}</span>`).join('');
   const logo = t.logo ? `<img class="toollogo" src="${esc(t.logo)}" alt="${esc(t.name)}" />` : '';
-  const embed = LOGOS[t.name] ? `<iframe class="embed" src="/logos/${LOGOS[t.name]}.html" loading="lazy" scrolling="no" title="Logo ${esc(t.name)}"></iframe>` : '';
+  const embed = LOGOS[t.name] ? `<div class="embed"><iframe src="/logos/${LOGOS[t.name]}.html" loading="lazy" scrolling="no" title="Logo ${esc(t.name)}"></iframe></div>` : '';
   const more = dis ? `<span class="more"><span>Segera Hadir</span></span>`
     : `<span class="more"><span>${esc(t.label)}</span><span class="ar">→</span></span>`;
   const inner = `
@@ -308,6 +309,15 @@ function section(sec){
   </section>`;
 }
 document.getElementById('app').innerHTML = S.sections.map(section).join('');
+
+/* scale embedded logos (rendered at 640x360) to fit each card */
+function fitEmbeds(){
+  document.querySelectorAll('.card .embed').forEach(b => { const w = b.clientWidth; if(!w) return; const f = b.querySelector('iframe'); if(f) f.style.transform = `scale(${w/640})`; });
+}
+fitEmbeds();
+window.addEventListener('resize', fitEmbeds);
+setTimeout(fitEmbeds, 400);
+if(window.ResizeObserver){ const _ro = new ResizeObserver(() => fitEmbeds()); document.querySelectorAll('.card .embed').forEach(b => _ro.observe(b)); }
 
 /* scroll reveal */
 const io = new IntersectionObserver((es) => {
