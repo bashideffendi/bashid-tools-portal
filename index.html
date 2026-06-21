@@ -63,11 +63,15 @@ header.nav .wrap{display:flex;align-items:center;justify-content:flex-end;height
 
 /* program sections */
 .program{padding:116px 0 0}
-.prog-head{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;border-bottom:2px solid var(--hair);padding-bottom:22px}
+.prog-head{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;border-bottom:2px solid var(--hair);padding-bottom:22px;cursor:pointer;user-select:none}
 .prog-head .no{display:block;font-size:13px;font-weight:600;letter-spacing:.2em;color:var(--soft);margin-bottom:14px}
 .prog-head h2{font-size:clamp(30px,3.6vw,52px);font-weight:800;letter-spacing:-.03em;line-height:.92}
-.prog-head .meta{text-align:right;color:var(--soft);font-size:15px;max-width:30ch;flex:none}
-.prog-head .meta .ct{font-weight:700;color:var(--ink);margin-top:6px}
+.prog-head .meta{display:flex;align-items:center;gap:16px;color:var(--soft);font-size:15px;flex:none;white-space:nowrap}
+.prog-head .meta .ct{font-weight:700;color:var(--ink)}
+.prog-head .chev{display:inline-flex;color:var(--soft);transition:transform .35s,color .25s}
+.prog-head:hover .chev{color:var(--ink)}
+.program.collapsed .grid{display:none}
+.program.collapsed .prog-head .chev{transform:rotate(-180deg)}
 
 .grid{display:grid;grid-template-columns:repeat(2,1fr);border-left:1px solid var(--line)}
 .card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:32px 30px 28px;display:flex;flex-direction:column;min-height:300px;position:relative;background:var(--bg);transition:background .35s}
@@ -311,14 +315,25 @@ function card(t, i, sec){
 }
 function section(sec){
   return `<section class="program reveal" id="${sec.key}">
-    <div class="prog-head">
+    <div class="prog-head" role="button" tabindex="0" aria-expanded="true" aria-label="Tampil/sembunyikan ${esc(sec.title)}">
       <div class="ph-left"><div class="no">${sec.no}</div><h2>${esc(sec.title)}</h2></div>
-      <div class="meta"><div class="ct">${sec.tools.length} Tools</div></div>
+      <div class="meta"><span class="ct">${sec.tools.length} Tools</span><span class="chev" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
     </div>
     <div class="grid">${sec.tools.map((t, i) => card(t, i, sec)).join('')}</div>
   </section>`;
 }
 document.getElementById('app').innerHTML = S.sections.map(section).join('');
+
+/* collapsible categories — click header to minimize/expand */
+document.querySelectorAll('.prog-head').forEach(h => {
+  const toggle = () => {
+    const collapsed = h.closest('.program').classList.toggle('collapsed');
+    h.setAttribute('aria-expanded', String(!collapsed));
+    if(!collapsed) setTimeout(fitEmbeds, 30);
+  };
+  h.addEventListener('click', toggle);
+  h.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); } });
+});
 
 /* scale embedded logos (rendered at 640x360) to fit each card */
 function fitEmbeds(){
