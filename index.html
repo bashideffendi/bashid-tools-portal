@@ -5,6 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Bashid Effendi — Tools Collection</title>
 <meta name="description" content="Koleksi tools audit, finance, dan personal projects oleh Bashid Effendi (Auditor BPK RI). Open, free, no signup." />
+<link rel="canonical" href="https://masbash.id/" />
+<meta name="theme-color" content="#0e0e0e" />
+<meta name="robots" content="index,follow" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
+<link rel="apple-touch-icon" href="/static/apple-touch-icon.png" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="masbash.id" />
+<meta property="og:locale" content="id_ID" />
+<meta property="og:url" content="https://masbash.id/" />
+<meta property="og:title" content="Bashid Effendi — Tools Collection" />
+<meta property="og:description" content="Koleksi tools audit, finance, dan personal projects. Open, free, no signup." />
+<meta property="og:image" content="https://masbash.id/static/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Bashid Effendi — Tools Collection" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Bashid Effendi — Tools Collection" />
+<meta name="twitter:description" content="Koleksi tools audit, finance, dan personal projects. Open, free, no signup." />
+<meta name="twitter:image" content="https://masbash.id/static/og.png" />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Bashid Effendi — Tools Collection","url":"https://masbash.id/","author":{"@type":"Person","name":"Bashid Effendi","jobTitle":"Auditor BPK RI"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Expanded:wght@600;700;800;900&display=swap" rel="stylesheet" />
@@ -19,6 +40,11 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 ::selection{background:var(--ink);color:#fff}
 a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.card:focus-visible{outline-offset:-2px}
+.prog-head:focus-visible{outline-offset:6px}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--ink);color:#fff;padding:10px 16px;font-size:13px;font-weight:600;transition:top .2s}
+.skip:focus{top:8px}
 .wrap{max-width:1320px;margin:0 auto;padding:0 40px}
 .eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
 
@@ -27,15 +53,12 @@ a{color:inherit;text-decoration:none}
 .announce .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;height:42px}
 .announce .msg{font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:12px;white-space:nowrap}
 .announce .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
-@keyframes pulse{50%{opacity:.3}}
 .announce a{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
 .announce a:hover{color:var(--accent)}
 
 /* header */
 header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 header.nav .wrap{display:flex;align-items:center;justify-content:flex-end;height:74px}
-.brand{font-size:23px;font-weight:800;letter-spacing:-.03em;display:flex;align-items:center;gap:9px;white-space:nowrap;flex:none}
-.brand .mk{width:11px;height:11px;border-radius:50%;background:var(--ink)}
 .menu{display:flex;align-items:center;gap:34px}
 .menu a{font-size:15px;font-weight:500;position:relative;padding:4px 0}
 .menu a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--ink);transition:width .3s}
@@ -64,7 +87,7 @@ header.nav .wrap{display:flex;align-items:center;justify-content:flex-end;height
 /* program sections */
 .program{padding:116px 0 0}
 .prog-head{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;border-bottom:2px solid var(--hair);padding-bottom:22px;cursor:pointer;user-select:none}
-.prog-head .no{display:block;font-size:13px;font-weight:600;letter-spacing:.2em;color:var(--soft);margin-bottom:14px}
+.prog-head .no{display:block;font-size:13px;font-weight:700;letter-spacing:.2em;color:var(--accent);margin-bottom:14px}
 .prog-head h2{font-size:clamp(30px,3.6vw,52px);font-weight:800;letter-spacing:-.03em;line-height:.92}
 .prog-head .meta{display:flex;align-items:center;gap:16px;color:var(--soft);font-size:15px;flex:none;white-space:nowrap}
 .prog-head .meta .ct{font-weight:700;color:var(--ink)}
@@ -76,10 +99,9 @@ header.nav .wrap{display:flex;align-items:center;justify-content:flex-end;height
 .grid{display:grid;grid-template-columns:repeat(2,1fr);border-left:1px solid var(--line)}
 .card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:32px 30px 28px;display:flex;flex-direction:column;min-height:300px;position:relative;background:var(--bg);transition:background .35s}
 .card:not(.disabled):hover{background:#fafafa}
-.card .embed{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);margin-bottom:22px;background:#f3f1ea}
+.card .embed{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);margin-bottom:22px;background:#f4f4f2}
 .card .embed iframe{position:absolute;top:0;left:0;width:640px;height:360px;border:0;transform-origin:0 0;pointer-events:none}
-.card .toollogo{aspect-ratio:16/10;width:100%;margin-bottom:22px;border:1px solid var(--line);object-fit:contain;display:block}
-.card.disabled .toollogo{opacity:.7}
+.card.disabled .embed{opacity:.45}
 .card .cat{color:var(--soft);display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
 .card .cat .badge{color:var(--accent);font-weight:700}
 .card .cat .badge.soon{color:var(--soft)}
@@ -91,21 +113,17 @@ header.nav .wrap{display:flex;align-items:center;justify-content:flex-end;height
 .card .more .ar{transition:transform .3s}
 .card:not(.disabled):hover .more{color:var(--accent)}
 .card:not(.disabled):hover .more .ar{transform:translateX(7px)}
-.card.disabled{opacity:.55}
 
 /* footer */
 footer{margin-top:128px;background:var(--ink);color:#fff}
 footer .wrap{padding:80px 40px 46px}
 footer .top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,.16)}
 footer .bigmark{font-size:clamp(44px,5.6vw,84px);font-weight:900;letter-spacing:-.04em;line-height:.9}
-footer .lede{color:rgba(255,255,255,.62);font-size:16px;margin-top:22px;max-width:34ch;line-height:1.5}
-footer .col h4{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:18px}
+footer .col h4{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.62);margin-bottom:18px}
 footer .col a,footer .col p{display:block;color:#fff;font-size:15.5px;margin-bottom:11px;opacity:.9}
 footer .col a:hover{color:var(--accent);opacity:1}
 footer .bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding-top:30px}
-footer .bottom .c{font-size:13px;color:rgba(255,255,255,.5)}
-footer .bottom .made{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:9px}
-footer .bottom .made .dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+footer .bottom .c{font-size:13px;color:rgba(255,255,255,.62)}
 
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
@@ -115,27 +133,27 @@ footer .bottom .made .dot{width:7px;height:7px;border-radius:50%;background:var(
   .grid,.vgrid{grid-template-columns:1fr 1fr}
   .menu a:not(.ext){display:none}
   footer .top{grid-template-columns:1fr 1fr}
-  .prog-head{grid-template-columns:1fr;gap:14px}
-  .prog-head .meta{text-align:left}
+  .prog-head{gap:16px}
 }
 @media(max-width:600px){
   .grid,.vgrid,footer .top{grid-template-columns:1fr}
   footer .wrap{padding:56px 24px 40px}
+  .announce a{display:none}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .announce .dot{animation:none}
   .reveal{opacity:1;transform:none;transition:none}
   *{transition:none!important}
 }
 </style>
 </head>
 <body>
+<a class="skip" href="#app">Lewati ke konten</a>
 <a id="top"></a>
 
 <div class="announce">
   <div class="wrap">
-    <div class="msg"><span class="dot"></span><span id="amsg">15 Tools Live · 1 In Dev</span></div>
+    <div class="msg"><span class="dot"></span><span id="amsg"></span></div>
     <a href="https://masbash.id" target="_blank" rel="noopener">Open · Free · No Signup →</a>
   </div>
 </div>
@@ -160,7 +178,7 @@ footer .bottom .made .dot{width:7px;height:7px;border-radius:50%;background:var(
     </div>
   </section>
 
-  <main id="app"></main>
+  <main id="app" tabindex="-1"></main>
 </div>
 
 <footer>
@@ -194,9 +212,6 @@ footer .bottom .made .dot{width:7px;height:7px;border-radius:50%;background:var(
 /* ---- Content (single source of truth) ---- */
 const SITE = {
   name: "Bashid Effendi",
-  role: "Auditor BPK RI",
-  year: "2026",
-  stats: { live: 17, dev: 3 },
   ventures: [
     { name: "Tiny Hour Tales", url: "https://tinyhourtales.com", label: "tinyhourtales.com", logo: "static/logos/tiny-hour-tales.png", h: 68 },
     { name: "Tempus Collective", url: "https://tempuscollective.com", label: "tempuscollective.com", logo: "static/logos/tempus.png", h: 52 },
@@ -206,7 +221,6 @@ const SITE = {
   sections: [
     {
       no: "01", key: "audit", title: "Audit",
-      blurb: "Alat untuk pemeriksaan — kepatuhan, verifikasi, dan data pemerintahan.",
       tools: [
         { name: "Just Count", status: "new", tags: ["Multi-tenant", "BAPK Auto", "SKA Check"], desc: "Audit kepatuhan jasa konsultansi konstruksi APBD. 3-area checklist, engine numerik, dan auto-generate BAPK Word.", link: "https://justcount.up.railway.app", label: "Buka Tool" },
         { name: "PDDIKTI Checker", tags: ["Excel", "Bulk"], desc: "Cek status kemahasiswaan dari PDDIKTI. Upload Excel, dapat status Aktif/Lulus/DO secara massal.", link: "https://pddikti-checker.up.railway.app", label: "Buka Tool" },
@@ -224,7 +238,6 @@ const SITE = {
     },
     {
       no: "02", key: "hobbies", title: "Hobbies",
-      blurb: "Hal-hal yang saya cintai di luar kantor — jam, kuliner, cuaca, dan rumah.",
       tools: [
         { name: "Tiny Hour Tales", tags: ["Watches", "Inventory"], desc: "Inventory koleksi jam tangan dengan dashboard, story per jam, dan catatan service.", link: "https://inventory.tinyhourtales.com", label: "Buka Tool" },
         { name: "Seiko Almanac", status: "new", tags: ["Seiko", "Watches", "Decoder"], desc: "Meja referensi Seiko buat kolektor — decode tahun produksi dari nomor serial, decoder case-code vintage pra-1966, 230+ caliber & 1.179 model dari katalog asli 1932–2020. Sibling Tiny Hour Tales.", link: "https://seiko.tinyhourtales.com", label: "Buka Tool" },
@@ -236,7 +249,6 @@ const SITE = {
     },
     {
       no: "03", key: "finance", title: "Finance",
-      blurb: "Menata uang dengan tenang — portofolio, kekayaan, dan tujuan.",
       tools: [
         { name: "Investment Dashboard", tags: ["Portfolio", "Real-time"], desc: "Track portfolio saham, reksa dana, obligasi — terminal-style dashboard untuk monitoring real-time.", link: "https://kelolainvestasi.vercel.app", label: "Buka Tool" },
         { name: "Klunting", tags: ["Net Worth", "Goals"], desc: "Wealth Management App — net worth, cash flow, alokasi aset, dan goals dalam satu tempat.", link: "https://www.klunting.com", label: "Buka Tool" }
@@ -250,15 +262,18 @@ const S = SITE;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const allTools = S.sections.flatMap(s => s.tools.map(t => ({...t, cat: s.title, key: s.key})));
 
-document.getElementById('amsg').textContent = `${S.stats.live} Tools Live · ${S.stats.dev} In Dev`;
+/* live/dev counts derived from data (can never drift) */
+const liveN = allTools.filter(t => t.status !== 'soon').length;
+const devN = allTools.filter(t => t.status === 'soon').length;
+document.getElementById('amsg').textContent = `${liveN} Tools Live · ${devN} In Dev`;
 
 /* ventures */
 document.getElementById('vgrid').innerHTML = S.ventures.map(v => {
   const head = v.logo
-    ? `<img class="logo" src="${esc(v.logo)}" alt="${esc(v.name)}" style="height:${v.h||44}px" />`
+    ? `<img class="logo" src="${esc(v.logo)}" alt="${esc(v.name)}" style="height:${Number(v.h) || 44}px" />`
     : `<div class="bname">${esc(v.name)}</div>`;
   const meta = v.url
-    ? `<div class="bmeta"><a class="burl" href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.label)}</a><span class="ar">↗</span></div>`
+    ? `<div class="bmeta"><a class="burl" href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.label)}</a><span class="ar" aria-hidden="true">↗</span></div>`
     : `<div class="bmeta"><span class="burl">${esc(v.label)}</span></div>`;
   return `<div class="vcell"><div class="vtop">${head}</div>${meta}</div>`;
 }).join('');
@@ -266,7 +281,7 @@ document.getElementById('vgrid').innerHTML = S.ventures.map(v => {
 /* footer flagship tool links */
 const fcols = ['Just Count','Kriteria','Tiny Hour Tales','Persotoan','Investment Dashboard'];
 document.getElementById('fcol-tools').insertAdjacentHTML('beforeend',
-  fcols.map(n => { const t = allTools.find(x => x.name === n); return t ? `<a href="${esc(t.link)}" target="_blank" rel="noopener">${esc(t.name)}</a>` : ''; }).join(''));
+  fcols.map(n => { const t = allTools.find(x => x.name === n); return t && t.link ? `<a href="${esc(t.link)}" target="_blank" rel="noopener">${esc(t.name)}</a>` : ''; }).join(''));
 
 /* embedded logo (audit tools) — tool name -> /logos/<slug>.html */
 const LOGOS = {
@@ -299,12 +314,12 @@ function card(t, i, sec){
     : (t.status === 'soon' ? '<span class="badge soon">Coming Soon</span>' : '<span></span>');
   const idx = sec.title + ' · #' + String(i + 1).padStart(2, '0');
   const tags = t.tags.map(x => `<span class="tag">${esc(x)}</span>`).join('');
-  const logo = t.logo ? `<img class="toollogo" src="${esc(t.logo)}" alt="${esc(t.name)}" />` : '';
-  const embed = LOGOS[t.name] ? `<div class="embed"><iframe src="/logos/${LOGOS[t.name]}.html" loading="lazy" scrolling="no" title="Logo ${esc(t.name)}"></iframe></div>` : '';
+  const slug = LOGOS[t.name];
+  const embed = slug ? `<div class="embed" data-logo="${slug}" data-name="${esc(t.name)}"></div>` : '';
   const more = dis ? `<span class="more"><span>Segera Hadir</span></span>`
-    : `<span class="more"><span>${esc(t.label)}</span><span class="ar">→</span></span>`;
+    : `<span class="more"><span>${esc(t.label)}</span><span class="ar" aria-hidden="true">→</span></span>`;
   const inner = `
-    ${embed}${logo}
+    ${embed}
     <div class="cat eyebrow"><span>${esc(idx)}</span>${badge}</div>
     <h3>${esc(t.name)}</h3>
     <p class="desc">${esc(t.desc)}</p>
@@ -315,7 +330,7 @@ function card(t, i, sec){
 }
 function section(sec){
   return `<section class="program reveal" id="${sec.key}">
-    <div class="prog-head" role="button" tabindex="0" aria-expanded="true" aria-label="Tampil/sembunyikan ${esc(sec.title)}">
+    <div class="prog-head" role="button" tabindex="0" aria-expanded="true">
       <div class="ph-left"><div class="no">${sec.no}</div><h2>${esc(sec.title)}</h2></div>
       <div class="meta"><span class="ct">${sec.tools.length} Tools</span><span class="chev" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
     </div>
@@ -329,33 +344,49 @@ document.querySelectorAll('.prog-head').forEach(h => {
   const toggle = () => {
     const collapsed = h.closest('.program').classList.toggle('collapsed');
     h.setAttribute('aria-expanded', String(!collapsed));
-    if(!collapsed) setTimeout(fitEmbeds, 30);
+    if(!collapsed) fitAllRaf();
   };
   h.addEventListener('click', toggle);
   h.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); } });
 });
 
-/* scale embedded logos (rendered at 640x360) to fit each card */
-function fitEmbeds(){
-  document.querySelectorAll('.card .embed').forEach(b => { const w = b.clientWidth; if(!w) return; const f = b.querySelector('iframe'); if(f) f.style.transform = `scale(${w/640})`; });
+/* ---- embedded logos: lazy-MOUNT on intersection (true lazy), scale to fit, replay on hover/touch ---- */
+const _ro = window.ResizeObserver ? new ResizeObserver(() => fitAllRaf()) : null;
+let _raf = 0;
+function fitOne(box){ const f = box.querySelector('iframe'); if(!f) return; const w = box.clientWidth; if(w) f.style.transform = `scale(${w / 640})`; }
+function fitAll(){
+  const boxes = [...document.querySelectorAll('.card .embed')];
+  const widths = boxes.map(b => b.clientWidth);                                   // read all first
+  boxes.forEach((b, i) => { const f = b.querySelector('iframe'); if(f && widths[i]) f.style.transform = `scale(${widths[i] / 640})`; }); // then write all (no thrash)
 }
-fitEmbeds();
-window.addEventListener('resize', fitEmbeds);
-[120, 400, 1000, 2000].forEach(d => setTimeout(fitEmbeds, d));
-document.querySelectorAll('.card .embed iframe').forEach(f => f.addEventListener('load', fitEmbeds));
-if(window.ResizeObserver){ const _ro = new ResizeObserver(() => fitEmbeds()); document.querySelectorAll('.card .embed').forEach(b => _ro.observe(b)); }
-
-/* hover replays the motion; iframe is click-through so clicking the logo opens the tool */
-document.querySelectorAll('.card .embed').forEach(box => {
-  const f = box.querySelector('iframe');
-  if(!f) return;
+function fitAllRaf(){ if(_raf) return; _raf = requestAnimationFrame(() => { _raf = 0; fitAll(); }); }
+function mountEmbed(box){
+  if(box.dataset.mounted) return; box.dataset.mounted = '1';
+  const f = document.createElement('iframe');
+  f.src = `/logos/${box.dataset.logo}.html`;
+  f.title = `Logo ${box.dataset.name}`;
+  f.tabIndex = -1;
+  f.setAttribute('aria-hidden', 'true');
+  box.appendChild(f);
   const tidy = () => { try { const b = f.contentDocument && f.contentDocument.querySelector('[data-replay]'); if(b) b.style.display = 'none'; } catch(e){} };
   const play = () => { try { const r = f.contentDocument && f.contentDocument.querySelector('[data-screen-label]'); if(r) r.click(); } catch(e){} tidy(); };
-  // bundled logo unpacks ~1-3s after load, so hide the replay button on staged passes
-  f.addEventListener('load', () => { [0, 500, 1200, 2500, 4000].forEach(d => setTimeout(tidy, d)); });
-  [800, 2000, 3500].forEach(d => setTimeout(tidy, d));
+  f.addEventListener('load', () => { fitOne(box); [0, 600, 1500, 3000].forEach(d => setTimeout(() => { tidy(); fitOne(box); }, d)); });
+  fitOne(box);
   box.addEventListener('mouseenter', play);
-});
+  box.addEventListener('touchstart', play, { passive: true });   // touch can't hover — let a tap replay
+  if(_ro) _ro.observe(box);
+}
+const embedIO = ('IntersectionObserver' in window)
+  ? new IntersectionObserver((es) => es.forEach(e => { if(e.isIntersecting){ embedIO.unobserve(e.target); mountEmbed(e.target); } }), { rootMargin: '400px 0px' })
+  : null;
+function observeEmbeds(){
+  document.querySelectorAll('.card .embed:not([data-seen])').forEach(b => {
+    b.setAttribute('data-seen', '1');
+    if(embedIO) embedIO.observe(b); else mountEmbed(b);   // no IO support -> mount all
+  });
+}
+observeEmbeds();
+window.addEventListener('resize', fitAllRaf);
 
 /* scroll reveal */
 const io = new IntersectionObserver((es) => {
