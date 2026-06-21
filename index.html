@@ -44,16 +44,12 @@ header.nav .wrap{display:flex;align-items:center;justify-content:space-between;h
 .menu .ext:hover{color:var(--accent)}
 
 /* hero — nama di tengah */
-.hero{padding:96px 0 64px;border-bottom:2px solid var(--hair);text-align:center}
-.hero .kick{color:var(--soft);margin-bottom:30px;display:flex;align-items:center;justify-content:center;gap:14px}
+.hero{padding:88px 0 64px;border-bottom:2px solid var(--hair);text-align:center}
 .hero .name{font-size:clamp(36px,5.4vw,76px);font-weight:900;line-height:.9;letter-spacing:-.04em}
 
 /* ventures */
-.ventures{margin-top:60px;text-align:left}
-.ventures .vh{display:flex;align-items:baseline;justify-content:space-between;gap:20px;border-bottom:2px solid var(--hair);padding-bottom:16px;margin-bottom:0}
-.ventures .vh h2{font-size:clamp(22px,2.4vw,30px);font-weight:800;letter-spacing:-.02em}
-.ventures .vh .side{color:var(--soft);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
-.vgrid{display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid var(--line)}
+.ventures{margin-top:64px;text-align:left}
+.vgrid{display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid var(--line);border-top:1px solid var(--line)}
 .vcell{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 24px 26px;display:flex;flex-direction:column;gap:18px;min-height:184px;transition:background .35s}
 .vcell:hover{background:#fafafa}
 .vcell .vtop{flex:1;display:flex;align-items:center;justify-content:center;width:100%;min-height:64px}
@@ -154,14 +150,9 @@ footer .bottom .made .dot{width:7px;height:7px;border-radius:50%;background:var(
 
 <div class="wrap">
   <section class="hero reveal">
-    <div class="kick eyebrow">Tools Collection — 2026</div>
     <h1 class="name">Bashid Effendi</h1>
 
     <div class="ventures">
-      <div class="vh">
-        <h2>Ventures &amp; Brands</h2>
-        <span class="side">Empat Brand</span>
-      </div>
       <div class="vgrid" id="vgrid"></div>
     </div>
   </section>
