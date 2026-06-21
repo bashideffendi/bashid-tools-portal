@@ -29,7 +29,7 @@
         return;
     }
 
-    const VERSION = '1.2.2';
+    const VERSION = '1.2.3';
     const SHEETJS_CDN = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
     const BASE_API = location.origin;
 
@@ -582,8 +582,9 @@
                 </div>
             </div>
             <div class="${STYLE_PREFIX}-section">
+                <label class="${STYLE_PREFIX}-label">Belum punya file PKP?</label>
                 <button id="${STYLE_PREFIX}-pkp" class="${STYLE_PREFIX}-btn ${STYLE_PREFIX}-btn-secondary" style="width:100%;">📂 Buka PKP Saya di SIAP</button>
-                <p class="${STYLE_PREFIX}-hint" id="${STYLE_PREFIX}-pkp-status" style="margin-top:6px;"></p>
+                <p class="${STYLE_PREFIX}-hint" id="${STYLE_PREFIX}-pkp-status" style="margin-top:6px;">Di baris namamu: Lihat File → download</p>
             </div>
             <details>
                 <summary style="cursor:pointer;font-size:12px;color:#6366f1;font-weight:600;margin-bottom:10px;">Pengaturan Lanjutan (Format Excel)</summary>
