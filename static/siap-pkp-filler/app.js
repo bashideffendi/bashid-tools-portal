@@ -29,7 +29,7 @@
         return;
     }
 
-    const VERSION = '1.1.0';
+    const VERSION = '1.2.0';
     const SHEETJS_CDN = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
     const BASE_API = location.origin;
 
@@ -289,62 +289,44 @@
         return wb.SheetNames;
     }
 
-    // ============ GENERATE TEMPLATE EXCEL (PKP saya) ============
-    // Bikin Excel siap-isi dari daftar prosedur API — kolom Hasil kosong.
-    // Layout match default parser (header baris 16, data baris 19, A=Kode,
-    // B=Uraian, G=Hasil) jadi re-upload nggak perlu ubah setting apa pun.
-    async function downloadTemplate(nip, nama, onStatus) {
+    // ============ DEEP-LINK: BUKA PKP SAYA (file asli di Perencanaan) ============
+    // SIAP nggak expose endpoint download file langsung (file disajikan via
+    // office viewer ONLYOFFICE-style). Jadi tombol ini LONCAT ke halaman file
+    // PKP kamu di Perencanaan → kamu klik "Download File" di SIAP buat ambil
+    // file ASLI. Container "Program Kerja Perseorangan" dicari via kontainermenu
+    // (indeks A). Verified empiris 2026-06-21: container-id stabil, URL detail
+    // /perencanaan/dokumenpemeriksaan/{containerId} nampilin daftar file PKP.
+    async function openMyPkp(onStatus, win) {
         const setS = onStatus || (() => {});
-        const XLSX = await loadSheetJS();
-
-        // 1. Token segar dari live page (sama mekanisme submit)
-        setS('Ambil token dari halaman (tab switch sebentar — normal)…');
-        const cap = await captureLiveTokenAndUserId();
-        state.token = cap.token;
-
-        // 2. Fetch semua prosedur sub-pemeriksaan
-        setS('Ambil daftar prosedur dari SIAP…');
-        const pdata = await apiGet(`/api/subpemeriksaan/prosedur/bundle/data/${state.subId}`);
-        if (!pdata.success || !Array.isArray(pdata.data)) {
-            throw new Error('Gagal ambil daftar prosedur dari SIAP');
-        }
-        let list = pdata.data.slice().sort((a, b) => (a.NoUrut - b.NoUrut));
-        const totalAll = list.length;
-
-        // 3. Filter ke prosedur PIC user (= "PKP saya"). Fallback: semua.
-        let scopeNote = `semua ${totalAll} prosedur (filter PKP gagal — cek NIP)`;
+        const sid = String(state.subId).toLowerCase();
+        const base = `${BASE_API}/pemeriksaan/subpemeriksaan/${state.subId}/perencanaan/dokumenpemeriksaan`;
+        const guidRe = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        let containerId = null;
         try {
-            setS('Filter ke PKP kamu…');
-            const projectId = await fetchProjectId(state.subId);
-            const picStates = await fetchUserPicStates(state.subId, projectId, nip);
-            if (picStates.size) {
-                list = list.filter(d => picStates.has(String(d.Id).toUpperCase()));
-                scopeNote = `${list.length} prosedur PKP kamu (dari ${totalAll} total)`;
+            setS('Ambil token dari halaman (tab switch sebentar — normal)…');
+            const cap = await captureLiveTokenAndUserId();
+            state.token = cap.token;
+            setS('Cari dokumen PKP kamu…');
+            const resp = await apiGet(`/api/subpemeriksaan/dok/kontainermenu?indeks=A&subid=${sid}`);
+            const items = Array.isArray(resp) ? resp : (Array.isArray(resp.data) ? resp.data : []);
+            const pkp = items.find(c => /program kerja perseorangan/i.test(JSON.stringify(c)));
+            if (pkp) {
+                // Ambil GUID container (bukan subId). Coba key id eksplisit dulu,
+                // fallback ke field bernilai-GUID pertama yang bukan subId.
+                for (const k of ['Id', 'id', 'KontainerId', 'kontainerId', 'IdKontainer']) {
+                    if (pkp[k] && guidRe.test(String(pkp[k])) && String(pkp[k]).toLowerCase() !== sid) { containerId = pkp[k]; break; }
+                }
+                if (!containerId) for (const k in pkp) {
+                    const v = pkp[k];
+                    if (guidRe.test(String(v)) && String(v).toLowerCase() !== sid) { containerId = v; break; }
+                }
             }
-        } catch (e) { /* biarin fallback semua */ }
-        if (!list.length) throw new Error('Tidak ada prosedur buat di-template (cek NIP / status PIC).');
+        } catch (e) { /* fallback: buka halaman daftar dokumen */ }
 
-        // 4. Bangun workbook — layout cocok default parser
-        setS('Generate Excel…');
-        const aoa = Array.from({ length: 18 }, () => []);
-        aoa[0] = ['PROGRAM KERJA PERSEORANGAN (PKP) — Template'];
-        aoa[2] = [`Auditor: ${nama} (${nip})`];
-        aoa[3] = [`Sub-pemeriksaan: ${state.subId}`];
-        aoa[4] = [`Cakupan: ${scopeNote}`];
-        aoa[6] = ['Petunjuk: isi kolom G (Hasil Pemeriksaan), simpan, lalu upload file ini kembali ke tool.'];
-        aoa[15] = ['No', 'Uraian Prosedur', '', '', '', '', 'Hasil Pemeriksaan']; // baris 16 = header
-        // baris 17-18 sengaja kosong; data mulai baris 19 (index 18)
-        for (const d of list) aoa.push([d.Kode || '', d.Nama || '', '', '', '', '', '']);
-
-        const ws = XLSX.utils.aoa_to_sheet(aoa);
-        ws['!cols'] = [{ wch: 12 }, { wch: 90 }, { wch: 4 }, { wch: 4 }, { wch: 4 }, { wch: 4 }, { wch: 60 }];
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, 'PKP');
-
-        // 5. Trigger download
-        const safeName = ((nama || 'PKP').replace(/[\\/:*?"<>|]/g, '').trim()) || 'PKP';
-        XLSX.writeFile(wb, `Template PKP - ${safeName} (${nip}).xlsx`);
-        return { count: list.length, totalAll, scopeNote };
+        const url = containerId ? `${base}/${containerId}` : base;
+        // win dibuka SINKRON di handler (anti popup-block); redirect di sini.
+        if (win && !win.closed) { win.location.href = url; } else { window.open(url, '_blank'); }
+        return { direct: !!containerId };
     }
 
     // ============ API CALLS ============
@@ -599,10 +581,10 @@
             </div>
             <div class="${STYLE_PREFIX}-section" style="background:#f0f4ff;border:1px solid #dbe4ff;border-radius:10px;padding:12px;">
                 <p style="font-size:12px;color:#334155;margin:0 0 8px 0;line-height:1.5;">
-                    <strong>Belum punya file Excel?</strong> Generate template prosedur <strong>PKP kamu</strong> langsung dari SIAP — kolom Hasil kosong, siap diisi. Nggak perlu buka Perencanaan.
+                    <strong>Belum punya file Excel PKP?</strong> Buka halaman file <strong>PKP kamu</strong> di SIAP langsung dari sini — nggak usah klik Perencanaan → Dokumen → cari baris. Di sana klik <strong>"Download File"</strong>.
                 </p>
-                <button id="${STYLE_PREFIX}-tmpl" class="${STYLE_PREFIX}-btn ${STYLE_PREFIX}-btn-secondary" style="width:100%;">⬇ Download Template PKP Saya</button>
-                <p class="${STYLE_PREFIX}-hint" id="${STYLE_PREFIX}-tmpl-status" style="margin-top:6px;">Isi NIP dulu di atas, lalu klik. Setelah isi kolom G, upload file-nya di kolom Excel di atas.</p>
+                <button id="${STYLE_PREFIX}-pkp" class="${STYLE_PREFIX}-btn ${STYLE_PREFIX}-btn-secondary" style="width:100%;">📂 Buka PKP Saya di SIAP</button>
+                <p class="${STYLE_PREFIX}-hint" id="${STYLE_PREFIX}-pkp-status" style="margin-top:6px;">Kebuka di tab baru. Setelah download + isi kolom Hasil (G), upload file-nya di kolom Excel di atas.</p>
             </div>
             <details>
                 <summary style="cursor:pointer;font-size:12px;color:#6366f1;font-weight:600;margin-bottom:10px;">Pengaturan Lanjutan (Format Excel)</summary>
@@ -645,22 +627,25 @@
             }
         });
 
-        const tmplBtn = bodyEl.querySelector('#' + STYLE_PREFIX + '-tmpl');
-        const tmplStatus = bodyEl.querySelector('#' + STYLE_PREFIX + '-tmpl-status');
-        tmplBtn.addEventListener('click', async () => {
-            const nip = bodyEl.querySelector('#' + STYLE_PREFIX + '-nip').value.trim();
-            const nama = bodyEl.querySelector('#' + STYLE_PREFIX + '-nama').value.trim();
-            if (!nip) { tmplStatus.textContent = '⚠ Isi NIP Auditor dulu di atas.'; return; }
-            const origText = tmplBtn.textContent;
-            tmplBtn.disabled = true;
+        const pkpBtn = bodyEl.querySelector('#' + STYLE_PREFIX + '-pkp');
+        const pkpStatus = bodyEl.querySelector('#' + STYLE_PREFIX + '-pkp-status');
+        pkpBtn.addEventListener('click', async () => {
+            // Buka tab kosong SINKRON dalam gesture klik biar nggak ke-block popup,
+            // baru di-redirect setelah container PKP ketemu.
+            const win = window.open('about:blank', '_blank');
+            const origText = pkpBtn.textContent;
+            pkpBtn.disabled = true;
             try {
-                const res = await downloadTemplate(nip, nama, (m) => { tmplStatus.textContent = m; });
-                tmplStatus.textContent = `✓ Ke-download: ${res.count} prosedur. Isi kolom G, lalu upload file ini di kolom Excel di atas.`;
+                const res = await openMyPkp((m) => { pkpStatus.textContent = m; }, win);
+                pkpStatus.textContent = res.direct
+                    ? '✓ Halaman file PKP kamu kebuka di tab baru — klik "Download File" di SIAP.'
+                    : '✓ Halaman Dokumen kebuka — buka "Program Kerja Perseorangan" → Detail → Download File.';
             } catch(e) {
-                tmplStatus.textContent = '✗ Gagal: ' + e.message;
+                if (win && !win.closed) win.close();
+                pkpStatus.textContent = '✗ Gagal: ' + e.message;
             } finally {
-                tmplBtn.disabled = false;
-                tmplBtn.textContent = origText;
+                pkpBtn.disabled = false;
+                pkpBtn.textContent = origText;
             }
         });
 
