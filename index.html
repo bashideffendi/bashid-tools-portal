@@ -70,6 +70,7 @@ header.nav .wrap{display:flex;align-items:center;justify-content:space-between;h
 .prog-head .meta .ct{font-weight:700;color:var(--ink);margin-top:6px}
 
 .grid{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--line)}
+@media(min-width:981px){#audit .grid{grid-template-columns:repeat(2,1fr)}}
 .card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:32px 30px 28px;display:flex;flex-direction:column;min-height:300px;position:relative;background:var(--bg);transition:background .35s}
 .card:not(.disabled):hover{background:#fafafa}
 .card .embed{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);margin-bottom:22px;background:#f3f1ea}
