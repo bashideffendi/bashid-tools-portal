@@ -29,7 +29,7 @@
         return;
     }
 
-    const VERSION = '1.0.0';
+    const VERSION = '1.0.1';
     const SHEETJS_CDN = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
     const BASE_API = location.origin;
 
@@ -269,9 +269,12 @@
             const noCell = ws[XLSX.utils.encode_cell({ r, c: config.noCol - 1 })];
             const hasilCell = ws[XLSX.utils.encode_cell({ r, c: config.hasilCol - 1 })];
             const langkahCell = ws[XLSX.utils.encode_cell({ r, c: config.langkahCol - 1 })];
-            const no = noCell ? String(noCell.v).trim() : '';
-            const hasil = hasilCell ? String(hasilCell.v).trim() : '';
-            const langkah = langkahCell ? String(langkahCell.v).trim() : '';
+            // Guard .v == null: sel formula tanpa cached value / sel non-data
+            // jangan jadi string "undefined"/"null" yang nyasar ke-submit.
+            const cellVal = (cell) => (cell && cell.v != null) ? String(cell.v).trim() : '';
+            const no = cellVal(noCell);
+            const hasil = cellVal(hasilCell);
+            const langkah = cellVal(langkahCell);
             if (no && no.startsWith('B.') && hasil) {
                 results.push({ no, hasil, langkah });
             }
@@ -648,7 +651,6 @@
             const minLeft = Math.round((payload.exp - Math.floor(Date.now()/1000)) / 60);
             appendLog(`  Token valid ~${minLeft} menit lagi`, 'info');
         } catch(e) {}
-        if (!state.userId) appendLog('  ⚠ user_id nggak ke-capture — pre-filter PIC dilewat', 'skip');
 
         // 2. Parse Excel
         setStatusBanner('Parse Excel...', 'info');
@@ -745,7 +747,7 @@
                 </div>
                 <div class="${STYLE_PREFIX}-stat-card" style="background:#fef3c7;color:#92400e;">
                     <div class="${STYLE_PREFIX}-stat-num">${s.skippedPerm}</div>
-                    <div class="${STYLE_PREFIX}-stat-label">Bukan PIC</div>
+                    <div class="${STYLE_PREFIX}-stat-label">Skip Izin</div>
                 </div>
                 <div class="${STYLE_PREFIX}-stat-card" style="background:#f1f5f9;color:#475569;">
                     <div class="${STYLE_PREFIX}-stat-num">${state.skipped.length}</div>
@@ -769,7 +771,8 @@
         hide: () => { overlay.style.display = 'none'; },
         reset: () => {
             state.token = null; state.userId = null; state.auditor = null;
-            state.excelData = null; state.prosedurList = null; state.picIds = null;
+            state.excelData = null; state.prosedurList = null;
+            state.picStates = null; state.prefilterStats = null;
             state.submissions = null; state.skipped = []; state.running = false;
             renderStep1();
         },
