@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;height:100%;background:#f4f1fc;}
+    @keyframes inWord{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes inRow{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes inWin{0%{opacity:0;transform:scale(.4) rotate(-8deg)}60%{opacity:1;transform:scale(1.12) rotate(-3deg)}100%{opacity:1;transform:scale(1) rotate(-3deg)}}
+    @keyframes inGlow{from{box-shadow:0 0 0 0 rgba(109,40,217,0)}to{box-shadow:0 0 0 2px rgba(109,40,217,.5)}}
+  </style>
+</helmet>
+<div data-screen-label="Logo INAPROC" ref="{{ rootRef }}" onClick="{{ rootClick }}" style="position:relative; width:100%; min-height:100vh; display:flex; align-items:center; justify-content:center; background:radial-gradient(ellipse 70% 60% at 50% 40%,#f7f4fe,#e9e2f9); overflow:hidden; cursor:pointer; font-family:'Space Grotesk', system-ui, sans-serif;">
+  <div style="position:relative; display:flex; flex-direction:column; align-items:center; gap:clamp(18px,2.4vw,28px);">
+    <div style="text-align:center;">
+      <div data-anim style="font-weight:700; font-size:clamp(48px,9vw,116px); line-height:1; letter-spacing:-.02em; color:#5b21b6; animation:inWord .7s cubic-bezier(0.16,1,0.3,1) .1s both;">INAPROC</div>
+      <div data-anim style="font-family:'Space Mono',monospace; font-size:clamp(10px,1.3vw,14px); letter-spacing:.32em; text-transform:uppercase; color:#7c3aed; margin-top:8px; animation:inWord .6s ease .28s both;">Evaluasi Penawaran</div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px; width:clamp(270px,36vw,410px); padding:clamp(13px,1.7vw,18px); background:#fff; border-radius:16px; box-shadow:0 18px 40px rgba(91,33,182,.16); font-family:'Space Mono',monospace;">
+      <div data-anim style="display:flex; justify-content:space-between; align-items:center; padding:7px 0; color:#9b8fb8; font-size:clamp(11px,1.3vw,14px); animation:inRow .4s ease .4s both;"><span>Vendor A</span><span>Rp 2,40 M</span></div>
+      <div data-anim style="display:flex; justify-content:space-between; align-items:center; gap:10px; padding:9px 11px; margin:0 -3px; border-radius:9px; background:#f3ecfe; color:#5b21b6; font-weight:700; font-size:clamp(11px,1.3vw,14px); animation:inRow .4s ease .55s both, inGlow .5s ease 1.25s both;"><span>Vendor B</span><span style="display:flex; align-items:center; gap:8px;">Rp 1,98 M <span data-anim style="padding:3px 9px; border-radius:999px; background:#6d28d9; color:#fff; font-size:.82em; animation:inWin .5s cubic-bezier(0.34,1.5,0.6,1) 1.3s both;">✓ MENANG</span></span></div>
+      <div data-anim style="display:flex; justify-content:space-between; align-items:center; padding:7px 0; color:#9b8fb8; font-size:clamp(11px,1.3vw,14px); animation:inRow .4s ease .7s both;"><span>Vendor C</span><span>Rp 2,15 M</span></div>
+    </div>
+  </div>
+  <button data-replay onClick="{{ replayClick }}" aria-label="Putar ulang" style="position:fixed; right:24px; bottom:24px; width:44px; height:44px; border-radius:50%; border:1px solid rgba(91,33,182,.22); background:transparent; color:#5b21b6; display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:.6;">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><polyline points="21 3 21 9 15 9"/></svg>
+  </button>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{ &quot;$preview&quot;: { &quot;width&quot;: 1280, &quot;height&quot;: 720 } }">
+class Component extends DCLogic {
+  play(){const r=this.root;if(!r)return;r.querySelectorAll('[data-anim]').forEach(el=>{const s=el.style.animation;el.style.animation='none';void el.offsetWidth;el.style.animation=s;});}
+  renderVals(){return {rootRef:el=>{this.root=el;},rootClick:()=>this.play(),replayClick:e=>{if(e)e.stopPropagation();this.play();}};}
+}
+</script>
+</body>
+</html>

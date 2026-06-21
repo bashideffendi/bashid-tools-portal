@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;height:100%;background:#16201c;}
+    @keyframes bbBite{0%{transform:translateX(0)}100%{transform:translateX(26px)}}
+    @keyframes bbMarkIn{0%{opacity:0;transform:scale(.7)}70%{opacity:1;transform:scale(1.04)}100%{opacity:1;transform:scale(1)}}
+    @keyframes bbUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes bbMeta{from{opacity:0}to{opacity:1}}
+  </style>
+</helmet>
+<div data-screen-label="Logo Batam Bites" ref="{{ rootRef }}" onClick="{{ rootClick }}" style="position:relative; width:100%; min-height:100vh; display:flex; align-items:center; background:#16201c; overflow:hidden; cursor:pointer; font-family:'Space Grotesk', system-ui, sans-serif; color:#f3efe4; padding:clamp(28px,6vw,90px);">
+  <div data-anim style="position:absolute; top:clamp(28px,5vw,56px); right:clamp(28px,6vw,90px); font-family:'Space Mono',monospace; font-size:clamp(10px,1.1vw,13px); letter-spacing:.18em; text-align:right; line-height:1.7; color:#7f9285; animation:bbMeta .9s ease .3s both;">N°004<br>KULINER / BATAM</div>
+
+  <div style="display:flex; align-items:center; gap:clamp(22px,4vw,60px); max-width:1100px;">
+    <div data-anim style="flex:none; animation:bbMarkIn .6s cubic-bezier(0.34,1.4,0.6,1) .15s both;">
+      <svg width="clamp(96px,13vw,180px)" viewBox="0 0 100 100" style="display:block; overflow:visible;">
+        <defs><mask id="bite"><rect x="-20" y="-20" width="140" height="140" fill="#fff"/><circle cx="92" cy="34" r="22" fill="#000" style="transform-box:view-box; transform-origin:92px 34px; animation:bbBite 2.4s ease-in-out 1s infinite alternate"/></mask></defs>
+        <circle cx="50" cy="50" r="42" fill="#c8e85a" mask="url(#bite)"/>
+      </svg>
+    </div>
+    <div>
+      <div style="overflow:hidden;"><div data-anim style="font-weight:700; font-size:clamp(46px,9vw,128px); line-height:.86; letter-spacing:-.035em; animation:bbUp .8s cubic-bezier(0.16,1,0.3,1) .3s both;">Batam</div></div>
+      <div style="overflow:hidden;"><div data-anim style="font-weight:700; font-size:clamp(46px,9vw,128px); line-height:.92; letter-spacing:-.035em; color:#c8e85a; animation:bbUp .8s cubic-bezier(0.16,1,0.3,1) .45s both;">Bites</div></div>
+      <div data-anim style="display:flex; align-items:center; gap:12px; margin-top:clamp(16px,2vw,26px); font-family:'Space Mono',monospace; font-size:clamp(10px,1.15vw,14px); letter-spacing:.16em; text-transform:uppercase; color:#9fb0a4; animation:bbMeta .8s ease .7s both;"><span style="width:clamp(28px,4vw,52px); height:1px; background:#5c6f63;"></span> Eat good, Batam</div>
+    </div>
+  </div>
+  <button data-replay onClick="{{ replayClick }}" aria-label="Putar ulang" style="position:fixed; right:24px; bottom:24px; width:42px; height:42px; border-radius:50%; border:1px solid rgba(243,239,228,.25); background:transparent; color:#f3efe4; display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:.55; transition:opacity .2s;" style-hover="opacity:1;">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><polyline points="21 3 21 9 15 9"/></svg>
+  </button>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{ &quot;$preview&quot;: { &quot;width&quot;: 1280, &quot;height&quot;: 720 } }">
+class Component extends DCLogic {
+  play(){const r=this.root;if(!r)return;r.querySelectorAll('[data-anim]').forEach(el=>{const s=el.style.animation;el.style.animation='none';void el.offsetWidth;el.style.animation=s;});}
+  renderVals(){return {rootRef:el=>{this.root=el;},rootClick:()=>this.play(),replayClick:e=>{if(e)e.stopPropagation();this.play();}};}
+}
+</script>
+</body>
+</html>

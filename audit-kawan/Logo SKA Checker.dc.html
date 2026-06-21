@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;height:100%;background:#eef4ef;}
+    @keyframes skWord{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes skCard{from{opacity:0;transform:translateX(16px) rotate(2deg)}to{opacity:1;transform:translateX(0) rotate(2deg)}}
+    @keyframes skSeal{0%{opacity:0;transform:rotate(-20deg) scale(.4)}62%{opacity:1;transform:rotate(5deg) scale(1.12)}100%{opacity:1;transform:rotate(0) scale(1)}}
+    @keyframes skDraw{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+    @keyframes skRow{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+  </style>
+</helmet>
+<div data-screen-label="Logo SKA Checker" ref="{{ rootRef }}" onClick="{{ rootClick }}" style="position:relative; width:100%; min-height:100vh; display:flex; align-items:center; justify-content:center; gap:clamp(24px,4.5vw,72px); flex-wrap:wrap; background:radial-gradient(ellipse 72% 64% at 50% 42%,#f3f8f3,#e0eae1); overflow:hidden; cursor:pointer; font-family:'Space Grotesk', system-ui, sans-serif;">
+  <div style="text-align:left;">
+    <div data-anim style="font-weight:700; font-size:clamp(72px,13vw,184px); line-height:.86; letter-spacing:-.04em; color:#0f5132; animation:skWord .8s cubic-bezier(0.16,1,0.3,1) .1s both;">SKA</div>
+    <div data-anim style="font-family:'Space Mono',monospace; font-size:clamp(11px,1.5vw,17px); letter-spacing:.42em; text-transform:uppercase; color:#2f8a5c; margin-top:clamp(8px,1.2vw,14px); padding-left:.42em; animation:skWord .7s ease .3s both;">Checker</div>
+  </div>
+  <div data-anim style="position:relative; width:clamp(260px,32vw,360px); padding:clamp(18px,2.2vw,26px); background:#fff; border-radius:16px; box-shadow:0 22px 50px rgba(15,81,50,.16); transform:rotate(2deg); animation:skCard .7s cubic-bezier(0.16,1,0.3,1) .4s both;">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+      <span style="font-family:'Space Mono',monospace; font-size:clamp(9px,1.1vw,12px); letter-spacing:.18em; text-transform:uppercase; color:#9bbfae;">Sertifikat Keahlian</span>
+      <span style="font-family:'Space Mono',monospace; font-size:clamp(9px,1.1vw,12px); color:#caa24a;">N°1187</span>
+    </div>
+    <div data-anim style="font-weight:700; font-size:clamp(18px,2.2vw,26px); letter-spacing:-.01em; color:#173a28; line-height:1.1; animation:skRow .45s ease .8s both;">Ahli Muda<br>Bangunan Gedung</div>
+    <div data-anim style="display:flex; align-items:center; gap:8px; margin-top:14px; padding-top:14px; border-top:1px solid #eef3f0; animation:skRow .45s ease .95s both;">
+      <span style="width:26px; height:26px; border-radius:50%; background:#e3f0e8; flex:none;"></span>
+      <span style="flex:1; display:flex; flex-direction:column; gap:5px;"><span style="height:6px; width:80%; border-radius:3px; background:#e8eeea;"></span><span style="height:5px; width:54%; border-radius:3px; background:#f0f4f1;"></span></span>
+    </div>
+    <div data-anim style="display:flex; align-items:center; justify-content:space-between; margin-top:14px;">
+      <span style="padding:5px 12px; border-radius:7px; background:#eaf4ee; color:#0f7a52; font-size:clamp(10px,1.2vw,13px); font-weight:700; font-family:'Space Mono',monospace;">VALID s.d. 2027</span>
+      <span style="font-family:'Space Mono',monospace; font-size:clamp(10px,1.2vw,13px); font-weight:700; color:#0f7a52; display:flex; align-items:center; gap:5px;">ASLI ✓</span>
+    </div>
+    <div data-anim aria-hidden="true" style="position:absolute; top:-20px; right:-16px; width:clamp(62px,8vw,84px); height:clamp(62px,8vw,84px); animation:skSeal .55s cubic-bezier(0.3,1.3,0.5,1) 1.05s both;">
+      <svg viewBox="0 0 100 100" style="display:block; overflow:visible;">
+        <circle cx="50" cy="50" r="34" fill="#caa24a"/>
+        <g fill="#b88f3a"><rect x="47" y="2" width="6" height="11" rx="2"/><rect x="47" y="2" width="6" height="11" rx="2" transform="rotate(45 50 50)"/><rect x="47" y="2" width="6" height="11" rx="2" transform="rotate(90 50 50)"/><rect x="47" y="2" width="6" height="11" rx="2" transform="rotate(135 50 50)"/><rect x="47" y="2" width="6" height="11" rx="2" transform="rotate(180 50 50)"/><rect x="47" y="2" width="6" height="11" rx="2" transform="rotate(225 50 50)"/><rect x="47" y="2" width="6" height="11" rx="2" transform="rotate(270 50 50)"/><rect x="47" y="2" width="6" height="11" rx="2" transform="rotate(315 50 50)"/></g>
+        <path data-anim d="M36 51 L46 61 L66 38" pathLength="100" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" style="stroke-dasharray:100; animation:skDraw .45s ease 1.5s both"/>
+      </svg>
+    </div>
+  </div>
+  <button data-replay onClick="{{ replayClick }}" aria-label="Putar ulang" style="position:fixed; right:24px; bottom:24px; width:44px; height:44px; border-radius:50%; border:1px solid rgba(15,81,50,.2); background:transparent; color:#0f5132; display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:.6;">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><polyline points="21 3 21 9 15 9"/></svg>
+  </button>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{ &quot;$preview&quot;: { &quot;width&quot;: 1280, &quot;height&quot;: 720 } }">
+class Component extends DCLogic {
+  play(){const r=this.root;if(!r)return;r.querySelectorAll('[data-anim]').forEach(el=>{const s=el.style.animation;el.style.animation='none';void el.offsetWidth;el.style.animation=s;});}
+  renderVals(){return {rootRef:el=>{this.root=el;},rootClick:()=>this.play(),replayClick:e=>{if(e)e.stopPropagation();this.play();}};}
+}
+</script>
+</body>
+</html>

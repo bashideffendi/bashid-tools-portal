@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;height:100%;background:#eaf4f1;}
+    @keyframes sbWord{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes sbCard{from{opacity:0;transform:translateX(16px) rotate(1.5deg)}to{opacity:1;transform:translateX(0) rotate(1.5deg)}}
+    @keyframes sbRow{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes sbCell{0%,100%{background:rgba(14,138,120,0)}50%{background:rgba(14,138,120,.1)}}
+    @keyframes sbCaret{0%,49%{opacity:1}50%,100%{opacity:0}}
+  </style>
+</helmet>
+<div data-screen-label="Logo SIKD Browser" ref="{{ rootRef }}" onClick="{{ rootClick }}" style="position:relative; width:100%; min-height:100vh; display:flex; align-items:center; justify-content:center; gap:clamp(18px,3vw,56px); background:radial-gradient(ellipse 72% 64% at 50% 42%,#f1f9f6,#dcefe9); overflow:hidden; cursor:pointer; font-family:'Space Grotesk', system-ui, sans-serif;">
+  <div data-anim style="flex:none; font-weight:700; font-size:clamp(50px,8.6vw,146px); line-height:.82; letter-spacing:-.03em; color:#103a32; text-align:left; animation:sbWord .8s cubic-bezier(0.16,1,0.3,1) .1s both;">SIKD<br><span style="color:#0e8a78;">Browser</span></div>
+  <div data-anim style="flex:none; width:clamp(228px,26vw,356px); background:#fff; border:1px solid #e0ece8; border-radius:16px; overflow:hidden; font-family:'Space Mono',monospace; box-shadow:0 22px 50px rgba(14,58,50,.14); transform:rotate(1.5deg); animation:sbCard .7s cubic-bezier(0.16,1,0.3,1) .4s both;">
+    <div style="display:grid; grid-template-columns:1.4fr 1fr 1fr; padding:11px 16px; font-size:clamp(9px,1.1vw,12px); letter-spacing:.1em; text-transform:uppercase; color:#8aa7a0; border-bottom:1px solid #eef4f2;"><span>Pemda</span><span style="text-align:right;">Realisasi</span><span style="text-align:right;">Persen</span></div>
+    <div data-anim style="display:grid; grid-template-columns:1.4fr 1fr 1fr; padding:10px 16px; font-size:clamp(10px,1.2vw,13px); color:#33524b; animation:sbRow .45s ease .7s both;"><span>Prov. Kepri</span><span style="text-align:right;">3,54 T</span><span style="text-align:right; color:#0e8a78; font-weight:700;">86%</span></div>
+    <div data-anim style="display:grid; grid-template-columns:1.4fr 1fr 1fr; padding:10px 16px; font-size:clamp(10px,1.2vw,13px); color:#33524b; animation:sbRow .45s ease .84s both, sbCell 1.8s ease 1.6s infinite;"><span>Kota Batam</span><span style="text-align:right;">3,17 T</span><span style="text-align:right; color:#0e8a78; font-weight:700;">91%</span></div>
+    <div data-anim style="display:grid; grid-template-columns:1.4fr 1fr 1fr; padding:10px 16px; font-size:clamp(10px,1.2vw,13px); color:#33524b; animation:sbRow .45s ease .98s both;"><span>Kab. Bintan</span><span style="text-align:right;">0,67 T</span><span style="text-align:right; color:#d39a2c; font-weight:700;">63%</span></div>
+    <div data-anim style="display:grid; grid-template-columns:1.4fr 1fr 1fr; padding:10px 16px; font-size:clamp(10px,1.2vw,13px); color:#7a948d; border-top:1px solid #f2f7f5; animation:sbRow .45s ease 1.12s both;"><span style="display:flex; align-items:center; gap:4px;">Tanjungpinang<span style="display:inline-block; width:7px; height:1.05em; background:#0e8a78; animation:sbCaret 1s step-end infinite;"></span></span><span style="text-align:right;">—</span><span style="text-align:right;">—</span></div>
+  </div>
+  <button data-replay onClick="{{ replayClick }}" aria-label="Putar ulang" style="position:fixed; right:24px; bottom:24px; width:44px; height:44px; border-radius:50%; border:1px solid rgba(16,58,50,.2); background:transparent; color:#103a32; display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:.6;">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><polyline points="21 3 21 9 15 9"/></svg>
+  </button>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{ &quot;$preview&quot;: { &quot;width&quot;: 1280, &quot;height&quot;: 720 } }">
+class Component extends DCLogic {
+  play(){const r=this.root;if(!r)return;r.querySelectorAll('[data-anim]').forEach(el=>{const s=el.style.animation;el.style.animation='none';void el.offsetWidth;el.style.animation=s;});}
+  renderVals(){return {rootRef:el=>{this.root=el;},rootClick:()=>this.play(),replayClick:e=>{if(e)e.stopPropagation();this.play();}};}
+}
+</script>
+</body>
+</html>

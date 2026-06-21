@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;background:#e9e4d8;}
+  </style>
+</helmet>
+<div data-screen-label="Galeri Logo" ref="{{ rootRef }}" style="min-height:100vh; background:#e9e4d8; font-family:'Space Grotesk', system-ui, sans-serif; padding:clamp(28px,5vw,60px); color:#17160f;">
+  <div style="max-width:1340px; margin:0 auto;">
+
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; padding-bottom:22px; border-bottom:2px solid #17160f; margin-bottom:clamp(26px,3.4vw,42px);">
+      <div>
+        <div style="font-family:'Space Mono', monospace; font-size:13px; letter-spacing:0.2em; color:#8f8a7b; margin-bottom:12px;">N°00 — INDEX OF TOOLS</div>
+        <h1 style="margin:0; font-size:clamp(34px,5.4vw,68px); font-weight:700; letter-spacing:-0.04em; line-height:0.94;">Audit &amp; Kawan<span style="color:#c0532f;">.</span></h1>
+      </div>
+      <div style="display:flex; align-items:center; gap:18px;">
+        <div style="font-family:'Space Mono', monospace; font-size:14px; font-weight:700;">16 Tools</div>
+        <button data-playall onClick="{{ playAll }}" style="border:none; cursor:pointer; background:#16181d; color:#fff; font-family:'Space Mono', monospace; font-size:13px; font-weight:700; padding:11px 18px; border-radius:999px; display:flex; align-items:center; gap:8px; transition:transform .18s;" style-hover="transform:translateY(-2px);">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><polyline points="21 3 21 9 15 9"/></svg>
+          Putar Semua
+        </button>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(460px, 1fr)); gap:clamp(16px,1.8vw,24px);">
+      <sc-for list="{{ logos }}" as="logo" hint-placeholder-count="16">
+        <div style="background:#faf7ef; border:1px solid #d8d3c4; border-radius:5px; overflow:hidden; display:flex; flex-direction:column; transition:transform .2s ease, box-shadow .2s ease;" style-hover="transform:translateY(-4px); box-shadow:0 14px 30px rgba(23,22,15,0.12);">
+          <div data-viz style="position:relative; width:100%; height:190px; overflow:hidden; border-bottom:1px solid #e6e1d3; background:#fff;">
+            <iframe data-frame src="{{ logo.src }}" title="{{ logo.name }}" loading="lazy" scrolling="no" style="position:absolute; top:0; left:0; width:640px; height:360px; border:none; transform-origin:0 0;"></iframe>
+          </div>
+          <div style="padding:15px 18px 17px; display:flex; flex-direction:column; gap:6px; flex:1;">
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <span style="font-family:'Space Mono', monospace; font-size:11px; letter-spacing:0.14em; color:#9a978d;">TOOL · {{ logo.no }}</span>
+              <sc-if value="{{ logo.isNew }}" hint-placeholder-val="{{ false }}"><span style="font-family:'Space Mono', monospace; font-size:10px; font-weight:700; letter-spacing:0.12em; color:#e0492c;">NEW</span></sc-if>
+            </div>
+            <div style="font-size:19px; font-weight:700; letter-spacing:-0.02em;">{{ logo.name }}</div>
+            <div style="font-size:13px; color:#7c7669; line-height:1.45; flex:1;">{{ logo.fungsi }}</div>
+            <div style="font-family:'Space Mono', monospace; font-size:12px; font-weight:700; color:#c0532f; margin-top:8px; display:flex; align-items:center; gap:7px;">Buka Tool <span aria-hidden="true">&#8594;</span></div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  RAW = [
+    ['01', 'Just Count', 'Logo Just Count.dc.html', 'Audit jasa konsultansi konstruksi APBD', true],
+    ['02', 'PDDIKTI Checker', 'Logo PDDIKTI Checker.dc.html', 'Cek status mahasiswa massal dari PDDIKTI', false],
+    ['03', 'SKA Checker', 'Logo SKA Checker.dc.html', 'Verifikasi keaslian sertifikat keahlian', false],
+    ['04', 'SIKD Browser', 'Logo SIKD Browser.dc.html', 'Jelajah data APBD seluruh daerah', false],
+    ['05', 'BPS Data Explorer', 'Logo BPS Data Explorer.dc.html', 'Eksplorasi data statistik resmi BPS', false],
+    ['06', 'SIAP PKP Filler', 'Logo Siyap.dc.html', 'Auto-fill kolom Hasil Pengujian SIAP', false],
+    ['07', 'Kriteria', 'Logo Kriteria.dc.html', 'Cari kriteria temuan: pasal & ayat relevan', true],
+    ['08', 'CalcTape Audit', 'Logo Calctape.dc.html', 'Telstruk LHP otomatis dari Word', true],
+    ['09', 'INAPROC', 'Logo INAPROC.dc.html', 'Evaluasi penawaran pengadaan B/J', false],
+    ['10', 'Perjadin', 'Logo Perjadin.dc.html', 'Audit perjalanan dinas', false],
+    ['11', 'Pegawai', 'Logo Pegawai.dc.html', 'Audit data kepegawaian', false],
+    ['12', 'Investment Dashboard', 'Logo Investment Dashboard.dc.html', 'Pantau portofolio investasi', false],
+    ['13', 'Tempe', 'Logo Tempe.dc.html', 'Database temuan BPK', false],
+    ['14', 'Hujan di Batam', 'Logo Hujan di Batam.dc.html', 'Pantau hujan realtime Batam', false],
+    ['15', 'Persotoan', 'Logo Persotoan.dc.html', 'Warung soto Nusantara', false],
+    ['16', 'Batam Bites', 'Logo Batam Bites.dc.html', 'Kuliner & jajan Batam', false]
+  ];
+  componentDidMount() {
+    this._tidy = () => {
+      if (!this.root) return;
+      this.root.querySelectorAll('iframe[data-frame]').forEach(f => {
+        try { const d = f.contentDocument; const b = d && d.querySelector('[data-replay]'); if (b) b.style.display = 'none'; } catch (e) {}
+      });
+    };
+    this._fit = () => {
+      if (!this.root) return;
+      this.root.querySelectorAll('[data-viz]').forEach(v => {
+        const w = v.clientWidth; if (!w) return;
+        const s = w / 640;
+        const f = v.querySelector('iframe');
+        if (f) f.style.transform = 'scale(' + s + ')';
+        v.style.height = Math.round(360 * s) + 'px';
+      });
+    };
+    this.root.querySelectorAll('iframe[data-frame]').forEach(f => {
+      f.addEventListener('load', () => { this._fit(); this._tidy(); });
+    });
+    this._fit(); this._tidy();
+    try { this._ro = new ResizeObserver(() => this._fit()); this._ro.observe(this.root); } catch (e) {}
+    window.addEventListener('resize', this._fit);
+    setTimeout(() => { this._fit(); this._tidy(); }, 400);
+    setTimeout(() => { this._fit(); this._tidy(); }, 1600);
+  }
+  componentWillUnmount() {
+    if (this._ro) this._ro.disconnect();
+    if (this._fit) window.removeEventListener('resize', this._fit);
+  }
+  playAll() {
+    if (!this.root) return;
+    this.root.querySelectorAll('iframe[data-frame]').forEach(f => { try { const el = f.contentDocument && f.contentDocument.querySelector('[data-screen-label]'); if (el) el.click(); } catch (e) {} });
+  }
+  renderVals() {
+    return {
+      rootRef: (el) => { this.root = el; },
+      playAll: () => this.playAll(),
+      logos: this.RAW.map(r => ({ no: r[0], name: r[1], src: encodeURI(r[2]), fungsi: r[3], isNew: r[4] }))
+    };
+  }
+}
+</script>
+</body>
+</html>

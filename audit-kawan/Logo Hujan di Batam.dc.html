@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;height:100%;background:#10171f;}
+    @keyframes hjFall{0%{transform:translateY(-120%);opacity:0}12%{opacity:.85}100%{transform:translateY(560%);opacity:0}}
+    @keyframes hjWord{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes hjLive{0%,60%{opacity:1}60.01%,100%{opacity:.25}}
+  </style>
+</helmet>
+<div data-screen-label="Logo Hujan di Batam" ref="{{ rootRef }}" onClick="{{ rootClick }}" style="position:relative; width:100%; min-height:100vh; display:flex; align-items:center; justify-content:center; background:linear-gradient(165deg,#16202b,#1d2a36 55%,#11181f); overflow:hidden; cursor:pointer; font-family:'Fraunces', Georgia, serif;">
+  <div aria-hidden="true" data-rain style="position:absolute; inset:0; overflow:hidden; pointer-events:none;">
+    <span style="position:absolute; left:9%; top:-10%; width:2px; height:62px; background:linear-gradient(180deg,transparent,rgba(150,200,235,.7)); animation:hjFall .9s linear -.1s infinite;"></span>
+    <span style="position:absolute; left:17%; top:-10%; width:2px; height:48px; background:linear-gradient(180deg,transparent,rgba(150,200,235,.55)); animation:hjFall 1.25s linear -.5s infinite;"></span>
+    <span style="position:absolute; left:24%; top:-10%; width:2.5px; height:72px; background:linear-gradient(180deg,transparent,rgba(170,210,240,.8)); animation:hjFall .78s linear -.3s infinite;"></span>
+    <span style="position:absolute; left:33%; top:-10%; width:2px; height:54px; background:linear-gradient(180deg,transparent,rgba(150,200,235,.5)); animation:hjFall 1.1s linear -.8s infinite;"></span>
+    <span style="position:absolute; left:41%; top:-10%; width:2px; height:66px; background:linear-gradient(180deg,transparent,rgba(160,205,238,.78)); animation:hjFall .95s linear -.15s infinite;"></span>
+    <span style="position:absolute; left:54%; top:-10%; width:2.5px; height:76px; background:linear-gradient(180deg,transparent,rgba(175,215,242,.85)); animation:hjFall .72s linear -.45s infinite;"></span>
+    <span style="position:absolute; left:62%; top:-10%; width:2px; height:56px; background:linear-gradient(180deg,transparent,rgba(150,200,235,.55)); animation:hjFall 1.05s linear -.2s infinite;"></span>
+    <span style="position:absolute; left:71%; top:-10%; width:2px; height:50px; background:linear-gradient(180deg,transparent,rgba(155,202,236,.6)); animation:hjFall 1.2s linear -.7s infinite;"></span>
+    <span style="position:absolute; left:79%; top:-10%; width:2.5px; height:68px; background:linear-gradient(180deg,transparent,rgba(170,210,240,.8)); animation:hjFall .84s linear -.35s infinite;"></span>
+    <span style="position:absolute; left:88%; top:-10%; width:2px; height:60px; background:linear-gradient(180deg,transparent,rgba(160,205,238,.65)); animation:hjFall .98s linear -.55s infinite;"></span>
+  </div>
+  <div style="position:relative; display:flex; flex-direction:column; align-items:center; gap:clamp(16px,2.4vw,26px); z-index:2;">
+    <div data-anim style="display:flex; align-items:center; gap:9px; padding:7px 15px 7px 12px; border:1px solid rgba(150,200,235,.32); border-radius:999px; background:rgba(12,20,28,.45); font-family:'Space Mono', monospace; font-size:clamp(10px,1.25vw,13px); letter-spacing:.14em; color:#bcd6e8; text-transform:uppercase; animation:hjWord .7s ease .1s both;"><span style="width:8px; height:8px; border-radius:50%; background:#5ad6a0; box-shadow:0 0 9px #5ad6a0; animation:hjLive 1.4s ease-in-out infinite;"></span>Live · 26°C · gerimis</div>
+    <div data-anim style="font-weight:600; font-size:clamp(54px,10vw,138px); line-height:.92; letter-spacing:-.01em; color:#e7f1f8; text-align:center; text-shadow:0 2px 28px rgba(80,130,170,.45); animation:hjWord .8s cubic-bezier(0.16,1,0.3,1) .28s both;">Hujan<br><span style="font-weight:500; font-style:italic; color:#9fc3da;">di Batam</span></div>
+  </div>
+  <button data-replay onClick="{{ replayClick }}" aria-label="Putar ulang" style="position:fixed; right:24px; bottom:24px; width:44px; height:44px; border-radius:50%; border:1px solid rgba(190,214,232,.3); background:rgba(12,20,28,.4); color:#cfe2ef; display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:.7; z-index:5;">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><polyline points="21 3 21 9 15 9"/></svg>
+  </button>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{ &quot;$preview&quot;: { &quot;width&quot;: 1280, &quot;height&quot;: 720 } }">
+class Component extends DCLogic {
+  play(){const r=this.root;if(!r)return;r.querySelectorAll('[data-anim]').forEach(el=>{const s=el.style.animation;el.style.animation='none';void el.offsetWidth;el.style.animation=s;});}
+  renderVals(){return {rootRef:el=>{this.root=el;},rootClick:()=>this.play(),replayClick:e=>{if(e)e.stopPropagation();this.play();}};}
+}
+</script>
+</body>
+</html>

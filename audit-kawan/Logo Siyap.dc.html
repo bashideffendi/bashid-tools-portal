@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;height:100%;background:#eef0ff;}
+    @keyframes syWord{from{opacity:0;transform:scale(0.6)}to{opacity:1;transform:scale(1)}}
+    @keyframes syExcl{0%,100%{transform:translateY(0) rotate(0)}45%{transform:translateY(-0.08em) rotate(-5deg)}}
+    @keyframes syRow{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes syFill{from{width:0%}to{width:100%}}
+    @keyframes syCheck{0%{opacity:0;transform:scale(0.2)}60%{opacity:1;transform:scale(1.25)}100%{opacity:1;transform:scale(1)}}
+  </style>
+</helmet>
+<div data-screen-label="Logo Siyap" ref="{{ rootRef }}" onClick="{{ rootClick }}" style="position:relative; width:100%; min-height:100vh; display:flex; align-items:center; justify-content:center; background:radial-gradient(ellipse 70% 60% at 50% 42%, #f3f4ff, #e2e6ff); overflow:hidden; cursor:pointer; font-family:'Baloo 2', system-ui, sans-serif;">
+
+  <div style="position:relative; display:flex; flex-direction:column; align-items:center; gap:clamp(16px,2.2vw,28px);">
+
+    <div data-anim style="display:flex; align-items:baseline; font-weight:800; font-size:clamp(58px,11vw,142px); line-height:1; letter-spacing:-0.01em; animation:syWord 0.6s cubic-bezier(0.34,1.5,0.5,1) 0.1s both;">
+      <span style="color:#3b4de0;">Siyap</span><span data-anim style="display:inline-block; color:#ff6b4a; transform-origin:center bottom; animation:syExcl 1.6s ease-in-out 1.3s infinite;">!</span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:10px; width:clamp(264px,34vw,388px); padding:clamp(14px,1.8vw,20px); background:#ffffff; border-radius:16px; box-shadow:0 16px 38px rgba(59,77,224,0.16);">
+      <div style="font-family:'Space Mono', monospace; font-size:clamp(9px,1.1vw,12px); letter-spacing:0.2em; text-transform:uppercase; color:#9aa0c4;">SIAP BPK · auto-fill</div>
+      <div data-anim style="display:flex; align-items:center; gap:10px; animation:syRow 0.4s ease 0.4s both;">
+        <span style="width:54px; height:8px; border-radius:4px; background:#e6e8f5; flex:none;"></span>
+        <span style="position:relative; flex:1; height:14px; border-radius:5px; background:#eef0fb; overflow:hidden;"><span data-anim style="position:absolute; inset:0; width:0; background:linear-gradient(90deg,#3b4de0,#6b78f0); animation:syFill 0.5s cubic-bezier(0.4,0,0.2,1) 0.6s both;"></span></span>
+        <span data-anim style="color:#22b07a; font-weight:800; font-size:14px; animation:syCheck 0.4s cubic-bezier(0.34,1.6,0.6,1) 1.05s both;">&#10003;</span>
+      </div>
+      <div data-anim style="display:flex; align-items:center; gap:10px; animation:syRow 0.4s ease 0.55s both;">
+        <span style="width:54px; height:8px; border-radius:4px; background:#e6e8f5; flex:none;"></span>
+        <span style="position:relative; flex:1; height:14px; border-radius:5px; background:#eef0fb; overflow:hidden;"><span data-anim style="position:absolute; inset:0; width:0; background:linear-gradient(90deg,#3b4de0,#6b78f0); animation:syFill 0.5s cubic-bezier(0.4,0,0.2,1) 0.85s both;"></span></span>
+        <span data-anim style="color:#22b07a; font-weight:800; font-size:14px; animation:syCheck 0.4s cubic-bezier(0.34,1.6,0.6,1) 1.3s both;">&#10003;</span>
+      </div>
+      <div data-anim style="display:flex; align-items:center; gap:10px; animation:syRow 0.4s ease 0.7s both;">
+        <span style="width:54px; height:8px; border-radius:4px; background:#e6e8f5; flex:none;"></span>
+        <span style="position:relative; flex:1; height:14px; border-radius:5px; background:#eef0fb; overflow:hidden;"><span data-anim style="position:absolute; inset:0; width:0; background:linear-gradient(90deg,#ff6b4a,#ff8d6a); animation:syFill 0.5s cubic-bezier(0.4,0,0.2,1) 1.1s both;"></span></span>
+        <span data-anim style="color:#22b07a; font-weight:800; font-size:14px; animation:syCheck 0.4s cubic-bezier(0.34,1.6,0.6,1) 1.55s both;">&#10003;</span>
+      </div>
+    </div>
+  </div>
+
+  <button data-replay onClick="{{ replayClick }}" aria-label="Putar ulang" style="position:fixed; right:24px; bottom:24px; width:44px; height:44px; border-radius:50%; border:none; background:#3b4de0; color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0.7; box-shadow:0 5px 14px rgba(59,77,224,0.35); transition:opacity .2s, transform .2s;" style-hover="opacity:1; transform:scale(1.1) rotate(-10deg);">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><polyline points="21 3 21 9 15 9"/></svg>
+  </button>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{ &quot;$preview&quot;: { &quot;width&quot;: 1280, &quot;height&quot;: 720 } }">
+class Component extends DCLogic {
+  play() { const r = this.root; if (!r) return; r.querySelectorAll('[data-anim]').forEach(el => { const s = el.style.animation; el.style.animation = 'none'; void el.offsetWidth; el.style.animation = s; }); }
+  renderVals() { return { rootRef: (el) => { this.root = el; }, rootClick: () => this.play(), replayClick: (e) => { if (e) e.stopPropagation(); this.play(); } }; }
+}
+</script>
+</body>
+</html>
