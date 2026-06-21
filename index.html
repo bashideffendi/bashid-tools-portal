@@ -72,6 +72,8 @@ header.nav .wrap{display:flex;align-items:center;justify-content:space-between;h
 .grid{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--line)}
 .card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:32px 30px 28px;display:flex;flex-direction:column;min-height:300px;position:relative;background:var(--bg);transition:background .35s}
 .card:not(.disabled):hover{background:#fafafa}
+.card .mark{width:50px;height:50px;margin-bottom:20px;font-family:var(--sans)}
+.card .mark svg{display:block;width:100%;height:100%;overflow:visible}
 .card .toollogo{aspect-ratio:16/10;width:100%;margin-bottom:22px;border:1px solid var(--line);object-fit:contain;display:block}
 .card.disabled .toollogo{opacity:.7}
 .card .cat{color:var(--soft);display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
@@ -264,6 +266,14 @@ const fcols = ['Just Count','Kriteria','Tiny Hour Tales','Persotoan','Investment
 document.getElementById('fcol-tools').insertAdjacentHTML('beforeend',
   fcols.map(n => { const t = allTools.find(x => x.name === n); return t ? `<a href="${esc(t.link)}" target="_blank" rel="noopener">${esc(t.name)}</a>` : ''; }).join(''));
 
+/* colorful brand marks (audit tools) — keyed by tool name */
+const MARKS = {
+  "Just Count": '<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18.5" stroke="#efe1c4" stroke-width="5"/><circle cx="24" cy="24" r="18.5" stroke="#e0890f" stroke-width="5" stroke-linecap="round" stroke-dasharray="116" stroke-dashoffset="33" transform="rotate(-90 24 24)"/><text x="24" y="29.5" text-anchor="middle" font-weight="800" font-size="15" fill="#20242c">147</text></svg>',
+  "SKA Checker": '<svg viewBox="0 0 100 100" fill="none"><g fill="#b88f3a"><rect x="46" y="6" width="8" height="13" rx="2"/><rect x="46" y="6" width="8" height="13" rx="2" transform="rotate(45 50 50)"/><rect x="46" y="6" width="8" height="13" rx="2" transform="rotate(90 50 50)"/><rect x="46" y="6" width="8" height="13" rx="2" transform="rotate(135 50 50)"/><rect x="46" y="6" width="8" height="13" rx="2" transform="rotate(180 50 50)"/><rect x="46" y="6" width="8" height="13" rx="2" transform="rotate(225 50 50)"/><rect x="46" y="6" width="8" height="13" rx="2" transform="rotate(270 50 50)"/><rect x="46" y="6" width="8" height="13" rx="2" transform="rotate(315 50 50)"/></g><circle cx="50" cy="50" r="33" fill="#caa24a"/><path d="M36 51 L46 61 L66 38" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  "BPS Data Explorer": '<svg viewBox="0 0 48 48" fill="none"><g stroke="#14110c" stroke-width="2.5"><rect x="4" y="27" width="8" height="17" rx="1.5" fill="#7aa3ec"/><rect x="15" y="19" width="8" height="25" rx="1.5" fill="#ff6b4a"/><rect x="26" y="23" width="8" height="21" rx="1.5" fill="#ffd23e"/><rect x="37" y="9" width="8" height="35" rx="1.5" fill="#b8e62e"/></g></svg>',
+  "Kriteria": '<svg viewBox="0 0 100 100" fill="none"><line x1="50" y1="22" x2="50" y2="80" stroke="#14294a" stroke-width="5" stroke-linecap="round"/><circle cx="50" cy="16" r="5" fill="#b08436"/><path d="M39 82 L61 82 L68 91 L32 91 Z" fill="#14294a"/><line x1="16" y1="27" x2="84" y2="27" stroke="#14294a" stroke-width="5" stroke-linecap="round"/><line x1="17" y1="27" x2="8" y2="45" stroke="#b08436" stroke-width="3"/><line x1="17" y1="27" x2="26" y2="45" stroke="#b08436" stroke-width="3"/><path d="M7 45 Q17 59 27 45" fill="none" stroke="#b08436" stroke-width="4"/><line x1="83" y1="27" x2="74" y2="45" stroke="#b08436" stroke-width="3"/><line x1="83" y1="27" x2="92" y2="45" stroke="#b08436" stroke-width="3"/><path d="M73 45 Q83 59 93 45" fill="none" stroke="#b08436" stroke-width="4"/></svg>'
+};
+
 /* program sections — text cards */
 function card(t, i, sec){
   const dis = t.status === 'soon';
@@ -272,10 +282,11 @@ function card(t, i, sec){
   const idx = sec.title + ' · #' + String(i + 1).padStart(2, '0');
   const tags = t.tags.map(x => `<span class="tag">${esc(x)}</span>`).join('');
   const logo = t.logo ? `<img class="toollogo" src="${esc(t.logo)}" alt="${esc(t.name)}" />` : '';
+  const mark = MARKS[t.name] ? `<div class="mark" aria-hidden="true">${MARKS[t.name]}</div>` : '';
   const more = dis ? `<span class="more"><span>Segera Hadir</span></span>`
     : `<span class="more"><span>${esc(t.label)}</span><span class="ar">→</span></span>`;
   const inner = `
-    ${logo}
+    ${mark}${logo}
     <div class="cat eyebrow"><span>${esc(idx)}</span>${badge}</div>
     <h3>${esc(t.name)}</h3>
     <p class="desc">${esc(t.desc)}</p>
