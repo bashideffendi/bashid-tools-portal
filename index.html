@@ -288,7 +288,7 @@ function section(sec){
   return `<section class="program reveal" id="${sec.key}">
     <div class="prog-head">
       <div class="ph-left"><div class="no">${sec.no}</div><h2>${esc(sec.title)}</h2></div>
-      <div class="meta">${esc(sec.blurb)}<div class="ct">${sec.tools.length} Tools</div></div>
+      <div class="meta"><div class="ct">${sec.tools.length} Tools</div></div>
     </div>
     <div class="grid">${sec.tools.map((t, i) => card(t, i, sec)).join('')}</div>
   </section>`;
