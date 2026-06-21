@@ -57,8 +57,8 @@ header.nav .wrap{display:flex;align-items:center;justify-content:space-between;h
 .vcell{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 24px 26px;display:flex;flex-direction:column;gap:18px;min-height:184px;transition:background .35s}
 .vcell:hover{background:#fafafa}
 .vcell .vtop{flex:1;display:flex;align-items:center;justify-content:center;width:100%;min-height:64px}
-.vcell .logo{max-height:46px;max-width:230px;width:auto;height:auto;object-fit:contain;display:block}
-.vcell .bname{font-weight:800;font-size:22px;letter-spacing:-.025em;line-height:1.05;text-align:center}
+.vcell .logo{width:auto;max-width:100%;object-fit:contain;display:block}
+.vcell .bname{font-weight:800;font-size:26px;letter-spacing:-.025em;line-height:1.05;text-align:center}
 .vcell .bmeta{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .vcell .burl{font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--soft)}
 .vcell a.burl:hover{color:var(--accent)}
@@ -207,10 +207,10 @@ const SITE = {
   year: "2026",
   stats: { live: 17, dev: 1 },
   ventures: [
-    { name: "Tiny Hour Tales", url: "https://tinyhourtales.com", label: "tinyhourtales.com", logo: "static/logos/tiny-hour-tales.png" },
-    { name: "Tempus Collective", label: "tempuscollective", logo: "static/logos/tempus.png" },
+    { name: "Tiny Hour Tales", url: "https://tinyhourtales.com", label: "tinyhourtales.com", logo: "static/logos/tiny-hour-tales.png", h: 56 },
+    { name: "Tempus Collective", label: "tempuscollective", logo: "static/logos/tempus.png", h: 44 },
     { name: "Klunting", url: "https://www.klunting.com", label: "klunting.com" },
-    { name: "Macnoos", label: "macnoos", logo: "static/logos/macnoos.png" }
+    { name: "Macnoos", label: "macnoos", logo: "static/logos/macnoos.png", h: 30 }
   ],
   sections: [
     {
@@ -262,7 +262,7 @@ document.getElementById('amsg').textContent = `${S.stats.live} Tools Live · ${S
 /* ventures */
 document.getElementById('vgrid').innerHTML = S.ventures.map(v => {
   const head = v.logo
-    ? `<img class="logo" src="${esc(v.logo)}" alt="${esc(v.name)}" />`
+    ? `<img class="logo" src="${esc(v.logo)}" alt="${esc(v.name)}" style="height:${v.h||44}px" />`
     : `<div class="bname">${esc(v.name)}</div>`;
   const meta = v.url
     ? `<div class="bmeta"><a class="burl" href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.label)}</a><span class="ar">↗</span></div>`
