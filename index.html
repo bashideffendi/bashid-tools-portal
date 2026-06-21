@@ -7,23 +7,31 @@
 <meta name="description" content="Koleksi tools audit, finance, dan personal projects oleh Bashid Effendi (Auditor BPK RI). Open, free, no signup." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Expanded:wght@600;700;800;900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
 <style>
 :root{
-  --ink:#0e0e0e; --bg:#ffffff; --soft:#6b6b6b; --line:#e4e4e2; --hair:#111;
-  --accent:#e2231a;
+  --ink:#3b3a2f; --bg:#f3edda; --surface:#fbf7ec; --soft:#7d7662; --line:#e2dbc4; --hair:#c8b690;
+  --accent:#4f93a6; --sky:#c8e3e5;
   --sans:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --round:"Quicksand","Archivo",sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-::selection{background:var(--ink);color:#fff}
+body{position:relative;background:linear-gradient(180deg,var(--sky) 0,rgba(200,227,229,0) 560px),var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:var(--accent);color:#fff}
 a{color:inherit;text-decoration:none}
-.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+.wrap{position:relative;z-index:1;max-width:1320px;margin:0 auto;padding:0 40px}
+/* ghibli sky + clouds */
+.clouds{position:absolute;top:0;left:0;right:0;height:600px;overflow:hidden;pointer-events:none;z-index:0}
+.cloud{position:absolute;background:#fffdf7;border-radius:100px;filter:blur(16px);opacity:.6}
+.cloud.c1{width:280px;height:64px;top:96px;left:6%;animation:drift 90s ease-in-out infinite alternate}
+.cloud.c2{width:200px;height:52px;top:188px;left:58%;opacity:.5;animation:drift 120s ease-in-out infinite alternate-reverse}
+.cloud.c3{width:340px;height:74px;top:330px;left:24%;opacity:.42;animation:drift 105s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translateX(-36px)}to{transform:translateX(36px)}}
 .eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
 
 /* announcement */
-.announce{background:var(--ink);color:#fff}
+.announce{background:transparent;color:var(--soft)}
 .announce .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;height:42px}
 .announce .msg{font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:12px;white-space:nowrap}
 .announce .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
@@ -32,10 +40,10 @@ a{color:inherit;text-decoration:none}
 .announce a:hover{color:var(--accent)}
 
 /* header */
-header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(248,243,231,.8);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 header.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
-.brand{font-size:23px;font-weight:800;letter-spacing:-.03em;display:flex;align-items:center;gap:9px;white-space:nowrap;flex:none}
-.brand .mk{width:11px;height:11px;border-radius:50%;background:var(--ink)}
+.brand{font-family:var(--round);font-size:22px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:9px;white-space:nowrap;flex:none}
+.brand .mk{width:10px;height:10px;border-radius:50%;background:var(--accent)}
 .menu{display:flex;align-items:center;gap:34px}
 .menu a{font-size:15px;font-weight:500;position:relative;padding:4px 0}
 .menu a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--ink);transition:width .3s}
@@ -45,13 +53,13 @@ header.nav .wrap{display:flex;align-items:center;justify-content:space-between;h
 
 /* hero — nama di tengah */
 .hero{padding:100px 0 0;text-align:center}
-.hero .name{font-family:"Archivo Expanded","Archivo",sans-serif;font-size:clamp(30px,5.2vw,72px);font-weight:800;line-height:1.04;letter-spacing:-.02em}
+.hero .name{font-family:var(--round);font-size:clamp(32px,5.4vw,74px);font-weight:700;line-height:1.06;letter-spacing:-.01em}
 
 /* ventures — compact brand strip */
 .ventures{margin-top:84px;text-align:left}
 .vgrid{display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid var(--line);border-top:1px solid var(--line)}
-.vcell{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 24px 24px;display:flex;flex-direction:column;gap:14px;min-height:150px;transition:background .35s}
-.vcell:hover{background:#fafafa}
+.vcell{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 24px 24px;display:flex;flex-direction:column;gap:14px;min-height:150px;background:var(--surface);transition:background .35s}
+.vcell:hover{background:#fff}
 .vcell .vtop{height:82px;display:flex;align-items:center;justify-content:center;width:100%}
 .vcell .logo{width:auto;max-width:100%;object-fit:contain;display:block}
 .vcell .bname{font-weight:800;font-size:25px;letter-spacing:-.025em;line-height:1.05;text-align:center}
@@ -70,8 +78,8 @@ header.nav .wrap{display:flex;align-items:center;justify-content:space-between;h
 .prog-head .meta .ct{font-weight:700;color:var(--ink);margin-top:6px}
 
 .grid{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--line)}
-.card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:32px 30px 28px;display:flex;flex-direction:column;min-height:300px;position:relative;background:var(--bg);transition:background .35s}
-.card:not(.disabled):hover{background:#fafafa}
+.card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:32px 30px 28px;display:flex;flex-direction:column;min-height:300px;position:relative;background:var(--surface);transition:background .35s}
+.card:not(.disabled):hover{background:#fff}
 .card .toollogo{aspect-ratio:16/10;width:100%;margin-bottom:22px;border:1px solid var(--line);object-fit:contain;display:block}
 .card.disabled .toollogo{opacity:.7}
 .card .cat{color:var(--soft);display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
@@ -88,7 +96,7 @@ header.nav .wrap{display:flex;align-items:center;justify-content:space-between;h
 .card.disabled{opacity:.55}
 
 /* footer */
-footer{margin-top:128px;background:var(--ink);color:#fff}
+footer{margin-top:128px;background:#343f30;color:#f4eedd}
 footer .wrap{padding:80px 40px 46px}
 footer .top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,.16)}
 footer .bigmark{font-size:clamp(44px,5.6vw,84px);font-weight:900;letter-spacing:-.04em;line-height:.9}
@@ -118,7 +126,7 @@ footer .bottom .made .dot{width:7px;height:7px;border-radius:50%;background:var(
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .announce .dot{animation:none}
+  .cloud{animation:none}
   .reveal{opacity:1;transform:none;transition:none}
   *{transition:none!important}
 }
@@ -126,6 +134,7 @@ footer .bottom .made .dot{width:7px;height:7px;border-radius:50%;background:var(
 </head>
 <body>
 <a id="top"></a>
+<div class="clouds" aria-hidden="true"><span class="cloud c1"></span><span class="cloud c2"></span><span class="cloud c3"></span></div>
 
 <div class="announce">
   <div class="wrap">
