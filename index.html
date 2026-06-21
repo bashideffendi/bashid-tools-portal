@@ -72,6 +72,7 @@ header.nav .wrap{display:flex;align-items:center;justify-content:space-between;h
 .grid{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--line)}
 .card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:32px 30px 28px;display:flex;flex-direction:column;min-height:300px;position:relative;background:var(--bg);transition:background .35s}
 .card:not(.disabled):hover{background:#fafafa}
+.card .embed{width:100%;aspect-ratio:16/9;border:1px solid var(--line);display:block;margin-bottom:22px;background:#f3f1ea}
 .card .toollogo{aspect-ratio:16/10;width:100%;margin-bottom:22px;border:1px solid var(--line);object-fit:contain;display:block}
 .card.disabled .toollogo{opacity:.7}
 .card .cat{color:var(--soft);display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
@@ -264,6 +265,18 @@ const fcols = ['Just Count','Kriteria','Tiny Hour Tales','Persotoan','Investment
 document.getElementById('fcol-tools').insertAdjacentHTML('beforeend',
   fcols.map(n => { const t = allTools.find(x => x.name === n); return t ? `<a href="${esc(t.link)}" target="_blank" rel="noopener">${esc(t.name)}</a>` : ''; }).join(''));
 
+/* embedded logo (audit tools) — tool name -> /logos/<slug>.html */
+const LOGOS = {
+  "Just Count": "just-count",
+  "PDDIKTI Checker": "pddikti-checker",
+  "SKA Checker": "ska-checker",
+  "SIKD Browser": "sikd-browser",
+  "BPS Data Explorer": "bps-data-explorer",
+  "SIAP PKP Filler": "siap-pkp-filler",
+  "Kriteria": "kriteria",
+  "CalcTape Audit": "calctape"
+};
+
 /* program sections — text cards */
 function card(t, i, sec){
   const dis = t.status === 'soon';
@@ -272,10 +285,11 @@ function card(t, i, sec){
   const idx = sec.title + ' · #' + String(i + 1).padStart(2, '0');
   const tags = t.tags.map(x => `<span class="tag">${esc(x)}</span>`).join('');
   const logo = t.logo ? `<img class="toollogo" src="${esc(t.logo)}" alt="${esc(t.name)}" />` : '';
+  const embed = LOGOS[t.name] ? `<iframe class="embed" src="/logos/${LOGOS[t.name]}.html" loading="lazy" scrolling="no" title="Logo ${esc(t.name)}"></iframe>` : '';
   const more = dis ? `<span class="more"><span>Segera Hadir</span></span>`
     : `<span class="more"><span>${esc(t.label)}</span><span class="ar">→</span></span>`;
   const inner = `
-    ${logo}
+    ${embed}${logo}
     <div class="cat eyebrow"><span>${esc(idx)}</span>${badge}</div>
     <h3>${esc(t.name)}</h3>
     <p class="desc">${esc(t.desc)}</p>
