@@ -29,7 +29,7 @@
         return;
     }
 
-    const VERSION = '1.2.0';
+    const VERSION = '1.2.1';
     const SHEETJS_CDN = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
     const BASE_API = location.origin;
 
@@ -292,8 +292,10 @@
     // ============ DEEP-LINK: BUKA PKP SAYA (file asli di Perencanaan) ============
     // SIAP nggak expose endpoint download file langsung (file disajikan via
     // office viewer ONLYOFFICE-style). Jadi tombol ini LONCAT ke halaman file
-    // PKP kamu di Perencanaan → kamu klik "Download File" di SIAP buat ambil
-    // file ASLI. Container "Program Kerja Perseorangan" dicari via kontainermenu
+    // PKP kamu di Perencanaan → di baris namamu klik "Lihat File" (buka viewer)
+    // → download dari viewer buat ambil file ASLI. ("Download File" doang nggak
+    // langsung nyimpen — harus Lihat File dulu, dikonfirmasi user 2026-06-21.)
+    // Container "Program Kerja Perseorangan" dicari via kontainermenu
     // (indeks A). Verified empiris 2026-06-21: container-id stabil, URL detail
     // /perencanaan/dokumenpemeriksaan/{containerId} nampilin daftar file PKP.
     async function openMyPkp(onStatus, win) {
@@ -581,7 +583,7 @@
             </div>
             <div class="${STYLE_PREFIX}-section" style="background:#f0f4ff;border:1px solid #dbe4ff;border-radius:10px;padding:12px;">
                 <p style="font-size:12px;color:#334155;margin:0 0 8px 0;line-height:1.5;">
-                    <strong>Belum punya file Excel PKP?</strong> Buka halaman file <strong>PKP kamu</strong> di SIAP langsung dari sini — nggak usah klik Perencanaan → Dokumen → cari baris. Di sana klik <strong>"Download File"</strong>.
+                    <strong>Belum punya file Excel PKP?</strong> Buka halaman file <strong>PKP kamu</strong> di SIAP langsung dari sini — nggak usah klik Perencanaan → Dokumen → cari baris. Di sana, pada <strong>baris namamu</strong>, klik <strong>"Lihat File"</strong> → lalu download dari viewer-nya.
                 </p>
                 <button id="${STYLE_PREFIX}-pkp" class="${STYLE_PREFIX}-btn ${STYLE_PREFIX}-btn-secondary" style="width:100%;">📂 Buka PKP Saya di SIAP</button>
                 <p class="${STYLE_PREFIX}-hint" id="${STYLE_PREFIX}-pkp-status" style="margin-top:6px;">Kebuka di tab baru. Setelah download + isi kolom Hasil (G), upload file-nya di kolom Excel di atas.</p>
@@ -638,8 +640,8 @@
             try {
                 const res = await openMyPkp((m) => { pkpStatus.textContent = m; }, win);
                 pkpStatus.textContent = res.direct
-                    ? '✓ Halaman file PKP kamu kebuka di tab baru — klik "Download File" di SIAP.'
-                    : '✓ Halaman Dokumen kebuka — buka "Program Kerja Perseorangan" → Detail → Download File.';
+                    ? '✓ Daftar file PKP kebuka di tab baru — di baris namamu klik "Lihat File", lalu download dari viewer-nya.'
+                    : '✓ Halaman Dokumen kebuka — buka "Program Kerja Perseorangan" → Detail → di baris namamu klik "Lihat File" → download dari viewer.';
             } catch(e) {
                 if (win && !win.closed) win.close();
                 pkpStatus.textContent = '✗ Gagal: ' + e.message;
