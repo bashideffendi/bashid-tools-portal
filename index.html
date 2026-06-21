@@ -196,7 +196,7 @@ const SITE = {
   name: "Bashid Effendi",
   role: "Auditor BPK RI",
   year: "2026",
-  stats: { live: 17, dev: 1 },
+  stats: { live: 17, dev: 5 },
   ventures: [
     { name: "Tiny Hour Tales", url: "https://tinyhourtales.com", label: "tinyhourtales.com", logo: "static/logos/tiny-hour-tales.png", h: 76 },
     { name: "Tempus Collective", url: "https://tempuscollective.com", label: "tempuscollective.com", logo: "static/logos/tempus.png", h: 44 },
@@ -214,9 +214,13 @@ const SITE = {
         { name: "SIKD Browser", tags: ["APBD", "DJPK"], desc: "Jelajahi data APBD seluruh Pemda Indonesia. Pendapatan, belanja, pembiayaan, komparasi antar tahun.", link: "https://sikd-browser.up.railway.app", label: "Buka Tool" },
         { name: "BPS Data Explorer", tags: ["BPS", "Statistik"], desc: "Jelajahi data statistik resmi BPS — publikasi, siaran pers, indikator strategis, SDGs, ekonomi per wilayah.", link: "https://data-bps.up.railway.app/", label: "Buka Tool" },
         { name: "SIAP PKP Filler", tags: ["SIAP BPK", "Desktop"], desc: "Auto-fill kolom Hasil Pengujian di SIAP BPK dari Excel PKP. Aplikasi desktop (butuh download + VPN BPK).", link: "https://masbash.id/siap-pkp-filler.html", label: "Panduan & Download" },
-        { name: "SPSE Checker", tags: ["LPSE", "Desktop"], desc: "Cek data pengadaan B/J pemerintah dari SPSE/LPSE. Tender, pemenang, peserta, nilai kontrak.", link: "https://masbash.id/spse-checker.html", label: "Panduan & Download" },
         { name: "Kriteria", status: "new", tags: ["AI", "pasal.id", "BAPK"], desc: "AI cari kriteria temuan pemeriksaan — paste kondisi, dapat peraturan + pasal + ayat relevan dengan format BPK siap copy ke BAPK.", link: "https://kriteria.masbash.id", label: "Buka Tool" },
         { name: "CalcTape Audit", status: "new", tags: ["Telstruk", "AI", ".calc"], desc: "Telstruk LHP otomatis — drop file Word, dapat verifikasi aritmatika (narasi + tabel) jadi file .calc. Hybrid regex + AI.", link: "https://calctape.vercel.app", label: "Buka Tool" },
+        { name: "INAPROC", status: "soon", tags: ["Pengadaan", "Evaluasi"], desc: "Evaluasi penawaran pengadaan barang/jasa dari data INAPROC/LKPP — bandingkan harga vendor, deteksi penawaran terendah & kewajaran.", link: "", label: "Coming Soon" },
+        { name: "Pegawai", status: "soon", tags: ["ASN", "Kepegawaian"], desc: "Audit data kepegawaian — uji kesesuaian status, NIP, dan data ASN terhadap realisasi belanja pegawai.", link: "", label: "Coming Soon" },
+        { name: "Perjadin", status: "soon", tags: ["SPPD", "Perjadin"], desc: "Audit perjalanan dinas — cek kesesuaian SPPD, tarif, dan bukti pertanggungjawaban perjalanan.", link: "", label: "Coming Soon" },
+        { name: "Tempe", status: "soon", tags: ["Temuan", "Database"], desc: "Database temuan BPK — cari & telusur teks temuan pemeriksaan lintas LHP dan wilayah.", link: "", label: "Coming Soon" },
+        { name: "SPSE Checker", tags: ["LPSE", "Desktop"], desc: "Cek data pengadaan B/J pemerintah dari SPSE/LPSE. Tender, pemenang, peserta, nilai kontrak.", link: "https://masbash.id/spse-checker.html", label: "Panduan & Download" },
         { name: "SIRUP Audit", status: "soon", tags: ["SIRUP", "Red Flag"], desc: "Dashboard deteksi paket pengadaan mencurigakan dari SIRUP LKPP. Red flag analysis 2021–2026.", link: "", label: "Coming Soon" }
       ]
     },
@@ -279,7 +283,11 @@ const LOGOS = {
   "Persotoan": "persotoan",
   "Hujan di Batam": "hujan-di-batam",
   "Batam Bites": "batam-bites",
-  "Investment Dashboard": "investment-dashboard"
+  "Investment Dashboard": "investment-dashboard",
+  "INAPROC": "inaproc",
+  "Pegawai": "pegawai",
+  "Perjadin": "perjadin",
+  "Tempe": "tempe"
 };
 
 /* program sections — text cards */
