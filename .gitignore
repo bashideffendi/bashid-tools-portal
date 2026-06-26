@@ -3,3 +3,6 @@ __pycache__/
 .env
 venv/
 .venv/
+
+# tucked reference assets (folder reorg 2026-06-21)
+_reference/
