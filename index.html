@@ -222,8 +222,8 @@ const SITE = {
     {
       no: "01", key: "audit", title: "Audit",
       tools: [
-        { name: "Tempe", status: "new", tags: ["Temuan", "Database"], desc: "Database temuan BPK — cari & telusur teks temuan pemeriksaan lintas LHP dan wilayah.", link: "https://tempe.masbash.id", label: "Buka Tool" },
-        { name: "Just Count", status: "new", tags: ["Multi-tenant", "BAPK Auto", "SKA Check"], desc: "Audit kepatuhan jasa konsultansi konstruksi APBD. 3-area checklist, engine numerik, dan auto-generate BAPK Word.", link: "https://justcount.up.railway.app", label: "Buka Tool" },
+        { name: "Tempe", title: "Tempe — Database Temuan BPK", status: "new", tags: ["Temuan", "Database"], desc: "Database temuan BPK — cari & telusur teks temuan pemeriksaan lintas LHP dan wilayah.", link: "https://tempe.masbash.id", label: "Buka Tool" },
+        { name: "Just Count", title: "Just Count — Audit Jasa Konsultansi", status: "new", tags: ["Multi-tenant", "BAPK Auto", "SKA Check"], desc: "Audit kepatuhan jasa konsultansi konstruksi APBD. 3-area checklist, engine numerik, dan auto-generate BAPK Word.", link: "https://justcount.up.railway.app", label: "Buka Tool" },
         { name: "PDDIKTI Checker", tags: ["Excel", "Bulk"], desc: "Cek status kemahasiswaan dari PDDIKTI. Upload Excel, dapat status Aktif/Lulus/DO secara massal.", link: "https://pddikti-checker.up.railway.app", label: "Buka Tool" },
         { name: "SKA Checker", tags: ["SKA/SKT/SKK", "LPJK"], desc: "Verifikasi sertifikat keahlian konstruksi dari LPJK. Cek keaslian dan status sertifikat.", link: "https://cek-sertifikat-keahlian.up.railway.app", label: "Buka Tool" },
         { name: "SIKD Browser", tags: ["APBD", "DJPK"], desc: "Jelajahi data APBD seluruh Pemda Indonesia. Pendapatan, belanja, pembiayaan, komparasi antar tahun.", link: "https://sikd-browser.up.railway.app", label: "Buka Tool" },
@@ -321,7 +321,7 @@ function card(t, i, sec){
   const inner = `
     ${embed}
     <div class="cat eyebrow"><span>${esc(idx)}</span>${badge}</div>
-    <h3>${esc(t.name)}</h3>
+    <h3>${esc(t.title || t.name)}</h3>
     <p class="desc">${esc(t.desc)}</p>
     <div class="tags">${tags}</div>
     ${more}`;
