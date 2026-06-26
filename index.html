@@ -222,6 +222,7 @@ const SITE = {
     {
       no: "01", key: "audit", title: "Audit",
       tools: [
+        { name: "Tempe", status: "new", tags: ["Temuan", "Database"], desc: "Database temuan BPK — cari & telusur teks temuan pemeriksaan lintas LHP dan wilayah.", link: "https://tempe.masbash.id", label: "Buka Tool" },
         { name: "Just Count", status: "new", tags: ["Multi-tenant", "BAPK Auto", "SKA Check"], desc: "Audit kepatuhan jasa konsultansi konstruksi APBD. 3-area checklist, engine numerik, dan auto-generate BAPK Word.", link: "https://justcount.up.railway.app", label: "Buka Tool" },
         { name: "PDDIKTI Checker", tags: ["Excel", "Bulk"], desc: "Cek status kemahasiswaan dari PDDIKTI. Upload Excel, dapat status Aktif/Lulus/DO secara massal.", link: "https://pddikti-checker.up.railway.app", label: "Buka Tool" },
         { name: "SKA Checker", tags: ["SKA/SKT/SKK", "LPJK"], desc: "Verifikasi sertifikat keahlian konstruksi dari LPJK. Cek keaslian dan status sertifikat.", link: "https://cek-sertifikat-keahlian.up.railway.app", label: "Buka Tool" },
@@ -232,8 +233,7 @@ const SITE = {
         { name: "CalcTape Audit", status: "new", tags: ["Telstruk", "AI", ".calc"], desc: "Telstruk LHP otomatis — drop file Word, dapat verifikasi aritmatika (narasi + tabel) jadi file .calc. Hybrid regex + AI.", link: "https://calctape.vercel.app", label: "Buka Tool" },
         { name: "Pegawai", status: "new", tags: ["ASN", "Kepegawaian"], desc: "Audit data kepegawaian — uji kesesuaian status, NIP, dan data ASN terhadap realisasi belanja pegawai.", link: "https://belpeg.vercel.app", label: "Buka Tool" },
         { name: "INAPROC", status: "soon", tags: ["Pengadaan", "Evaluasi"], desc: "Evaluasi penawaran pengadaan barang/jasa dari data INAPROC/LKPP — bandingkan harga vendor, deteksi penawaran terendah & kewajaran.", link: "", label: "Coming Soon" },
-        { name: "Perjadin", status: "soon", tags: ["SPPD", "Perjadin"], desc: "Audit perjalanan dinas — cek kesesuaian SPPD, tarif, dan bukti pertanggungjawaban perjalanan.", link: "", label: "Coming Soon" },
-        { name: "Tempe", status: "soon", tags: ["Temuan", "Database"], desc: "Database temuan BPK — cari & telusur teks temuan pemeriksaan lintas LHP dan wilayah.", link: "", label: "Coming Soon" }
+        { name: "Perjadin", status: "soon", tags: ["SPPD", "Perjadin"], desc: "Audit perjalanan dinas — cek kesesuaian SPPD, tarif, dan bukti pertanggungjawaban perjalanan.", link: "", label: "Coming Soon" }
       ]
     },
     {
@@ -279,7 +279,7 @@ document.getElementById('vgrid').innerHTML = S.ventures.map(v => {
 }).join('');
 
 /* footer flagship tool links */
-const fcols = ['Just Count','Kriteria','Tiny Hour Tales','Persotoan','Investment Dashboard'];
+const fcols = ['Tempe','Just Count','Kriteria','Persotoan','Investment Dashboard'];
 document.getElementById('fcol-tools').insertAdjacentHTML('beforeend',
   fcols.map(n => { const t = allTools.find(x => x.name === n); return t && t.link ? `<a href="${esc(t.link)}" target="_blank" rel="noopener">${esc(t.name)}</a>` : ''; }).join(''));
 
