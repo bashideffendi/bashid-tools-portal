@@ -370,7 +370,10 @@ function mountEmbed(box){
   f.setAttribute('aria-hidden', 'true');
   box.appendChild(f);
   const tidy = () => { try { const b = f.contentDocument && f.contentDocument.querySelector('[data-replay]'); if(b) b.style.display = 'none'; } catch(e){} };
-  const play = () => { try { const r = f.contentDocument && f.contentDocument.querySelector('[data-screen-label]'); if(r) r.click(); } catch(e){} tidy(); };
+  // Replay by re-triggering the [data-anim] entrance animations directly (same as the bundle's own play()).
+  // Do NOT click [data-screen-label]: its inline onclick="{{ rootClick }}" is a dead template binding in the
+  // standalone bundles (no runtime defines rootClick) -> throws "rootClick is not defined" on every hover.
+  const play = () => { try { const d = f.contentDocument; if(d) d.querySelectorAll('[data-anim]').forEach(el => { const s = el.style.animation; el.style.animation = 'none'; void el.offsetWidth; el.style.animation = s; }); } catch(e){} tidy(); };
   f.addEventListener('load', () => { fitOne(box); [0, 600, 1500, 3000].forEach(d => setTimeout(() => { tidy(); fitOne(box); }, d)); });
   fitOne(box);
   box.addEventListener('mouseenter', play);
