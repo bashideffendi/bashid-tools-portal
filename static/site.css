@@ -32,6 +32,8 @@ img{display:block}
 .home .grow{flex:1 0 0}
 .home .grow2{flex:2 0 0}
 .home .bar-m{margin-bottom:40px}
+.bar-m .site-name{font-weight:700}
+@media(max-width:767px){.bar{flex-direction:column;align-items:flex-start;gap:8px}}
 .home .bar-d{display:none;margin-top:16px}
 .prof{font-size:14px;line-height:1.625}
 .prof a{font-weight:700}
