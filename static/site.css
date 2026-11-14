@@ -83,7 +83,7 @@ a.row:focus-visible .thumb img,.list>li[data-active] a.row .thumb img{filter:non
 .row.soon{opacity:.55}
 
 /* project page: categories side by side as columns */
-.page.wide{max-width:1184px}
+.page.wide{max-width:1440px}
 .cols{display:grid;grid-template-columns:minmax(0,1fr);gap:56px;align-items:start}
 .cols .group+.group{margin-top:0}
 
@@ -139,12 +139,15 @@ time{font-variant-numeric:tabular-nums;white-space:nowrap}
   .det ul{grid-template-columns:repeat(3,minmax(0,1fr))}
   .det p,.det-btn{font-size:14px}
   .wlist .date{font-size:14px}
-  .cols{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 32px}
-  .cols .row{flex-direction:column;gap:12px}
-  .cols .thumb{width:100%}
-  .cols .list>li+li{margin-top:32px}
 }
-@media(min-width:1024px){
+@media(min-width:768px){
+  .cols{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 32px}
+  .cols .row{gap:12px}
+  .cols .thumb{width:112px}
+  .cols .t{font-size:14px;line-height:20px}
+  .cols .d{font-size:13px;line-height:1.55}
+}
+@media(min-width:1200px){
   .cols{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
 @media(min-width:768px){
