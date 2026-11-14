@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Project — Bashid Effendi</title>
-<meta name="description" content="Project Bashid Effendi: tools audit, hobby, dan business. Open, free, no signup.">
+<meta name="description" content="Tools for audit, hobbies and business by Bashid Effendi.">
 <link rel="canonical" href="https://masbash.id/project/">
 <meta name="theme-color" content="#ffffff">
 <meta name="robots" content="index,follow">
@@ -13,10 +13,9 @@
 <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="masbash.id">
-<meta property="og:locale" content="id_ID">
 <meta property="og:url" content="https://masbash.id/project/">
 <meta property="og:title" content="Project — Bashid Effendi">
-<meta property="og:description" content="Tools audit, hobby, dan business. Open, free, no signup.">
+<meta property="og:description" content="Tools for audit, hobbies and business.">
 <meta property="og:image" content="https://masbash.id/static/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Project — Bashid Effendi">
@@ -28,70 +27,70 @@
 </head>
 <body>
 <div class="page">
-  <header class="top">
-    <a class="site-name" href="/">Bashid Effendi</a>
+  <header class="bar top">
+    <p class="site-name"><a href="/">Bashid Effendi</a></p>
     <nav class="nav" aria-label="Menu">
       <a href="/project/" aria-current="page">Project</a>
+      <span class="sep" aria-hidden="true">|</span>
+      <a class="ico" href="https://www.instagram.com/bashide" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a class="ico" href="mailto:bashide@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
     </nav>
   </header>
 
-  <main>
+  <main class="lab">
     <h1 class="sr-only">Project</h1>
     <div id="app"></div>
   </main>
 </div>
 
 <script>
-/* ---- Data (single source of truth) ----
-   Tambah tool = tambah satu objek di items[]:
-   { name, title?, status?, tags:[], desc, link, thumb? }
-   - title  : judul tampil (opsional; default = name)
-   - status : "soon" = belum live (tidak bisa diklik, baris jenis "Segera hadir")
-              "draft" = tidak ditampilkan sama sekali
-   - thumb  : slug gambar di /static/thumbs/<slug>.webp (320x200); kosong = kotak nama
-*/
+/* Add a tool = add one object to items[]:
+   { name, kind, desc, link, thumb?, status? }
+   kind   : the small grey line (e.g. "Web app")
+   status : "soon" = not live yet, not clickable
+            "draft" = hidden
+   thumb  : /static/thumbs/<slug>.webp (320x200); empty = name box */
 const PROJECTS = [
   {
     key: "audit", title: "Audit",
     items: [
-      { name: "Tempe", title: "Tempe — Database Temuan BPK", tags: ["Temuan", "Database"], desc: "Database temuan BPK — cari & telusur teks temuan pemeriksaan lintas LHP dan wilayah.", link: "https://tempe.masbash.id", thumb: "tempe" },
-      { name: "Just Count", title: "Just Count — Audit Jasa Konsultansi", tags: ["Multi-tenant", "BAPK Auto", "SKA Check"], desc: "Audit kepatuhan jasa konsultansi konstruksi APBD. 3-area checklist, engine numerik, dan auto-generate BAPK Word.", link: "https://justcount.up.railway.app", thumb: "just-count" },
-      { name: "PDDIKTI Checker", tags: ["Excel", "Bulk"], desc: "Cek status kemahasiswaan dari PDDIKTI. Upload Excel, dapat status Aktif/Lulus/DO secara massal.", link: "https://pddikti-checker.up.railway.app", thumb: "pddikti-checker" },
-      { name: "SKA Checker", tags: ["SKA/SKT/SKK", "LPJK"], desc: "Verifikasi sertifikat keahlian konstruksi dari LPJK. Cek keaslian dan status sertifikat.", link: "https://cek-sertifikat-keahlian.up.railway.app", thumb: "ska-checker" },
-      { name: "SIKD Browser", tags: ["APBD", "DJPK"], desc: "Jelajahi data APBD seluruh Pemda Indonesia. Pendapatan, belanja, pembiayaan, komparasi antar tahun.", link: "https://sikd-browser.up.railway.app", thumb: "sikd-browser" },
-      { name: "BPS Data Explorer", tags: ["BPS", "Statistik"], desc: "Jelajahi data statistik resmi BPS — publikasi, siaran pers, indikator strategis, SDGs, ekonomi per wilayah.", link: "https://data-bps.up.railway.app/", thumb: "bps-data-explorer" },
-      { name: "SIAP PKP Filler", tags: ["SIAP BPK", "Desktop"], desc: "Auto-fill kolom Hasil Pengujian di SIAP BPK dari Excel PKP. Aplikasi desktop (butuh download + VPN BPK).", link: "https://masbash.id/siap-pkp-filler.html", thumb: "siap-pkp-filler" },
-      // draft: halaman panduan siap-akun-filler.html + static/siap-akun-filler/ belum di-push. Hapus status kalau sudah dipublikasikan.
-      { name: "SIAP Akun Filler", status: "draft", tags: ["SIAP BPK", "Bookmarklet"], desc: "Isi massal modul Akun di SIAP BPK — Deskripsi, Tujuan Pemeriksaan, Kesimpulan, dan angka Cover Sheet dari satu Excel. Tiap simpanan diverifikasi ulang ke server.", link: "https://masbash.id/siap-akun-filler.html" },
-      { name: "Kriteria", tags: ["AI", "pasal.id", "BAPK"], desc: "AI cari kriteria temuan pemeriksaan — paste kondisi, dapat peraturan + pasal + ayat relevan dengan format BPK siap copy ke BAPK.", link: "https://kriteria.masbash.id", thumb: "kriteria" },
-      { name: "CalcTape Audit", tags: ["Telstruk", "AI", ".calc"], desc: "Telstruk LHP otomatis — drop file Word, dapat verifikasi aritmatika (narasi + tabel) jadi file .calc. Hybrid regex + AI.", link: "https://calctape.vercel.app", thumb: "calctape" },
-      { name: "Cap Cip Cup", tags: ["Sampling", "SP2D", "AICPA"], desc: "Sampling pemeriksaan SP2D — 7 metode statistik (MUS/SRS/Stratified/Judgmental/Attribute/Classical/Discovery), Risk Helper 40 aturan, Cluster Explorer. Reproducible seed + Excel/Word KKP. Data diproses di peramban.", link: "https://capcipcup.masbash.id" },
-      { name: "Pegawai", status: "soon", tags: ["ASN", "Kepegawaian"], desc: "Audit data kepegawaian — uji kesesuaian status, NIP, dan data ASN terhadap realisasi belanja pegawai.", link: "", thumb: "pegawai" },
-      { name: "INAPROC", status: "soon", tags: ["Pengadaan", "Evaluasi"], desc: "Evaluasi penawaran pengadaan barang/jasa dari data INAPROC/LKPP — bandingkan harga vendor, deteksi penawaran terendah & kewajaran.", link: "", thumb: "inaproc" },
-      { name: "Perjadin", status: "soon", tags: ["SPPD", "Perjadin"], desc: "Audit perjalanan dinas — cek kesesuaian SPPD, tarif, dan bukti pertanggungjawaban perjalanan.", link: "", thumb: "perjadin" }
+      { name: "Tempe", kind: "Web app", desc: "Search BPK audit findings across reports and regions.", link: "https://tempe.masbash.id", thumb: "tempe" },
+      { name: "Just Count", kind: "Web app", desc: "Audit construction consulting contracts and draft the BAPK.", link: "https://justcount.up.railway.app", thumb: "just-count" },
+      { name: "PDDIKTI Checker", kind: "Web app", desc: "Check student status in PDDIKTI, in bulk.", link: "https://pddikti-checker.up.railway.app", thumb: "pddikti-checker" },
+      { name: "SKA Checker", kind: "Web app", desc: "Verify construction expertise certificates with LPJK.", link: "https://cek-sertifikat-keahlian.up.railway.app", thumb: "ska-checker" },
+      { name: "SIKD Browser", kind: "Web app", desc: "Regional budget data for every local government.", link: "https://sikd-browser.up.railway.app", thumb: "sikd-browser" },
+      { name: "BPS Data Explorer", kind: "Web app", desc: "Official statistics from BPS.", link: "https://data-bps.up.railway.app/", thumb: "bps-data-explorer" },
+      { name: "SIAP PKP Filler", kind: "Desktop app", desc: "Fill test results in SIAP BPK from a PKP spreadsheet.", link: "https://masbash.id/siap-pkp-filler.html", thumb: "siap-pkp-filler" },
+      // draft: guide page siap-akun-filler.html + static/siap-akun-filler/ not pushed yet. Remove status to publish.
+      { name: "SIAP Akun Filler", kind: "Bookmarklet", status: "draft", desc: "Fill SIAP BPK account modules in bulk from one spreadsheet.", link: "https://masbash.id/siap-akun-filler.html" },
+      { name: "Kriteria", kind: "Web app", desc: "Find the regulations behind an audit finding.", link: "https://kriteria.masbash.id", thumb: "kriteria" },
+      { name: "CalcTape Audit", kind: "Web app", desc: "Check the arithmetic in an audit report.", link: "https://calctape.vercel.app", thumb: "calctape" },
+      { name: "Cap Cip Cup", kind: "Web app", desc: "Statistical sampling for SP2D audits.", link: "https://capcipcup.masbash.id" },
+      { name: "Pegawai", kind: "Coming soon", status: "soon", desc: "Test civil servant data against personnel spending.", link: "", thumb: "pegawai" },
+      { name: "INAPROC", kind: "Coming soon", status: "soon", desc: "Evaluate procurement bids from INAPROC data.", link: "", thumb: "inaproc" },
+      { name: "Perjadin", kind: "Coming soon", status: "soon", desc: "Audit official travel claims.", link: "", thumb: "perjadin" }
     ]
   },
   {
     key: "hobby", title: "Hobby",
     items: [
-      { name: "Tiny Hour Tales", tags: ["Watches", "Inventory"], desc: "Inventory koleksi jam tangan dengan dashboard, story per jam, dan catatan service.", link: "https://inventory.tinyhourtales.com", thumb: "tiny-hour-tales" },
-      { name: "Seiko Almanac", tags: ["Seiko", "Watches", "Decoder"], desc: "Meja referensi Seiko buat kolektor — decode tahun produksi dari nomor serial, decoder case-code vintage pra-1966, 230+ caliber & 1.179 model dari katalog asli 1932–2020. Sibling Tiny Hour Tales.", link: "https://seiko.tinyhourtales.com", thumb: "seiko-almanac" },
-      { name: "Persotoan", tags: ["Peta", "Kuliner"], desc: "Peta interaktif kuliner soto Nusantara — 18+ jenis soto & 165 warung legendaris, filter basis kuah & wilayah.", link: "https://soto.masbash.id", thumb: "persotoan" },
-      { name: "RABin", tags: ["RAB", "Konstruksi"], desc: "Tools RAB online untuk konstruksi — kalkulator AHSP, harga regional, dan ekspor Excel/PDF.", link: "https://rabindonesia.vercel.app", thumb: "rabin" },
-      { name: "Hujan di Batam", tags: ["Radar", "Cuaca"], desc: "Radar hujan real-time Batam & sekitarnya — overlay citra radar MSS Singapura (240 km), 3 view + time slider + animasi.", link: "https://hujandibatam.masbash.id", thumb: "hujan-di-batam" },
-      { name: "Batam Bites", tags: ["Kuliner", "Peta", "Halal"], desc: "Direktori kuliner Batam buat turis — 118 warung legendaris, seafood & hidden gem dengan peta interaktif, filter halal, dan dwibahasa ID/EN.", link: "https://batam-bites.vercel.app", thumb: "batam-bites" }
+      { name: "Tiny Hour Tales Inventory", kind: "Web app", desc: "A watch collection with stories and service notes.", link: "https://inventory.tinyhourtales.com", thumb: "tiny-hour-tales" },
+      { name: "Seiko Almanac", kind: "Web app", desc: "Decode Seiko serial numbers, calibers and models.", link: "https://seiko.tinyhourtales.com", thumb: "seiko-almanac" },
+      { name: "Persotoan", kind: "Web app", desc: "A map of soto across Indonesia.", link: "https://soto.masbash.id", thumb: "persotoan" },
+      { name: "RABin", kind: "Web app", desc: "Construction cost estimates in the browser.", link: "https://rabindonesia.vercel.app", thumb: "rabin" },
+      { name: "Hujan di Batam", kind: "Web app", desc: "Live rain radar for Batam.", link: "https://hujandibatam.masbash.id", thumb: "hujan-di-batam" },
+      { name: "Batam Bites", kind: "Web app", desc: "Where to eat in Batam.", link: "https://batam-bites.vercel.app", thumb: "batam-bites" }
     ]
   },
   {
     key: "business", title: "Business",
     items: [
-      { name: "Investment Dashboard", tags: ["Portfolio", "Real-time"], desc: "Track portfolio saham, reksa dana, obligasi — terminal-style dashboard untuk monitoring real-time.", link: "https://kelolainvestasi.vercel.app", thumb: "investment-dashboard" },
-      { name: "Klunting", tags: ["Net Worth", "Goals"], desc: "Wealth Management App — net worth, cash flow, alokasi aset, dan goals dalam satu tempat.", link: "https://www.klunting.com", thumb: "klunting" }
+      { name: "Klunting", kind: "Web app", desc: "Net worth, cash flow and goals in one place.", link: "https://www.klunting.com", thumb: "klunting" },
+      { name: "Investment Dashboard", kind: "Web app", desc: "Track stocks, mutual funds and bonds.", link: "https://kelolainvestasi.vercel.app", thumb: "investment-dashboard" }
     ]
   }
 ];
 
-/* ---- Render ---- */
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 let n = 0;
 function row(t) {
@@ -100,15 +99,14 @@ function row(t) {
   const thumb = t.thumb
     ? `<div class="thumb"><img src="/static/thumbs/${esc(t.thumb)}.webp" width="320" height="200" alt=""${lazy} decoding="async"></div>`
     : `<div class="thumb blank" aria-hidden="true">${esc(t.name)}</div>`;
-  const meta = `<div class="meta"><p class="t">${esc(t.title || t.name)}</p><p class="k">${esc(soon ? "Segera hadir" : t.tags.join(" · "))}</p><p class="d">${esc(t.desc)}</p></div>`;
+  const meta = `<div class="meta"><p class="t">${esc(t.name)}</p><p class="k">${esc(t.kind)}</p><p class="d">${esc(t.desc)}</p></div>`;
   return soon
     ? `<li><div class="row soon">${thumb}${meta}</div></li>`
     : `<li><a class="row" href="${esc(t.link)}" target="_blank" rel="noopener">${thumb}${meta}</a></li>`;
 }
-document.getElementById("app").innerHTML = PROJECTS.map(g => {
-  const items = g.items.filter(t => t.status !== "draft");
-  return `<section class="group" id="${g.key}"><h2>${esc(g.title)}</h2><ul class="list">${items.map(row).join("")}</ul></section>`;
-}).join("");
+document.getElementById("app").innerHTML = PROJECTS.map(g =>
+  `<section class="group" id="${g.key}"><h2>${esc(g.title)}</h2><ul class="list">${g.items.filter(t => t.status !== "draft").map(row).join("")}</ul></section>`
+).join("");
 
 /* Touch screens can't hover: colour the single row closest to the middle of the viewport. */
 if (window.matchMedia("(hover: none)").matches) {
