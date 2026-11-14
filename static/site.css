@@ -52,6 +52,7 @@ img{display:block}
 .era .org .aka{font-weight:400}
 .era .desc{margin-top:8px;position:relative}
 .era .links{margin-top:4px}
+.prof .era .links a{font-weight:400}
 .det-btn{position:absolute;right:0;bottom:0;font-size:12px;line-height:inherit;white-space:nowrap;opacity:0;transition:opacity .2s}
 .det-btn svg{display:inline-block;width:10px;height:10px;margin-left:3px;vertical-align:0;transition:transform .25s}
 .det-btn[aria-expanded="true"] svg{transform:rotate(180deg)}
