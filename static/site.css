@@ -51,6 +51,7 @@ img{display:block}
 .era .org .lg{width:16px;height:16px;object-fit:contain}
 .era .org .aka{font-weight:400}
 .era .desc{margin-top:8px;position:relative}
+.era .links{margin-top:4px}
 .det-btn{position:absolute;right:0;bottom:0;font-size:12px;line-height:inherit;white-space:nowrap;opacity:0;transition:opacity .2s}
 .det-btn svg{display:inline-block;width:10px;height:10px;margin-left:3px;vertical-align:0;transition:transform .25s}
 .det-btn[aria-expanded="true"] svg{transform:rotate(180deg)}
@@ -80,7 +81,45 @@ main.lab{margin-top:40px}
 a.row:focus-visible .thumb img,.list>li[data-active] a.row .thumb img{filter:none}
 .row.soon{opacity:.55}
 
+/* ---------- writing ---------- */
+.page-title{font-size:20px;font-weight:700;letter-spacing:-.5px;line-height:28px}
+.wlist{margin-top:32px;font-size:14px;line-height:1.5}
+.wlist>li+li{margin-top:24px}
+.wlist a{font-weight:700}
+.wlist .date{margin-top:2px;font-size:12px}
+time{font-variant-numeric:tabular-nums;white-space:nowrap}
+.back{display:inline-flex;align-items:center;gap:8px;min-height:24px;font-size:14px;line-height:20px}
+.post-title{margin-top:24px;font-size:20px;font-weight:800;line-height:26px}
+.post-meta{margin-top:8px;font-size:14px;line-height:20px;color:#71717a}
+.post{margin-top:32px;font-size:14px;line-height:24px;overflow-wrap:break-word}
+.post>:first-child{margin-top:0}
+.post p{margin:16px 0}
+.post h2{font-size:16px;font-weight:700;line-height:1.35;margin:30px 0 14px}
+.post h3{font-size:14px;font-weight:700;margin:24px 0 10px}
+.post a{font-weight:700}
+.post strong{font-weight:700}
+.post ul,.post ol{margin:16px 0;padding-left:1.6em}
+.post ul{list-style:disc}
+.post ol{list-style:decimal}
+.post li{margin:6px 0}
+.post li::marker{color:#a1a1aa}
+.post img,.post video{width:100%;height:auto;margin:28px 0}
+.post blockquote{margin:24px 0;padding-left:1em;border-left:2px solid var(--hair);font-style:italic}
+.post code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.875em;font-weight:600}
+.post code::before,.post code::after{content:"`"}
+.post pre{margin:24px 0;padding:.857em 1.143em;background:#121212;color:#dbd7caee;font-size:13px;line-height:22px;overflow-x:auto}
+.post pre code{font-size:inherit;font-weight:400}
+.post pre code::before,.post pre code::after{content:none}
+.post hr{border:0;border-top:1px solid var(--hair);margin:40px 0}
+.post table{width:100%;border-collapse:collapse;margin:24px 0;font-size:.9em}
+.post th,.post td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--hair)}
+.pn{display:flex;justify-content:space-between;gap:24px;margin-top:64px;font-size:14px;line-height:20px}
+.pn a{display:flex;gap:6px;min-width:0;max-width:48%}
+.pn .ttl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pn .next{margin-left:auto;text-align:right}
+
 @media(hover:hover){
+  .wlist a:hover,.back:hover,.post a:hover,.pn a:hover .ttl{text-decoration:underline;text-underline-offset:3px}
   .nav a:not(.ico):hover,.prof a:hover,a.row:hover .t,.det-btn:hover,.det a:hover p{text-decoration:underline;text-underline-offset:3px}
   .nav .ico:hover{opacity:.6}
   a.row:hover .thumb img,.det a:hover img{filter:none}
@@ -93,6 +132,7 @@ a.row:focus-visible .thumb img,.list>li[data-active] a.row .thumb img{filter:non
   .d{font-size:14px}
   .det ul{grid-template-columns:repeat(3,minmax(0,1fr))}
   .det p,.det-btn{font-size:14px}
+  .wlist .date{font-size:14px}
 }
 @media(min-width:768px){
   .page{padding:48px 32px 128px}
@@ -105,5 +145,12 @@ a.row:focus-visible .thumb img,.list>li[data-active] a.row .thumb img{filter:non
   .intro-sub p+p{margin-top:0}
   .timeline{border-bottom:1px solid var(--ink);padding-bottom:40px}
   .era{grid-template-columns:100px minmax(0,1fr);column-gap:24px}
+  .wlist{font-size:16px}
+  .post{font-size:16px;line-height:28px}
+  .post p{margin:20px 0}
+  .post h2{font-size:17px;margin:34px 0 17px}
+  .post h3{font-size:16px;margin:28px 0 12px}
+  .post img,.post video{margin:32px 0}
+  .post pre{font-size:14px;line-height:24px}
 }
 @media(max-width:767px),(prefers-reduced-motion:reduce){.thumb img,.det img,.det li,.det,.det-btn svg{transition:none}}
