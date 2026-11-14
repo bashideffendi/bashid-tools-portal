@@ -48,8 +48,9 @@
 /* Add a tool = add one object to items[]:
    { name, kind, desc, link, thumb?, status? }
    kind   : the small grey line (e.g. "Web app")
-   status : "soon" = not live yet, not clickable
+   status : "soon" = not live yet, not clickable (faded)
             "draft" = hidden
+   link   : empty = plain row, not clickable (e.g. Claude skills)
    thumb  : /static/thumbs/<slug>.webp (320x200); empty = name box */
 const PROJECTS = [
   {
@@ -89,6 +90,15 @@ const PROJECTS = [
       { name: "Klunting", kind: "Web app", desc: "Net worth, cash flow and goals in one place.", link: "https://www.klunting.com", thumb: "klunting" },
       { name: "Investment Dashboard", kind: "Web app", desc: "Track stocks, mutual funds and bonds.", link: "https://kelolainvestasi.vercel.app", thumb: "investment-dashboard" }
     ]
+  },
+  {
+    key: "skills", title: "Skills",
+    items: [
+      { name: "menulis-temuan-bpk", kind: "Claude skill", desc: "Writes BPK audit findings in the official style, ready for Word.", link: "" },
+      { name: "data-scraper", kind: "Claude skill", desc: "Builds scrapers for public data that run for free.", link: "" },
+      { name: "repo-scan", kind: "Claude skill", desc: "Checks an old repo for dead code, extra dependencies and leaked secrets.", link: "" },
+      { name: "secret-scan", kind: "Claude skill", desc: "Catches leaked API keys before a push.", link: "" }
+    ]
   }
 ];
 
@@ -101,9 +111,9 @@ function row(t) {
     ? `<div class="thumb"><img src="/static/thumbs/${esc(t.thumb)}.webp" width="320" height="200" alt=""${lazy} decoding="async"></div>`
     : `<div class="thumb blank" aria-hidden="true">${esc(t.name)}</div>`;
   const meta = `<div class="meta"><p class="t">${esc(t.name)}</p><p class="k">${esc(t.kind)}</p><p class="d">${esc(t.desc)}</p></div>`;
-  return soon
-    ? `<li><div class="row soon">${thumb}${meta}</div></li>`
-    : `<li><a class="row" href="${esc(t.link)}" target="_blank" rel="noopener">${thumb}${meta}</a></li>`;
+  if (soon) return `<li><div class="row soon">${thumb}${meta}</div></li>`;
+  if (!t.link) return `<li><div class="row">${thumb}${meta}</div></li>`;
+  return `<li><a class="row" href="${esc(t.link)}" target="_blank" rel="noopener">${thumb}${meta}</a></li>`;
 }
 document.getElementById("app").innerHTML = PROJECTS.map(g =>
   `<section class="group" id="${g.key}"><h2>${esc(g.title)}</h2><ul class="list">${g.items.filter(t => t.status !== "draft").map(row).join("")}</ul></section>`
